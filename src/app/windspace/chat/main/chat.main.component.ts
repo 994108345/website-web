@@ -35,7 +35,7 @@ export class ChatMainComponent extends AbstractComponent{
       .subscribe(
         data => console.log(data),
         err => console.log(err),
-        () => console.log("流已经结束")
+        () => console.log("长连接已经结束")
       )
 
     //生成随机姓名
