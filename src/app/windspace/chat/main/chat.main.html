@@ -1,0 +1,7 @@
+<nz-breadcrumb  style="margin:16px 0;" [nzAutoGenerate]="true">
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/chat']">聊天室</a>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+<h1>随机姓名：{{userName}}</h1>
+<button  nz-button nzType="primary"  (click)="sendMessageToserver()" >发送消息</button>
