@@ -53,7 +53,7 @@ export const httpOptions = {
 };
 
 /*成功状态*/
-export  const successStatus = 10000;
+export  const successStatus = 20;
 
 /*获取当前屏幕的大小*/
 /*宽度*/

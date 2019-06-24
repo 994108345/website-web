@@ -3,8 +3,13 @@
 module.exports =
 {
 /*这里是前台调用后端接口时做的代理标识*/
-  "/websocket/": {
-    "target": "localhost:6001",
+  //长连接项目
+  "/websocket": {
+    "target": "http://localhost:6001",
+    "secure": false,
+  },
+  "/website": {
+    "target": "http://localhost:6001",
     "secure": false,
   },
 }

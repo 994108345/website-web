@@ -1,4 +1,6 @@
 
+//网站项目路由
+export const websiteUrl = "/website";
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
@@ -16,6 +18,11 @@ export const urls = {
   retryUrl:"",
   // 下载url
   downUrl:"",
+  /*-----------------------------------website项目--------------------------------------------*/
+  //test接口
+  sayHelloUrl: websiteUrl + "/chat/say-hello",
+  //获取sessionId
+  getSessionIdUrl: websiteUrl + "/chat/get-session-id",
 };
 
 /*跳转菜单页面路径*/

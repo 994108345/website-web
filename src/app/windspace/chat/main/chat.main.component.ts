@@ -15,7 +15,8 @@ export class ChatMainComponent extends AbstractComponent{
 
   //删除弹出窗是否显示
   isDeleteVisible:boolean = false;
-
+  //sessionId
+  sessionId;number = 0;
   //删除的对象
   deleteObj:any;
 
@@ -29,17 +30,67 @@ export class ChatMainComponent extends AbstractComponent{
 
 
   ngOnInit(){
-    console.log("聊天窗口界面");
-
+    console.log("群聊界面");
     this.wsService.createObservableSocket("ws://localhost:6001/websocket/1")
       .subscribe(
-        data => console.log(data),
-        err => console.log(err),
-        () => console.log("长连接已经结束")
+        data =>
+          console.log(data),
+        err =>
+          console.log(err),
+        () =>
+          console.log("长连接已经结束")
       )
 
     //生成随机姓名
     this.createUsername();
+    //获取sessionId
+    this.getSessionId();
+  }
+
+  sayHello(){
+    if(urls.sayHelloUrl){
+      let condition = {};
+      this.commonService.doHttpPost(urls.sayHelloUrl,condition).then(rst => {
+        if(rst){
+          if(rst.status != successStatus){
+            this.wzlNgZorroAntdMessage.error(rst.message);
+          }else{
+            console.log(rst.data);
+          }
+        }else{
+          this.wzlNgZorroAntdMessage.error("返回参数异常，请联系管理员");
+        }
+      }).catch(rtc =>{
+        this.wzlNgZorroAntdMessage.error("http请求出现异常，请联系管理员");
+      })
+    }else{
+      this.wzlNgZorroAntdMessage.error("路由没有配置，请联系管理员");
+    }
+  }
+
+  /**
+   * 获取sessionId
+   */
+  getSessionId(){
+    if(urls.getSessionIdUrl){
+      let condition = {};
+      let url = urls.getSessionIdUrl+"?name="+this.userName;
+      this.commonService.doHttpGet(url,condition).then(rst => {
+        if(rst){
+          if(rst.status != successStatus){
+            this.wzlNgZorroAntdMessage.error(rst.message);
+          }else{
+            this.sessionId = rst.data;
+          }
+        }else{
+          this.wzlNgZorroAntdMessage.error("返回参数异常，请联系管理员");
+        }
+      }).catch(rtc =>{
+        this.wzlNgZorroAntdMessage.error("http请求出现异常，请联系管理员");
+      })
+    }else{
+      this.wzlNgZorroAntdMessage.error("路由没有配置，请联系管理员");
+    }
   }
 
   //生成随机姓名
