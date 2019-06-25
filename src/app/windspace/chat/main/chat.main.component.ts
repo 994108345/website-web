@@ -1,6 +1,6 @@
 import {Component, Injector} from '@angular/core';
 import {AbstractComponent} from '../../../common/service/abstract.component';
-import {routers, urls} from '../../../app.config';
+import {asllCode, routers, urls} from '../../../app.config';
 import {successStatus} from '../../../common/service/base/common.config';
 import {names, surnames} from '../chat.config';
 import {Server} from 'ws';
@@ -19,9 +19,16 @@ export class ChatMainComponent extends AbstractComponent{
   sessionId;number = 0;
   //删除的对象
   deleteObj:any;
-
+  //数据
+  items:any[] = [];
+  //标题
+  data:any[] = [];
   //用户名
   userName:string;
+  //是否加载
+  load:boolean;
+  //发送信息
+  sendMessage:string ="";
 
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector,private wsService:WebSocketService){
@@ -34,7 +41,7 @@ export class ChatMainComponent extends AbstractComponent{
     this.wsService.createObservableSocket("ws://localhost:6001/websocket/1")
       .subscribe(
         data =>
-          console.log(data),
+          this.receiveData(data),
         err =>
           console.log(err),
         () =>
@@ -45,6 +52,21 @@ export class ChatMainComponent extends AbstractComponent{
     this.createUsername();
     //获取sessionId
     this.getSessionId();
+  }
+
+  /**
+   * 接收消息
+   */
+  receiveData(message:string){
+    let rst = this.toJsonObject(message);
+    console.log("接收到信息："+message);
+    //判断返回结果
+    if(rst.status = successStatus){
+      let obj = JSON.parse(rst.data);
+      this.data.push(obj);
+    }else{
+      this.wzlNgZorroAntdMessage.error("长连接消息接收失败" + rst.message);
+    }
   }
 
   sayHello(){
@@ -73,9 +95,9 @@ export class ChatMainComponent extends AbstractComponent{
    */
   getSessionId(){
     if(urls.getSessionIdUrl){
-      let condition = {};
-      let url = urls.getSessionIdUrl+"?name="+this.userName;
-      this.commonService.doHttpGet(url,condition).then(rst => {
+      let condition = {name:this.userName};
+      let url = urls.getSessionIdUrl;
+      this.commonService.doHttpPost(url,condition).then(rst => {
         if(rst){
           if(rst.status != successStatus){
             this.wzlNgZorroAntdMessage.error(rst.message);
@@ -117,9 +139,24 @@ export class ChatMainComponent extends AbstractComponent{
   }
 
 
+  /**
+   * 键盘回车事件
+   * @param event
+   */
+  pressSendMessage(event){
+    console.log(event);
+    if(event.which == asllCode.enter){
+      this.sendMessageToserver();
+    }
+  }
 
   //发送信息
   sendMessageToserver(){
-    this.wsService.sendMessage("Hello from client");
+    if(this.sendMessage.trim().length < 1){
+      this.wzlNgZorroAntdMessage.error("输入信息不能为空");
+    }else{
+      let item = {"name":this.userName,"message":this.sendMessage,"createDate":new Date()};
+      this.wsService.sendMessage(item);
+    }
   }
 }

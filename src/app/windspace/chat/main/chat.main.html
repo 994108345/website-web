@@ -4,4 +4,12 @@
   </nz-breadcrumb-item>
 </nz-breadcrumb>
 <h1>随机姓名：{{userName}}</h1>
+<ul>
+  {{data}}
+  <li *ngFor="let item of data">
+    <b>{{item.name}}-{{item.createDate|date:'yyyy-MM-dd HH:mm:ss' }}</b><br>
+    <i>{{item.message}}</i>
+  </li>
+</ul>
+<input nz-input placeholder="Basic usage" [(ngModel)]="sendMessage" (keypress)="pressSendMessage($event)"/><br><br>
 <button  nz-button nzType="primary"  (click)="sendMessageToserver()" >发送消息</button>
