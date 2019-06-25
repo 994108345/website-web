@@ -38,7 +38,7 @@ export class ChatMainComponent extends AbstractComponent{
 
   ngOnInit(){
     console.log("群聊界面");
-    this.wsService.createObservableSocket("ws://localhost:6001/websocket/1")
+    this.wsService.createObservableSocket("ws://172.31.62.99:6001/websocket/1")
       .subscribe(
         data =>
           this.receiveData(data),
