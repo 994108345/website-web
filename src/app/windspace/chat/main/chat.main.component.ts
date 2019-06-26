@@ -2,9 +2,10 @@ import {Component, Injector} from '@angular/core';
 import {AbstractComponent} from '../../../common/service/abstract.component';
 import {asllCode, routers, urls} from '../../../app.config';
 import {successStatus} from '../../../common/service/base/common.config';
-import {names, surnames} from '../chat.config';
+import {names, pickName, surnames} from '../chat.config';
 import {Server} from 'ws';
 import {WebSocketService} from '../../../common/service/websocket/websocket.service';
+import {$} from 'protractor';
 
 @Component({
   selector: 'web-chat',
@@ -35,23 +36,29 @@ export class ChatMainComponent extends AbstractComponent{
     super(injector);
   }
 
-
   ngOnInit(){
     console.log("群聊界面");
-    this.wsService.createObservableSocket("ws://172.31.62.99:6001/websocket/1")
+    //生成随机姓名
+    this.pickName();
+    //获取sessionId
+    this.getSessionId();
+  }
+
+  /**
+   * 打开长连接
+   */
+  openWebSocket(){
+    let url = "ws://localhost:6001/websocket/";
+    url = url+this.sessionId;
+    this.wsService.createObservableSocket(url)
       .subscribe(
         data =>
           this.receiveData(data),
         err =>
-          console.log(err),
+          this.wzlNgZorroAntdMessage.error(err),
         () =>
-          console.log("长连接已经结束")
+          this.wzlNgZorroAntdMessage.info("长连接已经关闭"),
       )
-
-    //生成随机姓名
-    this.createUsername();
-    //获取sessionId
-    this.getSessionId();
   }
 
   /**
@@ -91,6 +98,18 @@ export class ChatMainComponent extends AbstractComponent{
   }
 
   /**
+   * 是我的信息吗
+   * @param name
+   */
+  isMyMessage(name:string){
+    if(name == this.userName){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  /**
    * 获取sessionId
    */
   getSessionId(){
@@ -103,6 +122,8 @@ export class ChatMainComponent extends AbstractComponent{
             this.wzlNgZorroAntdMessage.error(rst.message);
           }else{
             this.sessionId = rst.data;
+            //开启长连接
+            this.openWebSocket();
           }
         }else{
           this.wzlNgZorroAntdMessage.error("返回参数异常，请联系管理员");
@@ -118,7 +139,6 @@ export class ChatMainComponent extends AbstractComponent{
   //生成随机姓名
   createUsername(){
     let length = this.randomNum(2,4);
-    console.log(length);
     //取姓氏随机数
     let lenthA = surnames.length;
     let a = Math.floor(Math.random() * (lenthA-1));
@@ -138,13 +158,21 @@ export class ChatMainComponent extends AbstractComponent{
     }
   }
 
+  /**
+   * 直接挑一个姓名
+   */
+  pickName(){
+    let length = pickName.length;
+    let randomNum = this.randomNum(1,length+1);
+    this.userName = pickName[randomNum];
+  }
+
 
   /**
    * 键盘回车事件
    * @param event
    */
   pressSendMessage(event){
-    console.log(event);
     if(event.which == asllCode.enter){
       this.sendMessageToserver();
     }
@@ -157,6 +185,8 @@ export class ChatMainComponent extends AbstractComponent{
     }else{
       let item = {"name":this.userName,"message":this.sendMessage,"createDate":new Date()};
       this.wsService.sendMessage(item);
+      //输入框置空
+      this.sendMessage = "";
     }
   }
 }
