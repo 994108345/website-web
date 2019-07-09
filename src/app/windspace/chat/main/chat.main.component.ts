@@ -2,7 +2,7 @@ import {Component, Injector} from '@angular/core';
 import {AbstractComponent} from '../../../common/service/abstract.component';
 import {asllCode, routers, urls} from '../../../app.config';
 import {successStatus} from '../../../common/service/base/common.config';
-import {names, pickName, surnames} from '../chat.config';
+import {messageType, names, pickName, surnames, webSocketServerMsgCode} from '../chat.config';
 import {Server} from 'ws';
 import {WebSocketService} from '../../../common/service/websocket/websocket.service';
 import {$} from 'protractor';
@@ -30,6 +30,11 @@ export class ChatMainComponent extends AbstractComponent{
   load:boolean;
   //发送信息
   sendMessage:string ="";
+
+  /**
+   * 在线人数
+   */
+  onlineNum:number = 0;
 
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector,private wsService:WebSocketService){
@@ -69,33 +74,51 @@ export class ChatMainComponent extends AbstractComponent{
     console.log("接收到信息："+message);
     //判断返回结果
     if(rst.status = successStatus){
-      let obj = JSON.parse(rst.data);
-      this.data.push(obj);
+      let obj = rst.data;
+      let msgObj = obj.message;
+      if(obj.messageType == messageType.CHAT_MESSAGE){
+        this.receiveChatMessage(msgObj)
+      }else if(obj.messageType == messageType.ON_LINE_NUMER){
+        this.receiveOnlineNum(msgObj)
+      }else if (obj.messageType == messageType.SERVICE_MSG){
+        this.receiveServerMsg(msgObj)
+      }else{
+        this.wzlNgZorroAntdMessage.error("长连接返回信息异常");
+      }
     }else{
       this.wzlNgZorroAntdMessage.error("长连接消息接收失败" + rst.message);
     }
   }
 
-  sayHello(){
-    if(urls.sayHelloUrl){
-      let condition = {};
-      this.commonService.doHttpPost(urls.sayHelloUrl,condition).then(rst => {
-        if(rst){
-          if(rst.status != successStatus){
-            this.wzlNgZorroAntdMessage.error(rst.message);
-          }else{
-            console.log(rst.data);
-          }
-        }else{
-          this.wzlNgZorroAntdMessage.error("返回参数异常，请联系管理员");
-        }
-      }).catch(rtc =>{
-        this.wzlNgZorroAntdMessage.error("http请求出现异常，请联系管理员");
-      })
-    }else{
-      this.wzlNgZorroAntdMessage.error("路由没有配置，请联系管理员");
+  /**
+   * 接收聊天信息
+   */
+  receiveChatMessage(msgObj:any){
+    this.data.push(msgObj)
+  }
+
+  /**
+   * 接收在线人数
+   */
+  receiveOnlineNum(msgObj:any){
+    this.onlineNum = msgObj.onlineNum;
+  }
+
+  /**
+   * 接收服务信息
+   */
+  receiveServerMsg(msgObj:any){
+    if(msgObj.code = webSocketServerMsgCode.CONNECTION_SUCCESS){
+      this.wzlNgZorroAntdMessage.info("连接成功");
+    }else if (msgObj.code = webSocketServerMsgCode.BREAKE_CONNECTION){
+      this.wzlNgZorroAntdMessage.info("断开连接");
+    }else {
+      this.wzlNgZorroAntdMessage.info("长连接业务信息匹配异常")
+      console.log("长连接业务信息匹配异常"+this.toJsonStr(msgObj));
     }
   }
+
+
 
   /**
    * 是我的信息吗
