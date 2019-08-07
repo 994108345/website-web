@@ -44,15 +44,29 @@ export class ChatMainComponent extends AbstractComponent{
   ngOnInit(){
     console.log("群聊界面");
     //生成随机姓名
-    this.pickName();
-    //获取sessionId
-    this.getSessionId();
+    //this.pickName();
   }
+
+  /**
+   * 用户手动打开长连接
+   */
+  openSocket(){
+    if(!this.userName || this.userName.trim().length < 1){
+      this.wzlNgZorroAntdMessage.error("用户名不能为空");
+    }else{
+      //获取sessionId,并且开启长连接
+      if(!this.sessionId){
+        this.getSessionId();
+      }
+    }
+  }
+
 
   /**
    * 打开长连接
    */
   openWebSocket(){
+    // let url ="ws://47.104.240.104:6001/websocket/"
     let url = "ws://localhost:6001/websocket/";
     url = url+this.sessionId;
     this.wsService.createObservableSocket(url)
@@ -205,11 +219,11 @@ export class ChatMainComponent extends AbstractComponent{
   sendMessageToserver(){
     if(this.sendMessage.trim().length < 1){
       this.wzlNgZorroAntdMessage.error("输入信息不能为空");
-    }else{
-      let item = {"name":this.userName,"message":this.sendMessage,"createDate":new Date()};
-      this.wsService.sendMessage(item);
-      //输入框置空
-      this.sendMessage = "";
+      return;
     }
+    let item = {"name":this.userName,"message":this.sendMessage,"createDate":new Date()};
+    this.wsService.sendMessage(item);
+    //输入框置空
+    this.sendMessage = "";
   }
 }
