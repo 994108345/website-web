@@ -9,10 +9,10 @@ import {$} from 'protractor';
 
 @Component({
   selector: 'web-chat',
-  templateUrl: './chat.main.html',
-  styleUrls: ['./chat.main.css']
+  templateUrl: './optimistic.main.html',
+  styleUrls: ['./optimistic.main.css']
 })
-export class ChatMainComponent extends AbstractComponent{
+export class OptimisticMainComponent extends AbstractComponent{
 
   //删除弹出窗是否显示
   isDeleteVisible:boolean = false;

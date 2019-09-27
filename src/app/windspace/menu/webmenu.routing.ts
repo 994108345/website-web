@@ -18,6 +18,10 @@ const menuRoutes: Routes = [
         path: 'chat',
         loadChildren: 'src/app/windspace/chat/chat.module#ChatModule',
       },
+      {
+        path: 'query',
+        loadChildren: 'src/app/windspace/query/query.module#QueryModule',
+      },
     ]
   },
 ];

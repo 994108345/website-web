@@ -17,11 +17,14 @@ export const urls = {
   retryUrl:"",
   // 下载url
   downUrl:"",
-  /*-----------------------------------website项目--------------------------------------------*/
+  /*-----------------------------------chat--------------------------------------------*/
   //test接口
   sayHelloUrl: websiteUrl + "/chat/say-hello",
   //获取sessionId
   getSessionIdUrl: websiteUrl + "/chat/get-session-id",
+  /*-----------------------------------query--------------------------------------------*/
+  //查询邮政编码
+  getPostalUrl:websiteUrl + "/unified/postalServiceImpl/queryPostalService",
 };
 
 /*跳转菜单页面路径*/

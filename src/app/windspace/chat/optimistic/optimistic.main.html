@@ -10,7 +10,7 @@
 <br><br>
 <h2>在线人数：{{onlineNum}}</h2>
 <nz-tabset>
-  <nz-tab nzTitle="聊天界面">
+  <nz-tab nzTitle="乐观聊天界面">
     <div class="chat-interface">
       <ul *ngFor="let item of data">
         <li *ngIf="this.isMyMessage(item.name)" style="background-color: #F0D0D0;text-align: right;padding-right: 5px;">
@@ -25,5 +25,9 @@
       <input nz-input placeholder="Basic usage" [(ngModel)]="sendMessage" (keypress)="pressSendMessage($event)"/><br><br>
       <button  nz-button nzType="primary"  (click)="sendMessageToserver()" >发送消息</button>
     </div>
+  </nz-tab>
+  <nz-tab nzTitle="乐观者">
+  </nz-tab>
+  <nz-tab nzTitle="悲观者">
   </nz-tab>
 </nz-tabset>
