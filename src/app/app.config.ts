@@ -25,6 +25,8 @@ export const urls = {
   /*-----------------------------------query--------------------------------------------*/
   //查询邮政编码
   getPostalUrl:websiteUrl + "/unified/postalServiceImpl/queryPostalService",
+  //查询天气信息
+  queryWeatherUrl:websiteUrl + "/unified/weatherServiceImpl/queryWeatherByCityName",
 };
 
 /*跳转菜单页面路径*/
