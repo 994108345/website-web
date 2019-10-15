@@ -1,0 +1,8 @@
+<nz-tabset>
+  <nz-tab nzTitle="用户建议">
+    <div>
+      <input nz-input placeholder="Basic usage" [(ngModel)]="adviceObj.advice" (keypress)="pressAdvice($event)"/><br><br>
+      <button  nz-button nzType="primary"  (click)="addAdvice()">提交</button>
+    </div>
+  </nz-tab>
+</nz-tabset>

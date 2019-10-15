@@ -22,7 +22,7 @@
   </nz-sider>
 
   <!--右边-->
-  <nz-layout>
+  <nz-layout class="layout">
     <!--右边上面-->
     <nz-header style="background: #fff; padding:0;">
       <i class="trigger" nz-icon  [type]="isCollapsed ? 'menu-unfold':'menu-fold'" (click)="toggleCollapsed()" title="缩放菜单"></i>
@@ -43,7 +43,11 @@
     </nz-content>
 
     <!--底部-->
-    <nz-footer style="text-align: center;">nulidexiaoma 1.0</nz-footer>
+    <nz-footer style="text-align: center;">
+      <!--用户建议模块-->
+      <useradvice-root></useradvice-root>
+      <p style="font-size: 10px">nulidexiaoma 1.0</p>
+    </nz-footer>
 
   </nz-layout>
 </nz-layout>

@@ -7,6 +7,7 @@ import {WzlngzorroantdmessageService} from './wzlngzorroantdmessage/wzlngzorroan
 import {successStatus} from './base/common.config';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {routers, urls} from '../../app.config';
+import {WzlutilService} from './wzlutil/wzlutil.service';
 
 /**
  * Created by wenzailong on 2017/12/21.
@@ -161,11 +162,19 @@ export class AbstractComponent implements OnDestroy {
     return this.injector.get(WzlCacheService);
   }
 
-  /*缓存服务*/
+  /*消息服务*/
   get wzlNgZorroAntdMessage(): WzlngzorroantdmessageService {
     return this.injector.get(WzlngzorroantdmessageService);
   }
 
+  /**
+   * 工具类服务
+   */
+  get wzlutilService(): WzlutilService {
+    return this.injector.get(WzlutilService);
+  }
+
+  WzlutilService
   /*初始化require*/
   /*  requireInstance(){
       var System: any;

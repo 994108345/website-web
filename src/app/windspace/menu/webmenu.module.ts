@@ -6,11 +6,14 @@ import {CommonService} from '../../common/service/base/common.service';
 import {WzlCacheService} from '../../common/service/wzlcache/wzlceche.service';
 import {WebmenuMainComponent} from './main/webmenu.main.component';
 import {WzlngzorroantdmessageService} from '../../common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service';
+import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module';
 
 @NgModule({
   imports: [
     /** 导入 ng-zorro-antd 模块 **/
     NgZorroAntdModule,
+    /*用户建议模块*/
+    UseradviceModule,
     WebmenuRouting,
   ],
   declarations: [

@@ -17,6 +17,8 @@ export const urls = {
   retryUrl:"",
   // 下载url
   downUrl:"",
+  /*-----------------------------------baseComponent--------------------------------------------*/
+  insertAdviceUrl:websiteUrl + "/unified/userAdviceServiceImpl/insertAdvice",
   /*-----------------------------------chat--------------------------------------------*/
   //test接口
   sayHelloUrl: websiteUrl + "/chat/say-hello",

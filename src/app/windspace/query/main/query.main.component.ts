@@ -49,8 +49,10 @@ export class QueryMainComponent extends AbstractComponent{
         } else {
           let data = rst.data;
           if(data){
-            if(data.cityName == null && data.provinceName == null && data.areaName == null){
-              this.cityMessage = null;
+            if(this.wzlutilService.isBlank(data.cityName)
+              && this.wzlutilService.isBlank(data.provinceName)
+              && this.wzlutilService.isBlank(data.areaName)){
+              this.cityMessage = "未查到匹配的数据";
             }else{
               this.cityMessage = data.provinceName + data.cityName + data.areaName + ";邮政编码;" + data.postalCode;
             }

@@ -7,6 +7,8 @@ import { QueryMainComponent} from './main/query.main.component';
 import { QueryRouting} from './query.routing';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module';
+import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
 
 @NgModule({
   imports: [
@@ -17,13 +19,17 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     /*响应式表单*/
     ReactiveFormsModule,
+    //用户建议模块
+    UseradviceModule,
     QueryRouting,
+  ],
+  exports:[
   ],
   declarations: [
     QueryComponent,QueryMainComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
-  providers: [CommonService,WzlCacheService,{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [CommonService,WzlCacheService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],
 })
 export class QueryModule {
 
