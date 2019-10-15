@@ -48,10 +48,14 @@ export class QueryMainComponent extends AbstractComponent{
           this.wzlNgZorroAntdMessage.error(rst.message);
         } else {
           let data = rst.data;
-          if(data.cityName == null && data.provinceName == null && data.areaName == null){
-            this.cityMessage == null;
+          if(data){
+            if(data.cityName == null && data.provinceName == null && data.areaName == null){
+              this.cityMessage = null;
+            }else{
+              this.cityMessage = data.provinceName + data.cityName + data.areaName + ";邮政编码;" + data.postalCode;
+            }
           }else{
-            this.cityMessage = data.provinceName + data.cityName + data.areaName + ";邮政编码;" + data.postalCode;
+            this.cityMessage = null;
           }
         }
       } else {

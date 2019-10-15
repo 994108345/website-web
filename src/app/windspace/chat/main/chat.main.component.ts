@@ -66,8 +66,8 @@ export class ChatMainComponent extends AbstractComponent{
    * 打开长连接
    */
   openWebSocket(){
-    //let url ="ws://47.104.240.104:6001/websocket/"
-    let url = "ws://localhost:6001/websocket/";
+    let url ="ws://47.104.240.104:6001/websocket/"
+    //let url = "ws://localhost:6001/websocket/";
     url = url+this.sessionId;
     this.wsService.createObservableSocket(url)
       .subscribe(

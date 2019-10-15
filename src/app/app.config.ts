@@ -24,7 +24,7 @@ export const urls = {
   getSessionIdUrl: websiteUrl + "/chat/get-session-id",
   /*-----------------------------------query--------------------------------------------*/
   //查询邮政编码
-  getPostalUrl:websiteUrl + "/unified/postalServiceImpl/queryPostalService",
+  getPostalUrl:websiteUrl + "/unified/postalServiceImpl/queryCrawlerPostalService",
   //查询天气信息
   queryWeatherUrl:websiteUrl + "/unified/weatherServiceImpl/queryWeatherByCityName",
 };
