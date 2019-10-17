@@ -34,5 +34,5 @@ height:100vh == height:100%;
 但是设置height:100vh，该元素会被撑开屏幕高度一致。
 */
 .layout{
-  height: 100vh;
+  height: 100%;
 }

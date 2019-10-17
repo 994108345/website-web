@@ -29,6 +29,8 @@ export const urls = {
   getPostalUrl:websiteUrl + "/unified/postalServiceImpl/queryCrawlerPostalService",
   //查询天气信息
   queryWeatherUrl:websiteUrl + "/unified/weatherServiceImpl/queryWeatherByCityName",
+  //查询图片exif信息
+  queryPictureExifUrl:websiteUrl + "/exif/get-picture-exif",
 };
 
 /*跳转菜单页面路径*/

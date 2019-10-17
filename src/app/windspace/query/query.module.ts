@@ -9,6 +9,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module';
 import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
+import {PictureExifMainComponent} from './picture/picture.exif.main.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
   exports:[
   ],
   declarations: [
-    QueryComponent,QueryMainComponent
+    QueryComponent,QueryMainComponent,PictureExifMainComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],
