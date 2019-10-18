@@ -10,6 +10,7 @@ import {successStatus} from '../../../common/service/base/common.config';
 })
 export class QueryMainComponent extends AbstractComponent{
 
+  uploading:boolean = false;
   //查询邮政编码返回的信息
   cityMessage:string;
   //查询邮政编码的城市名
@@ -119,5 +120,12 @@ export class QueryMainComponent extends AbstractComponent{
     if(event.which == asllCode.enter){
       this.queryWeather();
     }
+  }
+
+  /**
+   * 是否上传中
+   */
+  isUploading(bool:boolean){
+    this.uploading = bool;
   }
 }

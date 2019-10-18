@@ -1,7 +1,7 @@
 <div class="chat-interface">
   <nz-alert nzType="success" style="white-space: pre-line;" nzMessage="想要解析该照片拍照时的地点，需要满足以下需求！ &#10;1 照片为数码电子照片。 &#10;2 拍照时，设备开启了gps定位服务。 &#10;3 微信图片都是经过处理的，缺失了经纬度信息，用微信发图时选择发送原图就能避免该情形。 "></nz-alert>
   <p>文件：</p>
-  <nz-upload [nzAction] = uploadUrl (nzChange)="uploadPicture($event)" [nzSize]="pictureSize" [nzFileType]="pictureType" nzListType="picture-card" [nzShowUploadList]="false">
+  <nz-upload [nzAction] = uploadUrl (nzChange)="uploadPicture($event)" [nzSize]="pictureSize" [nzFileType]="pictureType" [nzLimit]="1" [nzFileList]="fileList">
     <button nz-button><i nz-icon nzType="upload"></i>
       <span>选择图片上传</span>
     </button>
@@ -16,7 +16,4 @@
   </nz-descriptions>
   <p>拍摄地点：{{pictureExif.address}}</p>
   <div *ngIf="pictureExif" id='container' style='width:800px; height:600px;'></div>
-  <!--加载动画-->
-  <nz-spin nzSimple></nz-spin>
-
 </div>

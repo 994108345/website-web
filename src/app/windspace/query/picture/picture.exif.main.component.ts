@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Injector, Output} from '@angular/core';
+import {Component, EventEmitter, Injector, Input, Output} from '@angular/core';
 import {asllCode, cacheKey, routers, urls} from '../../../app.config';
 import {AbstractComponent} from '../../../common/service/abstract.component';
 import {successStatus} from '../../../common/service/base/common.config';
@@ -16,34 +16,27 @@ export class PictureExifMainComponent extends AbstractComponent{
 
   //上传文件集合
   uploadedFiles: any[] = [];
-
   //上传路由
   uploadUrl:string = urls.queryPictureExifUrl;
-
   //是否启用上传
   isUpload:boolean = false;
-
   //要上传的文件
   uploadingFiles:File[] = [];
-
   //上传文件容量超出提示文本
   invalidFileSizeMessageDetail:string = "maximum upload size is 50M";
-
-  /**
-   * 文件大小
-   */
+  //文件大小
   pictureSize:number = 1024*50;
-
-  /**
-   * 文件类型
-   */
+  //文件类型
   pictureType:string = "image/png,image/jpeg";
-
   //picture-exif对象
   pictureExif:any = {};
-
   //地址
   address:string = null;
+  //上传文件大小
+  fileList:any[] = [];
+
+  //是否上传中
+  @Output() uploading = new EventEmitter<boolean>();
 
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector){
@@ -63,16 +56,13 @@ export class PictureExifMainComponent extends AbstractComponent{
   uploadPicture(event){
     if(event){
       let file = event.file;
-      //删除老的文件
-      let fileList = event.fileList;
-      if(fileList){
-        fileList = [];
-        fileList.push(event.file)
-      }
       if(file){
         let status = event.file.status;
         if(status === "uploading"){
-
+          //往父组件传递参数
+          this.uploading.emit(true);
+          //删除老的文件，每次只显示一个文件
+          this.fileList = [file];
         }else if(status == "done"){
           let response = file.response;
           if(response){
@@ -87,8 +77,12 @@ export class PictureExifMainComponent extends AbstractComponent{
           }else{
             console.log("没有返回信息" + this.toJsonStr(event));
           }
+          //往父组件传递参数
+          this.uploading.emit(false);
         }else if(status == "error"){
-
+          //往父组件传递参数
+          this.uploading.emit(false);
+          this.wzlNgZorroAntdMessage.error("Web error :" + this.toJsonStr(event))
         }else if(status == "removed"){
 
         }
@@ -144,4 +138,5 @@ export class PictureExifMainComponent extends AbstractComponent{
       });
     }
   }
+
 }
