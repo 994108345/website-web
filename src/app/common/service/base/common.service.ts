@@ -25,6 +25,22 @@ export class  CommonService {
           });
     }
 
+  doHttpPostForm(url: string, param: any, options?: any): Promise<any> {
+    let defaultOptions = new HttpHeaders({
+      'Content-Type':  'multipart/form-data',
+    });
+    let option = options || defaultOptions;
+
+    return this.http.post(url, param, option)
+      .toPromise()
+      .then(res => {
+        return this.extractData(res)
+      })
+      .catch(
+        res => { return this.handleError(res)
+        });
+  }
+
     //发送请求GET
     doHttpGet(url: string, options?: any): Promise<any> {
       options = options || {};

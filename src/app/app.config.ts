@@ -31,6 +31,10 @@ export const urls = {
   queryWeatherUrl:websiteUrl + "/unified/weatherServiceImpl/queryWeatherByCityName",
   //查询图片exif信息
   queryPictureExifUrl:websiteUrl + "/exif/get-picture-exif",
+  //改变图片
+  changePictureUrl:websiteUrl + "/picturechange/change-picture",
+  /*------------------------------------------file upload--------------------------------------------------------*/
+  uploadFile:websiteUrl + "/file/upload",
 };
 
 /*跳转菜单页面路径*/

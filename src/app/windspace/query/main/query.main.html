@@ -50,10 +50,15 @@
     </nz-tab>
 
     <nz-tab nzTitle="查询图片隐藏信息">
-      <nz-spin nzTip="Loading..." [nzSpinning]="uploading" >
+      <nz-spin nzTip="图片上传中......" [nzSpinning]="uploading" >
         <nz-alert nzType="info" nzMessage="上传图片中..." *ngIf="uploading">
         </nz-alert>
         <picture-exif (uploading) = "isUploading($event)"></picture-exif>
+      </nz-spin>
+    </nz-tab>
+    <nz-tab nzTitle="图片处理">
+      <nz-spin nzTip="图片上传中......" [nzSpinning]="uploading" >
+        <picture-change (uploading) = "isUploading($event)"></picture-change>
       </nz-spin>
     </nz-tab>
   </nz-tabset>

@@ -17,6 +17,9 @@ export class WzlutilService {
    */
   isBlank(str:any):boolean{
     let bol = false;
+    if(str === undefined){
+      return true;
+    }
     if(!str){
       return true;
     }
@@ -32,15 +35,19 @@ export class WzlutilService {
    */
   isNotBlank(str:any):boolean{
     let bol = false;
-    if(str){
-      return true;
-    }
-    if(str === ""){
-    }else{
+    if(str && str !== "" && str !== undefined){
       return true;
     }
     return bol;
   }
 
+  /**
+   * 去空格
+   * @param str
+   */
+  trim(str){
+    str.replace(/(^\s*)|(\s*$)/g, "");
+    return str;
+  }
 }
 

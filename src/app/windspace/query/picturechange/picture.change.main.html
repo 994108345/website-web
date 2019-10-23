@@ -1,0 +1,80 @@
+<div>
+  <div class="gutter-example">
+    <div nz-row nzGutter="16">
+      <div nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>改变类型:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <nz-select [(ngModel)]="pictureChange.changeType" nzPlaceHolder="Choose"  [nzSize]="large" style="width: 100px;" (ngModelChange)="selectChange($event)">
+          <nz-option nzValue="1" nzLabel="按比例"></nz-option>
+          <nz-option nzValue="2" nzLabel="按大小"></nz-option>
+        </nz-select>
+      </div>
+
+      <br><br>
+      <div nz-col nzSpan="6"  *ngIf="pictureChange.changeType === '1'">
+        <span class="span-tab"><span style="color: red">*</span>比例:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18" *ngIf="pictureChange.changeType === '1'">
+        <div class="gutter-box">
+          <nz-input-number [(ngModel)]="pictureChange.rate" [nzMin]="0" [nzMax]="10" [nzStep]="0.1"></nz-input-number>
+        </div>
+      </div>
+      <div nz-col nzSpan="6" *ngIf="pictureChange.changeType === '2'">
+        <span class="span-tab"><span style="color: red">*</span>宽:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18" *ngIf="pictureChange.changeType === '2'">
+        <div class="gutter-box">
+          <nz-input-number [(ngModel)]="pictureChange.width" [nzMin]="1" [nzMax]="50000" [nzStep]="1"></nz-input-number>
+        </div>
+      </div>
+
+      <br><br>
+      <div nz-col nzSpan="6" *ngIf="pictureChange.changeType === '2'">
+        <span class="span-tab"><span style="color: red">*</span>高:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18" *ngIf="pictureChange.changeType === '2'">
+        <div class="gutter-box">
+          <nz-input-number [(ngModel)]="pictureChange.height" [nzMin]="1" [nzMax]="50000" [nzStep]="1"></nz-input-number>
+        </div>
+      </div>
+
+      <br><br>
+      <div nz-col nzSpan="6">
+        <span class="span-tab">文件类型:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <nz-select [(ngModel)]="pictureChange.type" nzPlaceHolder="Choose"  [nzSize]="large" style="width: 100px;" (ngModelChange)="selectChange($event)">
+          <nz-option nzValue= "" nzLabel="不改变"></nz-option>
+          <nz-option nzValue="png" nzLabel="png"></nz-option>
+          <nz-option nzValue="jpg" nzLabel="jpg"></nz-option>
+        </nz-select>
+      </div>
+
+      <br><br>
+      <div nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>图片上传:</span>
+      </div>
+      <div nz-col nzSpan="18">
+        <!--[nzAction] = uploadUrl (nzChange)="uploadPicture($event)"-->
+        <nz-upload  [nzSize]="pictureSize" nzListType="picture-card" [nzFileType]="pictureType" [nzLimit]="1" [nzFileList]="fileList" [nzBeforeUpload]="beforeUpload" >
+          <button nz-button><i nz-icon nzType="upload"></i>
+            <span>选择图片上传</span>
+          </button>
+        </nz-upload>
+      </div>
+
+      <br><br>
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col nzSpan="18">
+        <button nz-button [nzType]="'primary'" (click)="changePicture()" style="margin-top: 16px" >提交</button>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzSpan="6">
+  </div>
+  <div nz-col nzSpan="18">
+    <a *ngIf="resultPicUrl" [href]="resultPicUrl" style="color:red;font-size: 50px" target="_blank">点击此处下载处理后的图片</a>
+  </div>
+</div>

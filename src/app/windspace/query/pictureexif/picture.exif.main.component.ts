@@ -28,7 +28,7 @@ export class PictureExifMainComponent extends AbstractComponent{
   pictureSize:number = 1024*50;
   //文件类型
   pictureType:string = "image/png,image/jpeg";
-  //picture-exif对象
+  //pictureexif-exif对象
   pictureExif:any = {};
   //地址
   address:string = null;
@@ -44,7 +44,7 @@ export class PictureExifMainComponent extends AbstractComponent{
   }
 
   ngOnInit(){
-    console.log("picture-exif组件");
+    console.log("pictureexif-exif组件");
   }
 
   /**
