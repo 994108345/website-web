@@ -1,0 +1,56 @@
+<div class="chat-interface">
+
+  <div nz-col nzSpan="6">
+    <span class="span-tab"><span style="color: red">*</span>原文类型:</span>
+  </div>
+  <div nz-col class="gutter-row" nzSpan="18">
+    <nz-select [(ngModel)]="translation.from" nzPlaceHolder="Choose" style="width: 100px;">
+      <nz-option nzValue="zh" nzLabel="中文"></nz-option>
+      <nz-option nzValue="wyw" nzLabel="文言文"></nz-option>
+      <nz-option nzValue="cht" nzLabel="繁体字"></nz-option>
+      <nz-option nzValue="en" nzLabel="英语"></nz-option>
+    </nz-select>
+  </div>
+
+  <br><br>
+
+  <div nz-col nzSpan="6">
+    <span class="span-tab"><span style="color: red">*</span>结果类型:</span>
+  </div>
+  <div nz-col class="gutter-row" nzSpan="18">
+    <nz-select [(ngModel)]="translation.to" nzPlaceHolder="Choose" style="width: 100px;">
+      <nz-option nzValue="zh" nzLabel="中文"></nz-option>
+      <nz-option nzValue="wyw" nzLabel="文言文"></nz-option>
+      <nz-option nzValue="cht" nzLabel="繁体字"></nz-option>
+      <nz-option nzValue="en" nzLabel="英语"></nz-option>
+    </nz-select>
+  </div>
+
+  <br><br>
+
+  <div nz-col nzSpan="6">
+    <span class="span-tab"><span style="color: red">*</span>翻译文本:</span>
+  </div>
+  <div nz-col class="gutter-row" nzSpan="18">
+    <input nz-input placeholder="Basic usage" [(ngModel)]="translation.q"  [maxLength]="100"/>
+  </div>
+
+  <br><br>
+
+  <div nz-col nzSpan="6">
+    <span class="span-tab"><span style="color: red"></span></span>
+  </div>
+  <div nz-col class="gutter-row" nzSpan="18">
+    <button nz-button [nzType]="'primary'" (click)="trans()" style="margin-top: 16px"  (keypress)="pressEnter($event)">翻译</button>
+  </div>
+
+  <br><br>
+
+  <div nz-col nzSpan="6">
+    <span class="span-tab"><span style="color: red"></span>查询结果:</span>
+  </div>
+  <div nz-col class="gutter-row" nzSpan="18">
+    <p style="color: red;font-size: 50px">{{result}}</p>
+  </div>
+
+</div>

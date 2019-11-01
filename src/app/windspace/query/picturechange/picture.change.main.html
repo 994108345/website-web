@@ -1,11 +1,13 @@
 <div>
+  <nz-alert nzType="success" style="white-space: pre-line;"
+            nzMessage="使用说明：&#10;1 改变类型“按比例”，输入n，指生成图片的长宽为原图的n倍。&#10;2 改变类型“按大小”，输入长宽，上传的图片会按输入的值自动变化。&#10;3 图片类型：目前只支持图片类型jpg和png的互相更改。如果不需要转换图片类型，该值可以不输入"></nz-alert>
   <div class="gutter-example">
     <div nz-row nzGutter="16">
       <div nz-col nzSpan="6">
         <span class="span-tab"><span style="color: red">*</span>改变类型:</span>
       </div>
       <div nz-col class="gutter-row" nzSpan="18">
-        <nz-select [(ngModel)]="pictureChange.changeType" nzPlaceHolder="Choose"  [nzSize]="large" style="width: 100px;" (ngModelChange)="selectChange($event)">
+        <nz-select [(ngModel)]="pictureChange.changeType" nzPlaceHolder="Choose" style="width: 100px;" (ngModelChange)="selectChange($event)">
           <nz-option nzValue="1" nzLabel="按比例"></nz-option>
           <nz-option nzValue="2" nzLabel="按大小"></nz-option>
         </nz-select>
@@ -41,10 +43,10 @@
 
       <br><br>
       <div nz-col nzSpan="6">
-        <span class="span-tab">文件类型:</span>
+        <span class="span-tab">图片类型:</span>
       </div>
       <div nz-col class="gutter-row" nzSpan="18">
-        <nz-select [(ngModel)]="pictureChange.type" nzPlaceHolder="Choose"  [nzSize]="large" style="width: 100px;" (ngModelChange)="selectChange($event)">
+        <nz-select [(ngModel)]="pictureChange.type" nzPlaceHolder="Choose"  style="width: 100px;" (ngModelChange)="selectChange($event)">
           <nz-option nzValue= "" nzLabel="不改变"></nz-option>
           <nz-option nzValue="png" nzLabel="png"></nz-option>
           <nz-option nzValue="jpg" nzLabel="jpg"></nz-option>

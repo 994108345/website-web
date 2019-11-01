@@ -35,6 +35,8 @@ export const urls = {
   changePictureUrl:websiteUrl + "/picturechange/change-picture",
   /*------------------------------------------file upload--------------------------------------------------------*/
   uploadFile:websiteUrl + "/file/upload",
+  /*---------------------------------------翻译---------------------------------------------------*/
+  tranUrl:websiteUrl + "/unified/translationDaoImpl/translationByRequest"
 };
 
 /*跳转菜单页面路径*/
