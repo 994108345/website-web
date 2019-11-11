@@ -1,11 +1,14 @@
-
-
 import {Injectable} from '@angular/core';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+
+declare var returnCitySN: any;
+
 @Injectable()
 export class WzlutilService {
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
   ngOnInit(){
   }
@@ -48,6 +51,16 @@ export class WzlutilService {
   trim(str){
     str.replace(/(^\s*)|(\s*$)/g, "");
     return str;
+  }
+
+  /**
+   * 获取ip地址
+   */
+  getIpAddress() {
+    let data = {ip:"",address:""};
+    data.ip = returnCitySN["cip"];
+    data.address = returnCitySN["cname"];
+    return data
   }
 }
 

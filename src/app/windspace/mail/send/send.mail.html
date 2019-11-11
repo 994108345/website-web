@@ -1,6 +1,6 @@
 <div>
   <nz-alert nzType="success" style="white-space: pre-line;"
-            nzMessage="使用说明：&#10;1 邮件发送者将是匿名qq号，不是你的qq号，你填的qq号只是用作查询你的邮件发送记录。&#10;"></nz-alert>
+            nzMessage="使用说明：&#10;1 邮件发送者将是匿名qq号。&#10;"></nz-alert>
   <br>
   <div class="gutter-example">
     <div nz-row nzGutter="16">
@@ -44,7 +44,7 @@
         <span class="span-tab"><span style="color: red">*</span>发送时间:</span>
       </div>
       <div nz-col class="gutter-row" nzSpan="18">
-        <nz-date-picker [nzRenderExtraFooter]="footerRender" [(ngModel)]="sendEmail.actionTime"  nzShowTime [nzPlaceHolder]="'选择你想发送的时间点'"></nz-date-picker>
+        <nz-date-picker [(ngModel)]="sendEmail.actionTime"  nzShowTime [nzPlaceHolder]="'选择你想发送的时间点'"></nz-date-picker>
       </div>
       <br><br><br>
 
