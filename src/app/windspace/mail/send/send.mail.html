@@ -1,0 +1,60 @@
+<div>
+  <nz-alert nzType="success" style="white-space: pre-line;"
+            nzMessage="使用说明：&#10;1 邮件发送者将是匿名qq号，不是你的qq号，你填的qq号只是用作查询你的邮件发送记录。&#10;"></nz-alert>
+  <br>
+  <div class="gutter-example">
+    <div nz-row nzGutter="16">
+
+      <div class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>你的秘钥:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="填写你自己的秘钥，查看发送记录时使用。" [(ngModel)]="sendEmail.secretKey"/>
+      </div>
+      <br><br><br>
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>接收邮箱:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input placeholder="你想发给谁，邮箱填这里！！" nz-input [(ngModel)]="sendEmail.receiveMail" (ngModelChange)="onChange($event)" [nzAutocomplete]="auto" />
+        <nz-autocomplete #auto>
+          <nz-auto-option *ngFor="let option of options" [nzValue]="option">{{ option }}</nz-auto-option>
+        </nz-autocomplete>
+      </div>
+      <br><br><br>
+
+      <div class="tab"  nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>邮件标题:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="请输入你的邮件标题" [(ngModel)]="sendEmail.topic" [maxLength]="50"/>
+      </div>
+      <br><br><br>
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>邮件内容:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <textarea rows="4" placeholder="请输入你的邮件内" nz-input [(ngModel)]="sendEmail.postMessage" [maxLength]="500"></textarea>
+      </div>
+      <br><br><br><br><br>
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>发送时间:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <nz-date-picker [nzRenderExtraFooter]="footerRender" [(ngModel)]="sendEmail.actionTime"  nzShowTime [nzPlaceHolder]="'选择你想发送的时间点'"></nz-date-picker>
+      </div>
+      <br><br><br>
+
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col nzSpan="18">
+        <button nz-button nzType="primary" (click)="addEmail()">提交</button>
+      </div>
+      <br><br><br>
+    </div>
+  </div>
+
+</div>

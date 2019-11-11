@@ -1,0 +1,44 @@
+<div class="mail">
+  <div class="gutter-example">
+    <div nz-row nzGutter="16">
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>你的秘钥:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="填写查看的秘钥" [(ngModel)]="emailTimer.secretKey"/>
+      </div>
+      <br><br><br>
+
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <button nz-button nzType="primary" (click)="queryMail()">查询</button>
+      </div>
+      <br><br><br>
+    </div>
+  </div>
+  <nz-table *ngIf="this.emailTimers" #basicTable [nzData]="emailTimers">
+    <thead>
+    <tr>
+      <th>邮件标题</th>
+      <th>邮件内容</th>
+      <th>接收邮箱</th>
+      <th>发送时间</th>
+      <th>发送状态</th>
+      <th>创建时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.topic }}</td>
+      <td>{{ data.postMessage }}</td>
+      <td>{{ data.receiveMail }}</td>
+      <td>{{ data.sendTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td>{{ statusChange(data.status,mailSendStatus) }}</td>
+      <td>{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>
+

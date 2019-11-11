@@ -1,5 +1,8 @@
 //网站项目路由
 export const websiteUrl = "/website";
+
+//是否是本地环境
+export const isLocal = true;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
@@ -36,7 +39,12 @@ export const urls = {
   /*------------------------------------------file upload--------------------------------------------------------*/
   uploadFile:websiteUrl + "/file/upload",
   /*---------------------------------------翻译---------------------------------------------------*/
-  tranUrl:websiteUrl + "/unified/translationDaoImpl/translationByRequest"
+  tranUrl:websiteUrl + "/unified/translationDaoImpl/translationByRequest",
+  /*------------------------------------------mail--------------------------------------------*/
+  //添加一个发送邮件任务
+  addMailUrl:websiteUrl + "/unified/emailTimerServiceImpl/addOne",
+  //查询一个邮件任务的信息
+  queryMailUrl:websiteUrl + "/unified/emailTimerServiceImpl/queryByRequest",
 };
 
 /*跳转菜单页面路径*/

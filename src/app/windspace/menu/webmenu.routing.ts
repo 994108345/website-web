@@ -22,6 +22,10 @@ const menuRoutes: Routes = [
         path: 'query',
         loadChildren: 'src/app/windspace/query/query.module#QueryModule',
       },
+      {
+        path: 'mail',
+        loadChildren: 'src/app/windspace/mail/mail.module#MailModule',
+      },
     ]
   },
 ];

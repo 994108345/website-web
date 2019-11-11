@@ -9,6 +9,7 @@
       <nz-option nzValue="wyw" nzLabel="文言文"></nz-option>
       <nz-option nzValue="cht" nzLabel="繁体字"></nz-option>
       <nz-option nzValue="en" nzLabel="英语"></nz-option>
+      <nz-option nzValue="yue" nzLabel="粤语"></nz-option>
     </nz-select>
   </div>
 
@@ -22,7 +23,8 @@
       <nz-option nzValue="zh" nzLabel="中文"></nz-option>
       <nz-option nzValue="wyw" nzLabel="文言文"></nz-option>
       <nz-option nzValue="cht" nzLabel="繁体字"></nz-option>
-      <nz-option nzValue="en" nzLabel="英语"></nz-option>
+      <nz-option nzValue="en" nzLabel="英语"></nz-option>.
+      <nz-option nzValue="yue" nzLabel="粤语"></nz-option>
     </nz-select>
   </div>
 
@@ -32,7 +34,7 @@
     <span class="span-tab"><span style="color: red">*</span>翻译文本:</span>
   </div>
   <div nz-col class="gutter-row" nzSpan="18">
-    <input nz-input placeholder="Basic usage" [(ngModel)]="translation.q"  [maxLength]="100"/>
+    <input nz-input placeholder="Basic usage" [(ngModel)]="translation.q"  [maxLength]="100" (keypress)="pressEnter($event)"/>
   </div>
 
   <br><br>
@@ -41,7 +43,7 @@
     <span class="span-tab"><span style="color: red"></span></span>
   </div>
   <div nz-col class="gutter-row" nzSpan="18">
-    <button nz-button [nzType]="'primary'" (click)="trans()" style="margin-top: 16px"  (keypress)="pressEnter($event)">翻译</button>
+    <button nz-button [nzType]="'primary'" (click)="trans()" style="margin-top: 16px">翻译</button>
   </div>
 
   <br><br>
@@ -54,3 +56,4 @@
   </div>
 
 </div>
+

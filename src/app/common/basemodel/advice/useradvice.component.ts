@@ -25,6 +25,10 @@ export class UseradviceComponent extends AbstractComponent{
    * 新增用户建议
    */
   addAdvice() {
+    if(this.wzlutilService.isBlank(this.adviceObj.advice)){
+      this.wzlNgZorroAntdMessage.error("建议内容不能为空");
+      return;
+    }
     let condition = this.adviceObj;
     this.commonService.doHttpPost(urls.insertAdviceUrl, condition).then(rst => {
       if (rst) {
