@@ -7,6 +7,7 @@ import {WzlCacheService} from '../../common/service/wzlcache/wzlceche.service';
 import {WebmenuMainComponent} from './main/webmenu.main.component';
 import {WzlngzorroantdmessageService} from '../../common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service';
 import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module';
+import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module'
     WebmenuMainComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
-  providers: [CommonService,WzlCacheService,WzlngzorroantdmessageService,{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [CommonService,WzlCacheService,WzlngzorroantdmessageService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],
 })
 export class WebMenuModule {
 

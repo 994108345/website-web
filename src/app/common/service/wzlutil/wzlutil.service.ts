@@ -57,9 +57,11 @@ export class WzlutilService {
    * 获取ip地址
    */
   getIpAddress() {
-    let data = {ip:"",address:""};
+    console.log("ip_json：" + JSON.stringify(returnCitySN));
+    let data = {ip:"",address:"",id:""};
     data.ip = returnCitySN["cip"];
     data.address = returnCitySN["cname"];
+    data.id = returnCitySN["cid"];
     return data
   }
 }
