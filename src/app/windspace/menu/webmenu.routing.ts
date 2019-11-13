@@ -26,6 +26,10 @@ const menuRoutes: Routes = [
         path: 'mail',
         loadChildren: 'src/app/windspace/mail/mail.module#MailModule',
       },
+      {
+        path: 'file',
+        loadChildren: 'src/app/windspace/file/file.module#FileModule',
+      },
     ]
   },
 ];

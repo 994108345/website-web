@@ -1,0 +1,40 @@
+<div class="mail">
+  <div class="gutter-example">
+    <div nz-row nzGutter="16">
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>你的秘钥:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="填写查看的秘钥" [(ngModel)]="fileUpload.secretKey"/>
+      </div>
+      <br><br><br>
+
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <button nz-button nzType="primary" (click)="queryFile()">查询</button>
+      </div>
+      <br><br><br>
+    </div>
+  </div>
+  <nz-table *ngIf="this.fileUploads" #basicTable [nzData]="fileUploads">
+    <thead>
+    <tr>
+      <th>文件名</th>
+      <th>文件大小</th>
+      <th>上传时间</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.fileName }}</td>
+      <td>{{ data.fileSize }}KB</td>
+      <td>{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td><a href="{{ data.ossUrl}}">下载</a></td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>
+

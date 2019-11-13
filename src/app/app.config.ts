@@ -48,6 +48,11 @@ export const urls = {
   /*------------------------------------------ipLog--------------------------------------------*/
   //新增一个iplog
   addIpLog:websiteUrl + "/unified/ipLogServiceImpl/insertOne",
+  /*--------------------------------------------fileUpload----------------------------------------------*/
+  //上传文件
+  upload_File:websiteUrl + "/uploadfile/upload-file",
+  //查询文件
+  queryFileUrl:websiteUrl + "/unified/ossFileLogServiceImpl/queryByRequest",
 };
 
 /*跳转菜单页面路径*/

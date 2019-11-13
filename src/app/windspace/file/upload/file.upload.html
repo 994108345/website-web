@@ -1,0 +1,39 @@
+<nz-spin nzTip="图片上传中......" [nzSpinning]="uploading" >
+<div>
+  <nz-alert nzType="success" style="white-space: pre-line;"
+            nzMessage="使用说明：&#10;1 秘钥是下载文件时使用的，请牢记。&#10;"></nz-alert>
+  <br>
+  <div class="gutter-example">
+    <div nz-row nzGutter="16">
+
+      <div class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>你的秘钥:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="填写你自己的秘钥，查看文件时使用。" [(ngModel)]="fileUpload.secretKey"/>
+      </div>
+      <br><br><br>
+
+      <div class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>图片上传:</span>
+      </div>
+      <div nz-col nzSpan="18">
+        <nz-upload  [nzSize]="pictureSize" nzListType="picture-card" [nzLimit]="1" [nzFileList]="fileList" [nzBeforeUpload]="beforeUpload" >
+          <button nz-button><i nz-icon nzType="upload"></i>
+            <span>选择文件上传</span>
+          </button>
+        </nz-upload>
+      </div>
+      <br><br><br>
+
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col nzSpan="18">
+        <button nz-button nzType="primary" (click)="uploadFile()">提交</button>
+      </div>
+      <br><br><br>
+    </div>
+  </div>
+
+</div>
+</nz-spin>
