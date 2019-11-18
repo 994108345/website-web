@@ -53,6 +53,13 @@ export const urls = {
   upload_File:websiteUrl + "/uploadfile/upload-file",
   //查询文件
   queryFileUrl:websiteUrl + "/unified/ossFileLogServiceImpl/queryByRequest",
+  /*---------------------------------------------获取随机话-----------------------------------------------------*/
+  //获取彩虹屁
+  getRainbowFartUrl:websiteUrl + "/unified/wordServiceImpl/getRainbowFart",
+  //获取鸡汤
+  getChickenSoupUrl:websiteUrl + "/unified/wordServiceImpl/getChickenSoup",
+  //获取毒鸡汤
+  getTaintedChickenSoupUrl:websiteUrl + "/unified/wordServiceImpl/getTaintedChickenSoup",
 };
 
 /*跳转菜单页面路径*/

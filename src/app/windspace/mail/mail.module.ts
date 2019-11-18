@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module';
 import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
 import {SendMailComponent} from './send/send.mail.component';
+import {WordModule} from '../../common/basemodel/word/word.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,8 @@ import {SendMailComponent} from './send/send.mail.component';
     ReactiveFormsModule,
     //用户建议模块
     UseradviceModule,
+    //随机话模块
+    WordModule,
     MailRouting,
   ],
   exports:[

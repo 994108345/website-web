@@ -1,0 +1,7 @@
+.ColorSeesee{
+  display:inline-block;
+  /*background: #000 linear-gradient(to left, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);*/
+  background-image: linear-gradient(to left, #d325f3,#4c84d9, #5afaf3, #1bff00, #edf93a, #f3c133, #ff2d55);
+  -webkit-background-clip: text;   /*背景颜色转为文字*/
+  -webkit-text-fill-color: transparent; /*文本透明*/
+}

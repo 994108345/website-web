@@ -5,11 +5,18 @@ import {CommonService} from '../../common/service/base/common.service';
 import {WzlCacheService} from '../../common/service/wzlcache/wzlceche.service';
 import {IndexMainComponent} from './main/index.main.component';
 import {IndexRouting} from './index.routing';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     /** 导入 ng-zorro-antd 模块 **/
     NgZorroAntdModule,
+    CommonModule,
+    /*表单模块，要使用ngModel，就要使用这个模块*/
+    FormsModule,
+    /*响应式表单*/
+    ReactiveFormsModule,
     IndexRouting,
   ],
   declarations: [

@@ -10,6 +10,8 @@ import {successStatus} from '../../../common/service/base/common.config';
 })
 export class SendMailComponent extends AbstractComponent{
 
+  //是否显示抽屉
+  visible:boolean = false;
   //发送邮件对象
   sendEmail:any = {}
 
@@ -74,6 +76,13 @@ export class SendMailComponent extends AbstractComponent{
     } else {
       this.options = ['gmail.com', '163.com', 'qq.com'].map(domain => `${value}@${domain}`);
     }
+  }
+
+  /**
+   * 显示抽屉
+   */
+  drawerShow(bool:boolean){
+    this.visible = bool;
   }
 
 }

@@ -56,5 +56,15 @@
       <br><br><br>
     </div>
   </div>
-
 </div>
+<p>不知道说什么，戳下面按钮，帮你查询各种网络流行语</p>
+<button nz-button nzType="primary" (click)="drawerShow(true)">戳</button>
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  nzPlacement="bottom"
+  nzTitle="随机话"
+  (nzOnClose)="drawerShow(false)"
+>
+  <web-word></web-word>
+</nz-drawer>

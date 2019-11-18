@@ -18,13 +18,15 @@ export class WebmenuMainComponent extends AbstractComponent{
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector){
     super(injector);
-    //存储ip地址
-    this.saveClientIp();
   }
 
 
   ngOnInit(){
     console.log("网站菜单主页进来了吗");
+    //存储ip地址
+    this.saveClientIp();
+    //跳转到主页
+    this.router.navigate(["menu/index"]);
   }
 
   /*内嵌菜单*/
