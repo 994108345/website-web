@@ -45,6 +45,8 @@ export const urls = {
   addMailUrl:websiteUrl + "/unified/emailTimerServiceImpl/addOne",
   //查询一个邮件任务的信息
   queryMailUrl:websiteUrl + "/unified/emailTimerServiceImpl/queryByRequest",
+  //上次图片获取url
+  getUrlByUploadUrl:websiteUrl + "/uploadfile/get-url-by-upload",
   /*------------------------------------------ipLog--------------------------------------------*/
   //新增一个iplog
   addIpLog:websiteUrl + "/unified/ipLogServiceImpl/insertOne",

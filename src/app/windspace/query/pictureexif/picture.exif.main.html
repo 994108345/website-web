@@ -15,5 +15,6 @@
     <nz-descriptions-item nzTitle="纬度" [nzSpan]="3">{{pictureExif.lat}}</nz-descriptions-item>
   </nz-descriptions>
   <p>拍摄地点：{{pictureExif.address}}</p>
-  <div *ngIf="pictureExif" id='container' style='width:800px; height:600px;'></div>
+  <p>地图：</p>
+  <div *ngIf="pictureExif" id='container' style='width:800px; height:600px;border: deepskyblue 1px solid'></div>
 </div>

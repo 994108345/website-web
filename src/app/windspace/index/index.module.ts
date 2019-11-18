@@ -7,6 +7,7 @@ import {IndexMainComponent} from './main/index.main.component';
 import {IndexRouting} from './index.routing';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AnimationModule} from '../../common/basemodel/animation/animation.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     /*响应式表单*/
     ReactiveFormsModule,
+    /*动画模块*/
+    AnimationModule,
     IndexRouting,
   ],
   declarations: [

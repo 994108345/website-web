@@ -11,6 +11,7 @@ import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module'
 import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
 import {SendMailComponent} from './send/send.mail.component';
 import {WordModule} from '../../common/basemodel/word/word.module';
+import {QuillModule} from 'ngx-quill';
 
 @NgModule({
   imports: [
@@ -25,6 +26,8 @@ import {WordModule} from '../../common/basemodel/word/word.module';
     UseradviceModule,
     //随机话模块
     WordModule,
+    /*导入quil富文本编辑器模块*/
+    QuillModule,
     MailRouting,
   ],
   exports:[

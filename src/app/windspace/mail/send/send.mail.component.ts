@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Injector, Output} from '@angular/core';
-import {asllCode, cacheKey, routers, urls} from '../../../app.config';
+import {asllCode, cacheKey, isLocal, routers, urls} from '../../../app.config';
 import {AbstractComponent} from '../../../common/service/abstract.component';
 import {successStatus} from '../../../common/service/base/common.config';
+import {UploadFile} from 'ng-zorro-antd';
 
 @Component({
   selector: 'send-mail',
@@ -10,10 +11,24 @@ import {successStatus} from '../../../common/service/base/common.config';
 })
 export class SendMailComponent extends AbstractComponent{
 
+  /**
+   * 上传的url
+   */
+  uploadUrl = urls.getUrlByUploadUrl;
   //是否显示抽屉
   visible:boolean = false;
   //发送邮件对象
   sendEmail:any = {}
+  //quill富文本编辑器的配置
+  quillConfig:any;
+  //文件大小
+  pictureSize:number = 1024*50;
+  //发送邮件对象
+  fileUpload:any = {}
+  //上传文件
+  fileList: UploadFile[] = [];
+  //文件类型
+  pictureType:string = "image/png,image/jpeg";
 
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector){
@@ -22,6 +37,74 @@ export class SendMailComponent extends AbstractComponent{
 
   ngOnInit(){
     console.log("mail-send界面");
+    //设置配置
+    this.setQuillConfig();
+  }
+
+  /**
+   * 设置quill的配置
+   */
+  setQuillConfig(){
+    this.quillConfig = [
+      // ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      // ['blockquote', 'code-block'],
+      // [{ 'header': 1 }, { 'header': 2 }, { 'header': 3 }],               // custom button values
+      // [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      // [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      // [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      // [{ 'direction': 'rtl' }],                         // text direction
+      //
+      // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      // [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      //
+      // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      // [{ 'font': [] }],
+      // [{ 'align': [] }],
+      // ['clean'],                         // remove formatting button
+      // ['link', 'image', 'video']                         // link and image, video
+    ]
+  }
+
+  /**
+   * 开始、上传进度、完成、失败都会调用这个函数。
+   * status:uploading done error removed
+   * 上传图片
+   * @param event
+   */
+  uploadPicture(event){
+    if(event){
+      let file = event.file;
+      if(file){
+        let status = event.file.status;
+        if(status === "uploading"){
+          //删除老的文件，每次只显示一个文件
+          this.fileList = [file];
+        }else if(status == "done"){
+          let response = file.response;
+          if(response){
+            let status = response.status;
+            if(status === successStatus){
+              if(this.wzlutilService.isBlank(this.sendEmail.postMessage)){
+                this.sendEmail.postMessage = "";
+              }
+              let img = "<img class='camera' src=" + response.data + " alt=''>";
+              this.sendEmail.postMessage = this.sendEmail.postMessage + img;
+              this.wzlNgZorroAntdMessage.info("上传图片成功");
+            }else{
+              this.wzlNgZorroAntdMessage.error("上传图片发送异常" + response.message)
+            }
+          }else{
+            console.log("没有返回信息" + this.toJsonStr(event));
+          }
+        }else if(status == "error"){
+          this.wzlNgZorroAntdMessage.error("Web error :" + this.toJsonStr(event))
+        }else if(status == "removed"){
+
+        }
+      }else{
+        console.log("file is null ..." + this.toJsonStr(event))
+      }
+    }
   }
 
   /**

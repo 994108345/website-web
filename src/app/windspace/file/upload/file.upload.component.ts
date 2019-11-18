@@ -31,7 +31,7 @@ export class FileUploadComponent extends AbstractComponent{
   }
 
   /**
-   * 查询邮政编码
+   * 上传文件
    */
   uploadFile(){
     const formData = new FormData();
