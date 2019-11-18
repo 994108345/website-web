@@ -1,21 +1,30 @@
-<nz-tabset>
-  <nz-tab nzTitle="彩虹屁">
-    <div>
-      <p class="ColorSeesee">{{rainbowFart}}</p>
-      <br><br>
-      <button  nz-button nzType="primary"  (click)="getRainbowFart()">获取彩虹屁</button>
-    </div>
-  </nz-tab>
-  <nz-tab nzTitle="鸡汤">
-    <div>
-      <p>{{chickenSoup}}</p>
-      <button  nz-button nzType="primary"  (click)="getChickenSoup()">获取鸡汤</button>
-    </div>
-  </nz-tab>
-  <nz-tab nzTitle="毒鸡汤">
-    <div>
-      <p>{{taintedChickenSoup}}</p>
-      <button  nz-button nzType="primary"  (click)="getTaintedChickenSoup()">获取毒鸡汤</button>
-    </div>
-  </nz-tab>
-</nz-tabset>
+<div class="all">
+  <nz-alert nzType="success" nzMessage="点击文本即可完成复制"></nz-alert>
+  <nz-tabset>
+    <nz-tab nzTitle="彩虹屁">
+      <div>
+        <p class="ColorSeesee" ngxClipboard [cbContent]="rainbowFart"  (cbOnSuccess)="copySuccess()">{{rainbowFart}}</p>
+        <br><br>
+        <button  nz-button nzType="primary"  (click)="getRainbowFart()">获取彩虹屁</button>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="鸡汤">
+      <div>
+        <p  ngxClipboard [cbContent]="chickenSoup"  (cbOnSuccess)="copySuccess()">{{chickenSoup}}</p>
+        <button  nz-button nzType="primary"  (click)="getChickenSoup()">获取鸡汤</button>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="毒鸡汤">
+      <div>
+        <p  ngxClipboard [cbContent]="taintedChickenSoup" (cbOnSuccess)="copySuccess()">{{taintedChickenSoup}}</p>
+        <button  nz-button nzType="primary"  (click)="getTaintedChickenSoup()">获取毒鸡汤</button>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="古诗词">
+      <div>
+        <p  ngxClipboard [cbContent]="ancientChinesePoetry" (cbOnSuccess)="copySuccess()">{{ancientChinesePoetry}}</p>
+        <button  nz-button nzType="primary"  (click)="getAncientChinesePoetry()">获取古诗词</button>
+      </div>
+    </nz-tab>
+  </nz-tabset>
+</div>

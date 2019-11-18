@@ -5,3 +5,9 @@
   -webkit-background-clip: text;   /*背景颜色转为文字*/
   -webkit-text-fill-color: transparent; /*文本透明*/
 }
+
+.all{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

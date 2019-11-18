@@ -8,6 +8,7 @@ import {WordComponent} from './word.component';
 import {CommonService} from '../../service/base/common.service';
 import {WzlCacheService} from '../../service/wzlcache/wzlceche.service';
 import {CommonModule} from '@angular/common';
+import {ClipboardModule} from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import {CommonModule} from '@angular/common';
     ReactiveFormsModule,
     /*气泡卡片*/
     NzPopoverModule,
+    /*复制到剪贴板*/
+    ClipboardModule,
   ],
   //对外开放的组件
   exports:[

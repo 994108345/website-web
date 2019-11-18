@@ -30,6 +30,10 @@ const menuRoutes: Routes = [
         path: 'file',
         loadChildren: 'src/app/windspace/file/file.module#FileModule',
       },
+      {
+        path: 'wordquery',
+        loadChildren: 'src/app/windspace/wordquery/wordquery.module#WordqueryModule',
+      },
     ]
   },
 ];

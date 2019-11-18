@@ -60,6 +60,8 @@ export const urls = {
   getChickenSoupUrl:websiteUrl + "/unified/wordServiceImpl/getChickenSoup",
   //获取毒鸡汤
   getTaintedChickenSoupUrl:websiteUrl + "/unified/wordServiceImpl/getTaintedChickenSoup",
+  //获取古诗词
+  getAncientChinesePoetryUrl:websiteUrl + "/unified/wordServiceImpl/getAncientChinesePoetry",
 };
 
 /*跳转菜单页面路径*/

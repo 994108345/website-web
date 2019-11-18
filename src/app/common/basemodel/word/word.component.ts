@@ -16,6 +16,8 @@ export class WordComponent extends AbstractComponent{
   chickenSoup:string = "";
   //毒鸡汤
   taintedChickenSoup:string = "";
+  //古诗词
+  ancientChinesePoetry:string = "";
 
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector){
@@ -71,7 +73,7 @@ export class WordComponent extends AbstractComponent{
   }
 
   /**
-   * 获取毒鸡汤
+   * 获毒鸡汤
    */
   getTaintedChickenSoup() {
     let condition = {};
@@ -90,6 +92,35 @@ export class WordComponent extends AbstractComponent{
       this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
     }).finally(() => {
     });
+  }
+
+  /**
+   * 获取古诗词
+   */
+  getAncientChinesePoetry() {
+    let condition = {};
+    this.commonService.doHttpPost(urls.getAncientChinesePoetryUrl, condition).then(rst => {
+      if (rst) {
+        if (rst.status != successStatus) {
+          this.wzlNgZorroAntdMessage.error(rst.message);
+        } else {
+          this.ancientChinesePoetry = rst.data;
+          this.wzlNgZorroAntdMessage.success('查询成功');
+        }
+      } else {
+        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
+      }
+    }).catch(rtc => {
+      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+    }).finally(() => {
+    });
+  }
+
+  /**
+   * 成功复制
+   */
+  copySuccess(){
+    this.wzlNgZorroAntdMessage.success("复制成功");
   }
 
 }
