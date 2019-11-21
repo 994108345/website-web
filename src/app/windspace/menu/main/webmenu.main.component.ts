@@ -26,7 +26,7 @@ export class WebmenuMainComponent extends AbstractComponent{
     //存储ip地址
     this.saveClientIp();
     //跳转到主页
-    this.router.navigate(["menu/index"]);
+    this.goHome()
   }
 
   /*内嵌菜单*/

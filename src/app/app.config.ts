@@ -68,8 +68,7 @@ export const urls = {
 
 /*跳转菜单页面路径*/
 export const routers = {
-  webRouter:"",
-  homeRouter:"",
+  homeRouter:"menu/index",
 };
 
 //缓存key

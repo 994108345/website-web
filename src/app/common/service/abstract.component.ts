@@ -364,11 +364,7 @@ export class AbstractComponent implements OnDestroy {
 
   /*跳转主页*/
   goHome(){
-    if(routers.webRouter){
-
-    }else{
-
-    }
+    this.router.navigate([routers.homeRouter]);
   }
 
   /*查询文章列表*/

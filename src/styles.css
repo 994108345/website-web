@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-/*所有按钮50像素宽*/
+/*全局按钮的动画*/
 button{
+  transition: transform 1s;
+}
+button:hover{
+  transform: scale(1.2,1.2);
 }
 

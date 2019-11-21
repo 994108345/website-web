@@ -70,7 +70,11 @@ export class PictureExifMainComponent extends AbstractComponent{
             if(status === successStatus){
               this.pictureExif = response.data;
               this.getMap();
-              this.wzlNgZorroAntdMessage.info("解析图片成功");
+              if(this.pictureExif.lon = "0.0"){
+                this.wzlNgZorroAntdMessage.warning("无法正确解析图片！请保证图片为手机原图，没有经过后期处理，且拍照时开通了地理位置。")
+              }else{
+                this.wzlNgZorroAntdMessage.info("解析图片成功");
+              }
             }else{
               this.wzlNgZorroAntdMessage.error("上传图片发送异常" + response.message)
             }
