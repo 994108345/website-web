@@ -1,0 +1,40 @@
+<div class="mail">
+  <div class="gutter-example">
+    <div nz-row nzGutter="16">
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>内容:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <textarea rows="4" nz-input placeholder="填写提交的内容" [(ngModel)]="wordMessage.content" style="width: 400px" > </textarea>
+
+      </div>
+      <br><br><br>
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>类型:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <nz-select [(ngModel)]="wordMessage.type" nzAllowClear nzPlaceHolder="请选择文本类型" style="width:100px;">
+          <nz-option nzValue="1" nzLabel="毒鸡汤"></nz-option>
+          <nz-option nzValue="2" nzLabel="彩虹屁"></nz-option>
+          <nz-option nzValue="3" nzLabel="鸡汤"></nz-option>
+          <nz-option nzValue="4" nzLabel="古诗"></nz-option>
+          <nz-option nzValue="5" nzLabel="笑话"></nz-option>
+          <nz-option nzValue="6" nzLabel="冷笑话"></nz-option>
+          <nz-option nzValue="7" nzLabel="有趣故事"></nz-option>
+          <nz-option nzValue="8" nzLabel="现代诗"></nz-option>
+        </nz-select>
+      </div>
+      <br><br><br>
+
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <button nz-button nzType="primary" (click)="commitWord()">提交</button>
+      </div>
+      <br><br><br>
+    </div>
+  </div>
+</div>
+

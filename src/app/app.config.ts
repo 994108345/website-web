@@ -64,6 +64,9 @@ export const urls = {
   getTaintedChickenSoupUrl:websiteUrl + "/unified/wordServiceImpl/getTaintedChickenSoup",
   //获取古诗词
   getAncientChinesePoetryUrl:websiteUrl + "/unified/wordServiceImpl/getAncientChinesePoetry",
+  /*----------------------------------------------管理项目------------------------------------------------------*/
+  //插入语句
+  insertWordUrl:websiteUrl + "/unified/wordServiceImpl/insertWordByType",
 };
 
 /*跳转菜单页面路径*/
