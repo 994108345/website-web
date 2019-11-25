@@ -2,7 +2,7 @@
 export const websiteUrl = "/website";
 
 //是否是本地环境
-export const isLocal = true;
+export const isLocal = false;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
@@ -67,6 +67,8 @@ export const urls = {
   /*----------------------------------------------管理项目------------------------------------------------------*/
   //插入语句
   insertWordUrl:websiteUrl + "/unified/wordServiceImpl/insertWordByType",
+  //上传图片
+  upload_pic:websiteUrl + "/uploadfile/upload-pic",
 };
 
 /*跳转菜单页面路径*/

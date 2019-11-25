@@ -13,6 +13,7 @@ import {WordModule} from '../../common/basemodel/word/word.module';
 import {QuillModule} from 'ngx-quill';
 import {WordManageComponent} from './word/word.manage.component';
 import {WzlngzorroantdmessageService} from '../../common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service';
+import {FileUploadManageComponent} from './fileupload/file.upload.manage.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,7 @@ import {WzlngzorroantdmessageService} from '../../common/service/wzlngzorroantdm
   exports:[
   ],
   declarations: [
-    ManageMainComponent,ManageComponent,WordManageComponent
+    ManageMainComponent,ManageComponent,WordManageComponent,FileUploadManageComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,WzlngzorroantdmessageService,{ provide: NZ_I18N, useValue: zh_CN }],
