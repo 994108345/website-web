@@ -12,6 +12,7 @@ import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
 import {PictureExifMainComponent} from './pictureexif/picture.exif.main.component';
 import {PictureChangeMainComponent} from './picturechange/picture.change.main.component';
 import {TranslationMainComponent} from './translation/translation.main.component';
+import {BdpicComponent} from './bdpic/bdpic.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import {TranslationMainComponent} from './translation/translation.main.component
   exports:[
   ],
   declarations: [
-    QueryComponent,QueryMainComponent,PictureExifMainComponent,PictureChangeMainComponent,TranslationMainComponent
+    QueryComponent,QueryMainComponent,PictureExifMainComponent,PictureChangeMainComponent,TranslationMainComponent,BdpicComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],

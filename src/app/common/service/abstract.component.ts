@@ -381,4 +381,14 @@ export class AbstractComponent implements OnDestroy {
     let num = Math.floor(Math.random()*(end - start) + start);
     return num;
   }
+
+  /**
+   * 分页参数授予
+   * @param param
+   */
+  paging(param:any){
+    param.pageSize = this.nzPageSize;
+    param.curPage = this.nzPageIndex;
+    param.paging = true;
+  }
 }

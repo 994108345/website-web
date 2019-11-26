@@ -4,12 +4,23 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {QueryMainComponent} from './main/query.main.component';
+import {buildPath} from 'selenium-webdriver/http';
+import {QueryComponent} from './query.component';
+import {BdpicComponent} from './bdpic/bdpic.component';
 
 const indexRoutes: Routes = [
   {
     path: '',
-    component: QueryMainComponent,
+    component: QueryComponent,
     children: [
+      {
+        path: 'querypic',
+        component: BdpicComponent,
+      },
+      {
+        path: '',
+        component: QueryMainComponent,
+      }
     ]
   }
 ];

@@ -34,10 +34,6 @@ const menuRoutes: Routes = [
         path: 'wordquery',
         loadChildren: 'src/app/windspace/wordquery/wordquery.module#WordqueryModule',
       },
-      {
-        path: 'wordquery',
-        loadChildren: 'src/app/windspace/wordquery/wordquery.module#WordqueryModule',
-      },
     ]
   },
 ];
