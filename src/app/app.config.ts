@@ -2,7 +2,7 @@
 export const websiteUrl = "/website";
 
 //是否是本地环境
-export const isLocal = false;
+export const isLocal = true;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
