@@ -18,7 +18,7 @@ export class WordManageComponent extends AbstractComponent{
   }
 
   ngOnInit(){
-    console.log("mail.main.component");
+    console.log("main.main.component");
   }
 
   /**

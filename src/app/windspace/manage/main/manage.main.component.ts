@@ -16,7 +16,7 @@ export class ManageMainComponent extends AbstractComponent{
   }
 
   ngOnInit(){
-    console.log("mail.main.component");
+    console.log("main.main.component");
   }
 
   /**

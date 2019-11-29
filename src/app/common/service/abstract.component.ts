@@ -55,6 +55,11 @@ export class AbstractComponent implements OnDestroy {
   inputValue = '';
   inputElement: ElementRef;
 
+  /**
+   * 结果图片的url
+   */
+  resultPicUrl:string = "";
+
   /*oss获取上传文件的url*/
   ossUploadUrl:string;
 

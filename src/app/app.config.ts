@@ -2,7 +2,7 @@
 export const websiteUrl = "/website";
 
 //是否是本地环境
-export const isLocal = false;
+export const isLocal = true;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
@@ -42,7 +42,7 @@ export const urls = {
   uploadFile:websiteUrl + "/file/upload",
   /*---------------------------------------翻译---------------------------------------------------*/
   tranUrl:websiteUrl + "/unified/translationDaoImpl/translationByRequest",
-  /*------------------------------------------mail--------------------------------------------*/
+  /*------------------------------------------main--------------------------------------------*/
   //添加一个发送邮件任务
   addMailUrl:websiteUrl + "/unified/emailTimerServiceImpl/addOne",
   //查询一个邮件任务的信息
@@ -66,6 +66,9 @@ export const urls = {
   getTaintedChickenSoupUrl:websiteUrl + "/unified/wordServiceImpl/getTaintedChickenSoup",
   //获取古诗词
   getAncientChinesePoetryUrl:websiteUrl + "/unified/wordServiceImpl/getAncientChinesePoetry",
+  /*-----------------------------------------------二维码------------------------------------------------------*/
+  //获取二维码
+  getQrCodeUrl:websiteUrl + "/unified/qrCodeServiceImpl/createQrCode",
   /*----------------------------------------------管理项目------------------------------------------------------*/
   //插入语句
   insertWordUrl:websiteUrl + "/unified/wordServiceImpl/insertWordByType",

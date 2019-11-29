@@ -34,6 +34,10 @@ const menuRoutes: Routes = [
         path: 'wordquery',
         loadChildren: 'src/app/windspace/wordquery/wordquery.module#WordqueryModule',
       },
+      {
+        path: 'qrcode',
+        loadChildren: 'src/app/windspace/qrcode/qrcode.module#QrcodeModule',
+      },
     ]
   },
 ];

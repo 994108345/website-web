@@ -4,7 +4,7 @@ import {AbstractComponent} from '../../common/service/abstract.component';
 @Component({
   template: '<router-outlet></router-outlet>'
 })
-export class ManageComponent extends AbstractComponent implements  OnInit{
+export class QrcodeComponent extends AbstractComponent implements  OnInit{
   constructor(injector:Injector){
     super(injector);
   }
