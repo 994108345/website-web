@@ -67,8 +67,10 @@ export const urls = {
   //获取古诗词
   getAncientChinesePoetryUrl:websiteUrl + "/unified/wordServiceImpl/getAncientChinesePoetry",
   /*-----------------------------------------------二维码------------------------------------------------------*/
-  //获取二维码
+  //获取二维码（可以带图片）
   getQrCodeUrl:websiteUrl + "/unified/qrCodeServiceImpl/createQrCode",
+  //获取二维码（纯文本）
+  getQrCodeTextUrl:websiteUrl + "/unified/qrCodeServiceImpl/createQrCodeAllTest",
   /*----------------------------------------------管理项目------------------------------------------------------*/
   //插入语句
   insertWordUrl:websiteUrl + "/unified/wordServiceImpl/insertWordByType",
