@@ -13,6 +13,7 @@ import {QuillModule} from 'ngx-quill';
 import {QrcodeMainComponent} from './main/qrcode.main.component';
 import {QrcodeTextComponent} from "./text/qrcode.text.component";
 import {QrcodeAllComponent} from "./all/qrcode.all.component";
+import {QrcodeQueryComponent} from './query/qrcode.query.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,7 @@ import {QrcodeAllComponent} from "./all/qrcode.all.component";
   exports:[
   ],
   declarations: [
-    QrcodeMainComponent,QrcodeComponent,QrcodeTextComponent,QrcodeAllComponent
+    QrcodeMainComponent,QrcodeComponent,QrcodeTextComponent,QrcodeAllComponent,QrcodeQueryComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],

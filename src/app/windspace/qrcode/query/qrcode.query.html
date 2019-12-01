@@ -1,0 +1,40 @@
+<div>
+  <nz-alert nzType="success" style="white-space: pre-line;"
+            nzMessage="使用说明：&#10;1 输入秘钥即可查询对应的二维码"></nz-alert>
+  <br>
+  <div class="gutter-example">
+    <div nz-row nzGutter="16">
+
+      <div class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>你的秘钥:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="填写你自己的秘钥，查看发送记录时使用。" [(ngModel)]="qrCode.secretKey" nzsize="50"/>
+      </div>
+      <br><br><br>
+
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col nzSpan="18">
+        <button nz-button nzType="primary" (click)="queryQrCode()">查询</button>
+      </div>
+      <br><br><br>
+    </div>
+  </div>
+</div>
+<nz-table *ngIf="this.qrCodes" #basicTable [nzData]="qrCodes">
+  <thead>
+  <tr>
+    <th>二维码下载地址</th>
+    <th>创建时间</th>
+    <th>备注</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td><a [href]="data.qrCodeOssUrl">下载二维码</a></td>
+    <td>{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss'  }}</td>
+    <td>{{ data.remark }}</td>
+  </tr>
+  </tbody>
+</nz-table>

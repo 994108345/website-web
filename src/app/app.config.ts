@@ -2,7 +2,7 @@
 export const websiteUrl = "/website";
 
 //是否是本地环境
-export const isLocal = true;
+export const isLocal = false;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
@@ -71,6 +71,8 @@ export const urls = {
   getQrCodeUrl:websiteUrl + "/unified/qrCodeServiceImpl/createQrCode",
   //获取二维码（纯文本）
   getQrCodeTextUrl:websiteUrl + "/unified/qrCodeServiceImpl/createQrCodeAllTest",
+  //查询二维码
+  queryQrCodeUrl:websiteUrl + "/unified/qrCodeServiceImpl/queryQrCodeByRequest",
   /*----------------------------------------------管理项目------------------------------------------------------*/
   //插入语句
   insertWordUrl:websiteUrl + "/unified/wordServiceImpl/insertWordByType",

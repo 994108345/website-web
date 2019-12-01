@@ -97,9 +97,18 @@ export class QrcodeAllComponent extends AbstractComponent{
       this.wzlNgZorroAntdMessage.error("秘钥不能为空");
       return;
     }
+    if(this.qrCode.secretKey.length > 50){
+      this.wzlNgZorroAntdMessage.error("秘钥长度不能大于50");
+      return;
+    }
 
     if(this.wzlutilService.isBlank(this.qrCode.content)){
       this.wzlNgZorroAntdMessage.error("发送内容不能为空");
+      return;
+    }
+
+    if(this.qrCode.content.length > 1000){
+      this.wzlNgZorroAntdMessage.error("二维码内容不能大于1000字符");
       return;
     }
 
