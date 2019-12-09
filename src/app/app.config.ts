@@ -1,8 +1,10 @@
 //网站项目路由
 export const websiteUrl = "/website";
+//服务器的ip
+export const pro_ip = "106.15.198.170";
 
 //是否是本地环境
-export const isLocal = false;
+export const isLocal = true;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
@@ -36,8 +38,14 @@ export const urls = {
   queryPictureExifUrl:websiteUrl + "/exif/get-picture-exif",
   //改变图片
   changePictureUrl:websiteUrl + "/picturechange/change-picture",
+  /*---------------------------------------------pic--------------------------------------------------*/
   //查询图片
   queryPicUrl:websiteUrl + "/unified/crawlerTaskServiceImpl/queryBdPic",
+  //添加下载队列
+  addQueueUrl:websiteUrl + "/unified/downloadQueueServiceImpl/addQueue",
+  //查询图片的下载队列
+  queryPicQueueUrl:websiteUrl + "/unified/downloadQueueServiceImpl/queryPicQueueByRequest",
+
   /*------------------------------------------file upload--------------------------------------------------------*/
   uploadFile:websiteUrl + "/file/upload",
   /*---------------------------------------翻译---------------------------------------------------*/

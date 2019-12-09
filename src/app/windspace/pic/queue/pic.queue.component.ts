@@ -2,23 +2,30 @@ import {Component, EventEmitter, Injector, Output} from '@angular/core';
 import {asllCode, cacheKey, routers, urls} from '../../../app.config';
 import {AbstractComponent} from '../../../common/service/abstract.component';
 import {successStatus} from '../../../common/service/base/common.config';
+import {queue_status_conf} from '../pic.config';
 
 @Component({
-  selector: 'query-pic',
-  templateUrl: './bdpic.html',
-  styleUrls: ['./bdpic.css']
+  selector: 'pic-queue',
+  templateUrl: './pic.queue.html',
+  styleUrls: ['./pic.queue.css']
 })
-export class BdpicComponent extends AbstractComponent{
+export class PicQueueComponent extends AbstractComponent{
 
   /**
    * 对象
    */
-  queryParam:any = {};
+  picQueue:any = {};
 
   /**
    * 消息列表
    */
-  picSrcs:any[] = [];
+  queueList:any[] = [];
+
+  /**
+   * 图片队列状态
+   */
+  queue_status = queue_status_conf;
+
 
 
   /*初始化必须加，初始化基类的数据*/
@@ -27,22 +34,22 @@ export class BdpicComponent extends AbstractComponent{
   }
 
   ngOnInit(){
-    console.log("BdpicComponent");
+    console.log("PicQueueComponent");
   }
 
   /**
-   * 查询上传的文件
+   * 查询邮政编码
    */
-  queryPic(){
-    this.paging(this.queryParam);
-    let condition = this.queryParam;
-    this.commonService.doHttpPost(urls.queryPicUrl,condition).then(rst =>{
+  queryQueue(){
+    //this.paging(this.picQueue)
+    let condition = this.picQueue;
+    console.log("请求参数！"+condition)
+    this.commonService.doHttpPost(urls.queryPicQueueUrl,condition).then(rst =>{
       if (rst) {
         if (rst.status != successStatus) {
           this.wzlNgZorroAntdMessage.error(rst.message);
         } else {
-          this.picSrcs = rst.data.data;
-          this.totalRecords = rst.data.listNum;
+          this.queueList = rst.data;
           this.wzlNgZorroAntdMessage.success("查询成功");
         }
       } else {
@@ -61,7 +68,7 @@ export class BdpicComponent extends AbstractComponent{
    */
   indexChange(event){
     this.nzPageIndex = event;
-    this.queryPic();
+    this.queryQueue();
   }
 
   /**
@@ -69,7 +76,7 @@ export class BdpicComponent extends AbstractComponent{
    */
   pressEnter(event){
     if(event.which == asllCode.enter){
-      this.queryPic();
+      this.queryQueue();
     }
   }
 
@@ -78,7 +85,6 @@ export class BdpicComponent extends AbstractComponent{
    */
   nzPasizeChange(event){
     this.nzPageSize = event;
-    this.queryPic();
+    this.queryQueue();
   }
-
 }

@@ -1,0 +1,39 @@
+<div class="phone">
+  <div class="chat-interface">
+    <p>城市名称：</p>
+    <input nz-input placeholder="Basic usage" [(ngModel)]="weatherCity" (keypress)="pressQueryWeather($event)"/><br><br>
+    <button  nz-button nzType="primary"  (click)="queryWeather()">查询</button>
+  </div>
+  <p *ngIf="weatherCityMessage" style="color: red;font-size: 30px"> {{weatherCityMessage}} </p>
+  <nz-table *ngIf="this.weatherReposts" #basicTable [nzData]="weatherReposts">
+    <thead>
+    <tr>
+      <th>时间</th>
+      <th>周几</th>
+      <th>白天天气</th>
+      <th>夜间天气</th>
+      <th>白天温度</th>
+      <th>夜间温度</th>
+      <th>白天风向</th>
+      <th>夜间风向</th>
+      <th>白天风力</th>
+      <th>夜间风力</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.date | date:'yyyy-MM-dd' }}</td>
+      <td>{{ data.week }}</td>
+      <td>{{ data.dayweather }}</td>
+      <td>{{ data.nightweather }}</td>
+      <td>{{ data.daytemp }}</td>
+      <td>{{ data.nighttemp }}</td>
+      <td>{{ data.daywind }}</td>
+      <td>{{ data.nightwind }}</td>
+      <td>{{ data.daypower }}</td>
+      <td>{{ data.nightpower }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>
+

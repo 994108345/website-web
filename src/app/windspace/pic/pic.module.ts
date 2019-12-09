@@ -1,19 +1,16 @@
 import {NgModule} from '@angular/core';
-import { QueryComponent} from './query.component';
+import { PicComponent} from './pic.component';
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {CommonService} from '../../common/service/base/common.service';
 import {WzlCacheService} from '../../common/service/wzlcache/wzlceche.service';
-import { QueryMainComponent} from './main/query.main.component';
-import { QueryRouting} from './query.routing';
+import { PicRouting} from './pic.routing';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module';
 import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
-import {PictureExifMainComponent} from './pictureexif/picture.exif.main.component';
-import {PictureChangeMainComponent} from './picturechange/picture.change.main.component';
-import {TranslationMainComponent} from './translation/translation.main.component';
-import {PicQueryComponent} from '../pic/query/pic.query.component';
-import {QueryWeatherComponent} from './weather/query.weather.component';
+import {PicDownComponent} from './down/pic.down.component';
+import {PicQueryComponent} from './query/pic.query.component';
+import {PicQueueComponent} from './queue/pic.queue.component';
 
 @NgModule({
   imports: [
@@ -26,16 +23,16 @@ import {QueryWeatherComponent} from './weather/query.weather.component';
     ReactiveFormsModule,
     //用户建议模块
     UseradviceModule,
-    QueryRouting,
+    PicRouting,
   ],
   exports:[
   ],
   declarations: [
-    QueryComponent,QueryMainComponent,PictureExifMainComponent,PictureChangeMainComponent,TranslationMainComponent,QueryWeatherComponent
+    PicComponent,PicDownComponent,PicQueryComponent,PicQueueComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],
 })
-export class QueryModule {
+export class PicModule {
 
 }

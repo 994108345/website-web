@@ -1,0 +1,50 @@
+<div class="mail">
+  <div class="gutter-example">
+    <div nz-row nzGutter="16">
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>文件名称:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="填写文件名称" [(ngModel)]="picQueue.queueName"/>
+      </div>
+      <br><br><br>
+
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <button nz-button nzType="primary" (click)="queryQueue()">查询</button>
+      </div>
+      <br><br><br>
+    </div>
+  </div>
+  <nz-table *ngIf="this.queueList" #basicTable [nzData]="queueList">
+    <thead>
+    <tr>
+      <th>队列名称</th>
+      <th>队列状态</th>
+      <th>操作</th>
+      <th>完成时间</th>
+      <th>创建时间</th>
+      <th>最后修改时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.queueName }}</td>
+      <td>{{ statusChange(data.queueStatus,queue_status) }}</td>
+      <td><a [href]="data.ossUrl" *ngIf="data.ossUrl">下载</a></td>
+      <td>{{ data.completeTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td>{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td>{{ data.lastModifiedTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+    </tr>
+    </tbody>
+    <!--<div style="text-align:center" nz-col nzSpan="24">-->
+      <!--<nz-pagination [nzPageIndex]="nzPageIndex" [nzPageSize]="nzPageSize" nzShowSizeChanger  [nzTotal]="totalRecords" (nzPageIndexChange)="indexChange($event)"-->
+                     <!--(nzPageSizeChange)="nzPasizeChange($event)"-->
+      <!--&gt;-->
+      <!--</nz-pagination>-->
+    <!--</div>-->
+  </nz-table>
+</div>
+

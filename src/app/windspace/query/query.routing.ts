@@ -4,9 +4,11 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {QueryMainComponent} from './main/query.main.component';
-import {buildPath} from 'selenium-webdriver/http';
 import {QueryComponent} from './query.component';
-import {BdpicComponent} from './bdpic/bdpic.component';
+import {PictureExifMainComponent} from './pictureexif/picture.exif.main.component';
+import {PictureChangeMainComponent} from './picturechange/picture.change.main.component';
+import {TranslationMainComponent} from './translation/translation.main.component';
+import {QueryWeatherComponent} from './weather/query.weather.component';
 
 const indexRoutes: Routes = [
   {
@@ -14,8 +16,20 @@ const indexRoutes: Routes = [
     component: QueryComponent,
     children: [
       {
-        path: 'querypic',
-        component: BdpicComponent,
+        path: 'exif',
+        component: PictureExifMainComponent,
+      },
+      {
+        path: 'weather',
+        component: QueryWeatherComponent,
+      },
+      {
+        path: 'picchange',
+        component: PictureChangeMainComponent,
+      },
+      {
+        path: 'translation',
+        component: TranslationMainComponent,
       },
       {
         path: '',

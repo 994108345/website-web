@@ -38,6 +38,10 @@ const menuRoutes: Routes = [
         path: 'qrcode',
         loadChildren: 'src/app/windspace/qrcode/qrcode.module#QrcodeModule',
       },
+      {
+        path: 'pic',
+        loadChildren: 'src/app/windspace/pic/pic.module#PicModule',
+      },
     ]
   },
 ];

@@ -1,0 +1,49 @@
+<div class="mail">
+  <nz-alert nzType="success" style="white-space: pre-line;"
+            nzMessage="使用说明：&#10;1 最多一次性下载200张图片。&#10;2 添加完毕后前往“查看下载任务”模块下载生成的压缩包。 &#10;3 页码即你想下载图片的起始位置，每页60张图"></nz-alert>
+  <br>
+  <div class="gutter-example">
+    <div nz-row nzGutter="16">
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>搜索内容:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="你的搜索关键词" [(ngModel)]="queryParam.word"/>
+      </div>
+      <br><br><br>
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>图片数量:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <nz-input-number [(ngModel)]="queryParam.count"  placeholder="你需要的图片数量"   [nzMin]="1" [nzMax]="200" [nzStep]="1"></nz-input-number>
+      </div>
+      <br><br><br>
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>请输入文件名:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="请输入文件名" [(ngModel)]="queryParam.queueName" />
+      </div>
+      <br><br><br>
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>页码:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <nz-input-number [(ngModel)]="queryParam.beginNum"  placeholder="图片的页码"   [nzMin]="1" [nzMax]="9999" [nzStep]="1"></nz-input-number>
+      </div>
+      <br><br><br>
+
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <button nz-button nzType="primary" (click)="savePic()" >提交</button>
+      </div>
+      <br><br><br>
+    </div>
+  </div>
+</div>
+

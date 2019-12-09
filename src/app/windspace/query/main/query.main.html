@@ -10,60 +10,60 @@
     </nz-tab>
 
 
-    <nz-tab nzTitle="查询天气">
-      <div class="chat-interface">
-        <p>城市名称：</p>
-        <input nz-input placeholder="Basic usage" [(ngModel)]="weatherCity" (keypress)="pressQueryWeather($event)"/><br><br>
-        <button  nz-button nzType="primary"  (click)="queryWeather()">查询</button>
-      </div>
-      <p *ngIf="weatherCityMessage" style="color: red;font-size: 30px"> {{weatherCityMessage}} </p>
-      <nz-table *ngIf="this.weatherReposts" #basicTable [nzData]="weatherReposts">
-        <thead>
-        <tr>
-          <th>时间</th>
-          <th>周几</th>
-          <th>白天天气</th>
-          <th>夜间天气</th>
-          <th>白天温度</th>
-          <th>夜间温度</th>
-          <th>白天风向</th>
-          <th>夜间风向</th>
-          <th>白天风力</th>
-          <th>夜间风力</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.date | date:'yyyy-MM-dd' }}</td>
-          <td>{{ data.week }}</td>
-          <td>{{ data.dayweather }}</td>
-          <td>{{ data.nightweather }}</td>
-          <td>{{ data.daytemp }}</td>
-          <td>{{ data.nighttemp }}</td>
-          <td>{{ data.daywind }}</td>
-          <td>{{ data.nightwind }}</td>
-          <td>{{ data.daypower }}</td>
-          <td>{{ data.nightpower }}</td>
-        </tr>
-        </tbody>
-      </nz-table>
-    </nz-tab>
+    <!--<nz-tab nzTitle="查询天气">-->
+      <!--<div class="chat-interface">-->
+        <!--<p>城市名称：</p>-->
+        <!--<input nz-input placeholder="Basic usage" [(ngModel)]="weatherCity" (keypress)="pressQueryWeather($event)"/><br><br>-->
+        <!--<button  nz-button nzType="primary"  (click)="queryWeather()">查询</button>-->
+      <!--</div>-->
+      <!--<p *ngIf="weatherCityMessage" style="color: red;font-size: 30px"> {{weatherCityMessage}} </p>-->
+      <!--<nz-table *ngIf="this.weatherReposts" #basicTable [nzData]="weatherReposts">-->
+        <!--<thead>-->
+        <!--<tr>-->
+          <!--<th>时间</th>-->
+          <!--<th>周几</th>-->
+          <!--<th>白天天气</th>-->
+          <!--<th>夜间天气</th>-->
+          <!--<th>白天温度</th>-->
+          <!--<th>夜间温度</th>-->
+          <!--<th>白天风向</th>-->
+          <!--<th>夜间风向</th>-->
+          <!--<th>白天风力</th>-->
+          <!--<th>夜间风力</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr *ngFor="let data of basicTable.data">-->
+          <!--<td>{{ data.date | date:'yyyy-MM-dd' }}</td>-->
+          <!--<td>{{ data.week }}</td>-->
+          <!--<td>{{ data.dayweather }}</td>-->
+          <!--<td>{{ data.nightweather }}</td>-->
+          <!--<td>{{ data.daytemp }}</td>-->
+          <!--<td>{{ data.nighttemp }}</td>-->
+          <!--<td>{{ data.daywind }}</td>-->
+          <!--<td>{{ data.nightwind }}</td>-->
+          <!--<td>{{ data.daypower }}</td>-->
+          <!--<td>{{ data.nightpower }}</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+      <!--</nz-table>-->
+    <!--</nz-tab>-->
 
-    <nz-tab nzTitle="查询图片隐藏信息">
-      <nz-spin nzTip="图片上传中......" [nzSpinning]="uploading" >
-        <nz-alert nzType="info" nzMessage="上传图片中..." *ngIf="uploading">
-        </nz-alert>
-        <picture-exif (uploading) = "isUploading($event)"></picture-exif>
-      </nz-spin>
-    </nz-tab>
-    <nz-tab nzTitle="图片处理">
-      <nz-spin nzTip="图片上传中......" [nzSpinning]="uploading" >
-        <picture-change (uploading) = "isUploading($event)"></picture-change>
-      </nz-spin>
-    </nz-tab>
-    <nz-tab nzTitle="翻译">
-      <translation-damo></translation-damo>
-    </nz-tab>
+    <!--<nz-tab nzTitle="查询图片隐藏信息">-->
+      <!--<nz-spin nzTip="图片上传中......" [nzSpinning]="uploading" >-->
+        <!--<nz-alert nzType="info" nzMessage="上传图片中..." *ngIf="uploading">-->
+        <!--</nz-alert>-->
+        <!--<picture-exif (uploading) = "isUploading($event)"></picture-exif>-->
+      <!--</nz-spin>-->
+    <!--</nz-tab>-->
+    <!--<nz-tab nzTitle="图片处理">-->
+      <!--<nz-spin nzTip="图片上传中......" [nzSpinning]="uploading" >-->
+        <!--<picture-change (uploading) = "isUploading($event)"></picture-change>-->
+      <!--</nz-spin>-->
+    <!--</nz-tab>-->
+    <!--<nz-tab nzTitle="翻译">-->
+      <!--<translation-damo></translation-damo>-->
+    <!--</nz-tab>-->
   </nz-tabset>
 </div>
 

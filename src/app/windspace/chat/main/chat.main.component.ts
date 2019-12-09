@@ -1,6 +1,6 @@
 import {Component, Injector} from '@angular/core';
 import {AbstractComponent} from '../../../common/service/abstract.component';
-import {asllCode, isLocal, routers, urls} from '../../../app.config';
+import {asllCode, isLocal, pro_ip, routers, urls} from '../../../app.config';
 import {successStatus} from '../../../common/service/base/common.config';
 import {messageType, names, pickName, surnames, webSocketServerMsgCode} from '../chat.config';
 import {Server} from 'ws';
@@ -70,7 +70,7 @@ export class ChatMainComponent extends AbstractComponent{
     if(isLocal){
       url = "ws://localhost:6001/websocket/";
     }else{
-      url ="ws://47.104.240.104:6001/websocket/";
+      url ="ws://"+ pro_ip +":6001/websocket/";
     }
     url = url+this.sessionId;
     this.wsService.createObservableSocket(url)
