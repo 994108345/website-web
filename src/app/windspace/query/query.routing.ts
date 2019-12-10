@@ -9,6 +9,7 @@ import {PictureExifMainComponent} from './pictureexif/picture.exif.main.componen
 import {PictureChangeMainComponent} from './picturechange/picture.change.main.component';
 import {TranslationMainComponent} from './translation/translation.main.component';
 import {QueryWeatherComponent} from './weather/query.weather.component';
+import {PdfComponent} from './pdf/pdf.component';
 
 const indexRoutes: Routes = [
   {
@@ -18,6 +19,10 @@ const indexRoutes: Routes = [
       {
         path: 'exif',
         component: PictureExifMainComponent,
+      },
+      {
+        path: 'pdf',
+        component: PdfComponent,
       },
       {
         path: 'weather',

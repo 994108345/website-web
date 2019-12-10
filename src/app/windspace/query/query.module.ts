@@ -14,6 +14,7 @@ import {PictureChangeMainComponent} from './picturechange/picture.change.main.co
 import {TranslationMainComponent} from './translation/translation.main.component';
 import {PicQueryComponent} from '../pic/query/pic.query.component';
 import {QueryWeatherComponent} from './weather/query.weather.component';
+import {PdfComponent} from './pdf/pdf.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import {QueryWeatherComponent} from './weather/query.weather.component';
   exports:[
   ],
   declarations: [
-    QueryComponent,QueryMainComponent,PictureExifMainComponent,PictureChangeMainComponent,TranslationMainComponent,QueryWeatherComponent
+    QueryComponent,QueryMainComponent,PictureExifMainComponent,PictureChangeMainComponent,TranslationMainComponent,QueryWeatherComponent,PdfComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],

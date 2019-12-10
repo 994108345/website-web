@@ -1,0 +1,14 @@
+<nz-spin nzTip="文件比较大，上传比较慢，请耐心等待..." [nzSpinning]="isSpinning">
+  <div class="chat-interface">
+    <nz-alert nzType="success" style="white-space: pre-line;" nzMessage=" &#10;1 文件必须是pdf格式。 &#10;2 解析较慢，请耐心等待。 &#10;3 pdf是图片的话解析不出文字！&#10;4 如果报错可能是pdf不符合规则！"></nz-alert>
+    <p>文件：</p>
+    <nz-upload [nzAction] = uploadUrl (nzChange)="uploadPicture($event)" [nzSize]="pictureSize" [nzLimit]="1" [nzFileList]="fileList">
+      <button nz-button><i nz-icon nzType="upload"></i>
+        <span>选择图片上传</span>
+      </button>
+    </nz-upload>
+  </div>
+  <div nz-col nzSpan="18">
+    <a *ngIf="resultPicUrl" [href]="resultPicUrl" style="color:red;font-size: 50px" target="_blank">点击此处下载转化后的文本</a>
+  </div>
+</nz-spin>
