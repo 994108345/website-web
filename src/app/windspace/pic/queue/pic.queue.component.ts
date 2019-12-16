@@ -71,14 +71,6 @@ export class PicQueueComponent extends AbstractComponent{
     this.queryQueue();
   }
 
-  /**
-   * 回车查询
-   */
-  pressEnter(event){
-    if(event.which == asllCode.enter){
-      this.queryQueue();
-    }
-  }
 
   /**
    * 每页条数变化

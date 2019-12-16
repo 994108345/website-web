@@ -65,15 +65,6 @@ export class FlowerpicQueryComponent extends AbstractComponent{
   }
 
   /**
-   * 回车查询
-   */
-  pressEnter(event){
-    if(event.which == asllCode.enter){
-      this.queryFlowerPic();
-    }
-  }
-
-  /**
    * 每页条数变化
    */
   nzPasizeChange(event){

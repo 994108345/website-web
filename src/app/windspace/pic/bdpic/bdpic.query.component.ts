@@ -64,14 +64,6 @@ export class BdpicQueryComponent extends AbstractComponent{
     this.queryPic();
   }
 
-  /**
-   * 回车查询
-   */
-  pressEnter(event){
-    if(event.which == asllCode.enter){
-      this.queryPic();
-    }
-  }
 
   /**
    * 每页条数变化

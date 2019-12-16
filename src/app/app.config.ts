@@ -4,7 +4,7 @@ export const websiteUrl = "/website";
 export const pro_ip = "106.15.198.170";
 
 //是否是本地环境
-export const isLocal = true;
+export const isLocal = false;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
