@@ -79,4 +79,12 @@ export class FileUploadManageComponent extends AbstractComponent{
     return false;
   };
 
+  /**
+   * 选择框单选
+   */
+  selectChange(){
+    //清空上传文件
+    this.fileList = [];
+  }
+
 }

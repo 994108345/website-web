@@ -1,38 +1,11 @@
-<div class="mail">
-  <div class="gutter-example">
-    <div nz-row nzGutter="16">
-
-      <div  class="tab" nz-col nzSpan="6">
-        <span class="span-tab"><span style="color: red">*</span>搜索框:</span>
-      </div>
-      <div nz-col class="gutter-row" nzSpan="18">
-        <input nz-input placeholder="你的搜索关键词" [(ngModel)]="queryParam.word" (keypress)="pressEnter($event)"/>
-      </div>
-      <br><br><br>
-
-      <div nz-col nzSpan="6">
-      </div>
-      <div nz-col class="gutter-row" nzSpan="18">
-        <button nz-button nzType="primary" (click)="queryPic()" >查询</button>
-      </div>
-      <br><br><br>
-    </div>
-    <div *ngFor="let src of picSrcs ">
-      <div  nz-col nzSpan="4" style="margin: 0px;padding: 0px;">
-        <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
-          <nz-card-meta nzTitle="meaging" [nzDescription]="src.fromPageTitleEnc"></nz-card-meta>
-        </nz-card>
-        <ng-template #coverTemplate>
-          <img alt="example" [src]="src.thumbURL" />
-        </ng-template>
-      </div>
-    </div>
-    <div style="text-align:center" nz-col nzSpan="24">
-        <nz-pagination [nzPageIndex]="nzPageIndex" [nzPageSize]="nzPageSize" nzShowSizeChanger  [nzTotal]="totalRecords" (nzPageIndexChange)="indexChange($event)"
-                       (nzPageSizeChange)="nzPasizeChange($event)"
-        >
-        </nz-pagination>
-    </div>
-  </div>
+<div>
+  <nz-tabset>
+    <nz-tab nzTitle="某度图片">
+      <query-bdpic></query-bdpic>
+    </nz-tab>
+    <nz-tab nzTitle="某瓣图片">
+      <query-flowerpic></query-flowerpic>
+    </nz-tab>
+  </nz-tabset>
 </div>
 

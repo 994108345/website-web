@@ -6,7 +6,7 @@ import {WzlCacheService} from '../service/wzlcache/wzlceche.service';
 import {WzlngzorroantdmessageService} from './wzlngzorroantdmessage/wzlngzorroantdmessage.service';
 import {successStatus} from './base/common.config';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {routers, urls} from '../../app.config';
+import {asllCode, routers, urls} from '../../app.config';
 import {WzlutilService} from './wzlutil/wzlutil.service';
 
 /**
@@ -395,5 +395,15 @@ export class AbstractComponent implements OnDestroy {
     param.pageSize = this.nzPageSize;
     param.curPage = this.nzPageIndex;
     param.paging = true;
+  }
+
+  /**
+   * 回车查询
+   */
+  pressEnter(event,method){
+    if(event.which == asllCode.enter){
+      //调用指定方法
+      method();
+    }
   }
 }

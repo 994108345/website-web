@@ -4,7 +4,7 @@ export const websiteUrl = "/website";
 export const pro_ip = "106.15.198.170";
 
 //是否是本地环境
-export const isLocal = false;
+export const isLocal = true;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
@@ -43,10 +43,12 @@ export const urls = {
   /*---------------------------------------------pic--------------------------------------------------*/
   //查询图片
   queryPicUrl:websiteUrl + "/unified/crawlerTaskServiceImpl/queryBdPic",
+  //查询花瓣图片
+  queryFlowerPicUrl:websiteUrl + "/unified/flowerServiceImpl/queryPicByRequest",
   //添加下载队列
   addQueueUrl:websiteUrl + "/unified/downloadQueueServiceImpl/addQueue",
   //查询图片的下载队列
-  queryPicQueueUrl:websiteUrl + "/unified/downloadQueueServiceImpl/queryPicQueueByRequest",
+  queryPicQueueUrl:websiteUrl + "/unified/downloadQueueServiceImpl/queryQueueByRequest",
 
   /*------------------------------------------file upload--------------------------------------------------------*/
   uploadFile:websiteUrl + "/file/upload",

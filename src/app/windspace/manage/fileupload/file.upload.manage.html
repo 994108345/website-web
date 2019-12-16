@@ -10,7 +10,7 @@
         <span class="span-tab"><span style="color: red">*</span>类型:</span>
       </div>
       <div nz-col class="gutter-row" nzSpan="18">
-        <nz-select [(ngModel)]="fileUpload.picType" nzAllowClear nzPlaceHolder="请选择图片类型" style="width:100px;">
+        <nz-select [(ngModel)]="fileUpload.picType" nzAllowClear nzPlaceHolder="请选择图片类型" style="width:100px;"  (ngModelChange)="selectChange()">
           <nz-option nzValue="0" nzLabel="美图"></nz-option>
           <nz-option nzValue="1" nzLabel="毒鸡汤图"></nz-option>
           <nz-option nzValue="2" nzLabel="性感图"></nz-option>

@@ -62,8 +62,11 @@ export class PicDownComponent extends AbstractComponent{
       this.wzlNgZorroAntdMessage.error("队列名称长度不能大于50");
       return;
     }
+    if(this.wzlutilService.isBlank(this.queryParam.type)){
+      this.wzlNgZorroAntdMessage.error("图片来源不能为空");
+      return;
+    }
     //设置队列类型为下载图片压缩包
-    this.queryParam.type = 1;
     let condition = this.queryParam;
     this.commonService.doHttpPost(urls.addQueueUrl,condition).then(rst =>{
       if (rst) {

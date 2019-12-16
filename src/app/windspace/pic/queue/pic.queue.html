@@ -6,7 +6,7 @@
         <span class="span-tab"><span style="color: red">*</span>文件名称:</span>
       </div>
       <div nz-col class="gutter-row" nzSpan="18">
-        <input nz-input placeholder="填写文件名称" [(ngModel)]="picQueue.queueName"/>
+        <input nz-input placeholder="填写文件名称" [(ngModel)]="picQueue.queueName" (keypress)="pressEnter($event,queryQueue)"/>
       </div>
       <br><br><br>
 

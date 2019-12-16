@@ -11,6 +11,8 @@ import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
 import {PicDownComponent} from './down/pic.down.component';
 import {PicQueryComponent} from './query/pic.query.component';
 import {PicQueueComponent} from './queue/pic.queue.component';
+import {FlowerpicQueryComponent} from './flowerpic/flowerpic.query.component';
+import {BdpicQueryComponent} from './bdpic/bdpic.query.component';
 
 @NgModule({
   imports: [
@@ -28,7 +30,7 @@ import {PicQueueComponent} from './queue/pic.queue.component';
   exports:[
   ],
   declarations: [
-    PicComponent,PicDownComponent,PicQueryComponent,PicQueueComponent
+    PicComponent,PicDownComponent,PicQueryComponent,PicQueueComponent,FlowerpicQueryComponent,BdpicQueryComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],

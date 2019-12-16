@@ -54,4 +54,5 @@ export class WordManageComponent extends AbstractComponent{
       this.isFirst = false;
     });
   }
+
 }
