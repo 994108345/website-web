@@ -4,7 +4,7 @@ export const websiteUrl = "/website";
 export const pro_ip = "106.15.198.170";
 
 //是否是本地环境
-export const isLocal = false;
+export const isLocal = true;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
@@ -62,8 +62,11 @@ export const urls = {
   //上次图片获取url
   getUrlByUploadUrl:websiteUrl + "/uploadfile/get-url-by-upload",
   /*------------------------------------------ipLog--------------------------------------------*/
-  //新增一个iplog
+  //新增一个iplog(通过前端获取)
   addIpLog:websiteUrl + "/unified/ipLogServiceImpl/insertOne",
+  //新增一个iplog(通过后端获取)
+  addIpLogByServerUrl:websiteUrl + "/iplog/save-ip-log",
+
   /*--------------------------------------------fileUpload----------------------------------------------*/
   //上传文件
   upload_File:websiteUrl + "/uploadfile/upload-file",

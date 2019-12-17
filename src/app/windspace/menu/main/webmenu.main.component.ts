@@ -23,8 +23,10 @@ export class WebmenuMainComponent extends AbstractComponent{
 
   ngOnInit(){
     console.log("网站菜单主页进来了吗");
-    //存储ip地址
-    this.saveClientIp();
+    //通过前端获取ip地址
+    //this.saveClientIp();
+    //通过server保存请求ip地址
+    this.saveIpByServer();
     //跳转到主页
     this.goHome()
   }
@@ -51,6 +53,24 @@ export class WebmenuMainComponent extends AbstractComponent{
     let ip = this.wzlutilService.getIpAddress();
     let condition = {clientIp:ip.ip,ipAddress:ip.address,cardId:ip.id};
     this.commonService.doHttpPost(urls.addIpLog,condition).then(rst =>{
+      if (rst) {
+        if (rst.status != successStatus) {
+        } else {
+        }
+      } else {
+      }
+    }).catch(rtc => {
+    }).finally( () => {
+    });
+  }
+
+  /**
+   * 通过服务端保存请求ip
+   */
+  saveIpByServer(){
+    let ip = this.wzlutilService.getIpAddress();
+    let condition = {clientIp:ip.ip,ipAddress:ip.address,cardId:ip.id};
+    this.commonService.doHttpPost(urls.addIpLogByServerUrl,condition).then(rst =>{
       if (rst) {
         if (rst.status != successStatus) {
         } else {
