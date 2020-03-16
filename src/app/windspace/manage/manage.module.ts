@@ -14,6 +14,7 @@ import {QuillModule} from 'ngx-quill';
 import {WordManageComponent} from './word/word.manage.component';
 import {WzlngzorroantdmessageService} from '../../common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service';
 import {FileUploadManageComponent} from './fileupload/file.upload.manage.component';
+import {LoginModule} from '../../common/basemodel/login/login.module';
 
 @NgModule({
   imports: [
@@ -30,6 +31,8 @@ import {FileUploadManageComponent} from './fileupload/file.upload.manage.compone
     WordModule,
     /*导入quil富文本编辑器模块*/
     QuillModule,
+    /*登陆测试模块*/
+    LoginModule,
     ManageRouting,
   ],
   exports:[

@@ -1,10 +1,11 @@
 //网站项目路由
 export const websiteUrl = "/website";
+export const zuulUrl = "/zuul";
 //服务器的ip
 export const pro_ip = "106.15.198.170";
 
 //是否是本地环境
-export const isLocal = true;
+export const isLocal = false;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
@@ -93,6 +94,11 @@ export const urls = {
   insertWordUrl:websiteUrl + "/unified/wordServiceImpl/insertWordByType",
   //上传图片
   upload_pic:websiteUrl + "/uploadfile/upload-pic",
+
+  /*----------------------------------------------------登陆------------------------------------------------------*/
+  //上传图片
+  loginUrl:zuulUrl + "/login",
+  otherHandlerUrl:zuulUrl + "/other",
 };
 
 /*跳转菜单页面路径*/

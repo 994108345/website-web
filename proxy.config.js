@@ -12,5 +12,9 @@ module.exports =
     "target": "http://localhost:6001",
     "secure": false,
   },
+  "/zuul": {
+    "target": "http://localhost:6002",
+    "secure": false,
+  },
 }
 

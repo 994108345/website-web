@@ -1,0 +1,36 @@
+<div class="mail">
+  <div class="gutter-example">
+    <div nz-row nzGutter="16">
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>用户名:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="你的搜索关键词" [(ngModel)]="userInfo.userName"/>
+      </div>
+      <br><br><br>
+
+      <div  class="tab" nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>账号:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <input nz-input placeholder="你的搜索关键词" [(ngModel)]="userInfo.password" />
+      </div>
+      <br><br><br>
+
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <button nz-button nzType="primary" (click)="login()" >查询</button>
+      </div>
+      <br><br><br>
+
+      <div nz-col nzSpan="6">
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <button nz-button nzType="primary" (click)="otherHandler()" >其他操作</button>
+      </div>
+      <br><br><br>
+    </div>
+  </div>
+</div>
