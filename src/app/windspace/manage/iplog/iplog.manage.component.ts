@@ -4,13 +4,14 @@ import {AbstractComponent} from '../../../common/service/abstract.component';
 import {successStatus} from '../../../common/service/base/common.config';
 
 @Component({
-  selector: 'word-manage',
-  templateUrl: './word.manage.main.html',
-  styleUrls: ['./word.manage.css']
+  selector: 'iplog-manage',
+  templateUrl: './iplog.manage.main.html',
+  styleUrls: ['./iplog.manage.css']
 })
-export class WordManageComponent extends AbstractComponent{
+export class IplogManageComponent extends AbstractComponent{
 
-  wordMessage:any = {};
+  //ipLog数据源
+  ipLogs:any[];
 
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector){
@@ -19,31 +20,20 @@ export class WordManageComponent extends AbstractComponent{
 
   ngOnInit(){
     console.log("main.main.component");
+    this.queryIpLog();
   }
 
   /**
    * 提交
    */
-  commitWord(){
-    if(this.wzlutilService.isBlank(this.wordMessage.content)){
-      this.wzlNgZorroAntdMessage.error("文本内容不能为空");
-      return;
-    }
-    if(this.wzlutilService.isBlank(this.wordMessage.type)){
-      this.wzlNgZorroAntdMessage.error("文本类型不能为空");
-      return;
-    }
-    if(this.wordMessage.content.length > 1000){
-      this.wzlNgZorroAntdMessage.error("文本内容长度不能大于1000");
-      return;
-    }
-    let condition = this.wordMessage;
-    this.commonService.doHttpPost(urls.insertWordUrl,condition).then(rst =>{
+  queryIpLog(){
+    let condition = {};
+    this.commonService.doHttpPost(urls.query_ip_log_Url,condition).then(rst =>{
       if (rst) {
         if (rst.status != successStatus) {
           this.wzlNgZorroAntdMessage.error(rst.message);
         } else {
-          this.wzlNgZorroAntdMessage.success("提交成功");
+            this.ipLogs = rst.data;
         }
       } else {
         this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
@@ -55,4 +45,18 @@ export class WordManageComponent extends AbstractComponent{
     });
   }
 
+  getColor(): string {
+    let num = super.randomNum(1, 5);
+    let result = "blue";
+    if(num === 1){
+      result = "red";
+    }else if(num === 2){
+      result = "green";
+    }else if(num === 3){
+      result = "gray";
+    }else{
+      result = "blue";
+    }
+    return result;
+  }
 }

@@ -1,0 +1,6 @@
+<div class="iplog" style="width: 100%;">
+  <nz-timeline nzMode="alternate" *ngFor="let iplog of ipLogs" >
+    <nz-timeline-item [nzColor]="getColor()">{{iplog}}</nz-timeline-item>
+  </nz-timeline>
+</div>
+

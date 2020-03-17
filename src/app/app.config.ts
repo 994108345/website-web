@@ -94,6 +94,8 @@ export const urls = {
   insertWordUrl:websiteUrl + "/unified/wordServiceImpl/insertWordByType",
   //上传图片
   upload_pic:websiteUrl + "/uploadfile/upload-pic",
+  //上传图片
+  query_ip_log_Url:websiteUrl + "/unified/ipLogServiceImpl/queryEarly20IpLog",
 
   /*----------------------------------------------------登陆------------------------------------------------------*/
   //上传图片

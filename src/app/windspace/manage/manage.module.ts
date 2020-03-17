@@ -15,6 +15,7 @@ import {WordManageComponent} from './word/word.manage.component';
 import {WzlngzorroantdmessageService} from '../../common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service';
 import {FileUploadManageComponent} from './fileupload/file.upload.manage.component';
 import {LoginModule} from '../../common/basemodel/login/login.module';
+import {IplogManageComponent} from './iplog/iplog.manage.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,7 @@ import {LoginModule} from '../../common/basemodel/login/login.module';
   exports:[
   ],
   declarations: [
-    ManageMainComponent,ManageComponent,WordManageComponent,FileUploadManageComponent
+    ManageMainComponent,ManageComponent,WordManageComponent,FileUploadManageComponent,IplogManageComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,WzlngzorroantdmessageService,{ provide: NZ_I18N, useValue: zh_CN }],
