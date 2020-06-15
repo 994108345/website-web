@@ -10,7 +10,8 @@ import {ChatComponent} from './chat.component';
 import {ChatMainComponent} from './main/chat.main.component';
 import {ChatRouter} from './chat.router';
 import {WebSocketService} from '../../common/service/websocket/websocket.service';
-import {OptimisticMainComponent} from './optimistic/optimistic.main.component';
+import {RobotMainComponent} from './robot/robot.main.component';
+import {GroupMainComponent} from './group/group.main.component';
 registerLocaleData(zh);
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ registerLocaleData(zh);
     ChatRouter
   ],
   declarations: [
-    ChatComponent,ChatMainComponent,OptimisticMainComponent
+    ChatComponent,ChatMainComponent,RobotMainComponent,GroupMainComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WebSocketService,{ provide: NZ_I18N, useValue: zh_CN },WzlngzorroantdmessageService],

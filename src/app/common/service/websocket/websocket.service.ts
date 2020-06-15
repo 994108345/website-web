@@ -21,6 +21,12 @@ export class WebSocketService {
       })
   }
 
+  // 关闭长连接
+  closeWebSocket(url: string){
+    this.ws = new WebSocket(url);
+    this.ws.close();
+  }
+
   // 向服务器端发送消息
   sendMessage(message: any) {
     this.ws.send(JSON.stringify(message));

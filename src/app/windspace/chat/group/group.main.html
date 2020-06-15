@@ -1,0 +1,14 @@
+<div class="chat-interface">
+  <ul *ngFor="let item of data">
+    <li *ngIf="this.isMyMessage(item.name)" style="background-color: #F0D0D0;text-align: right;padding-right: 5px;">
+      <b>{{item.name}}-{{item.createDate|date:'yyyy-MM-dd HH:mm:ss' }}</b><br>
+      <i>{{item.message}}</i>
+    </li>
+    <li *ngIf="!this.isMyMessage(item.name)" style="background-color: #cccccc;padding-left: 5px;">
+      <b>{{item.name}}-{{item.createDate|date:'yyyy-MM-dd HH:mm:ss' }}</b><br>
+      <i>{{item.message}}</i>
+    </li>
+  </ul>
+  <input nz-input placeholder="Basic usage" [(ngModel)]="sendMessage" (keypress)="pressSendMessage($event)"/><br><br>
+  <button  nz-button nzType="primary"  (click)="sendMessageToserver()" >发送消息</button>
+</div>

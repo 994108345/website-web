@@ -78,11 +78,15 @@ export const pickName = [
  */
 export const messageType = {
   //聊天信息
-  "CHAT_MESSAGE":1,
+  CHAT_MESSAGE:1,
   //在线人数
-  "ON_LINE_NUMER":2,
+  ON_LINE_NUMER:2,
   //业务逻辑信息
-  "SERVICE_MSG":3
+  SERVICE_MSG:3,
+  /**
+   * 心跳
+   */
+  HEARTBEAT:4,
 };
 
 /**
@@ -94,3 +98,26 @@ export const webSocketServerMsgCode = {
   //断开连接
   "BREAKE_CONNECTION":"breakeConnection",
 }
+
+/**
+ * 消息类型
+ */
+export const messageSource = {
+  /**
+   * 群聊
+   */
+  GROUP_CHAT:1,
+  /**
+   * 和机器人聊
+   */
+  ROBOT_CHAT:2,
+}
+/**
+ * 长连接心跳时间为5秒(单位毫秒)
+ */
+export const  heartbeatTime = 5000;
+
+/**
+ * 长连接过期时间阈值(单位毫秒)
+ */
+export const  outHeartbeatTime = 9000;

@@ -179,7 +179,6 @@ export class AbstractComponent implements OnDestroy {
     return this.injector.get(WzlutilService);
   }
 
-  WzlutilService
   /*初始化require*/
   /*  requireInstance(){
       var System: any;

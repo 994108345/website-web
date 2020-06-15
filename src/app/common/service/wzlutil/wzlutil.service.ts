@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {NzNotificationService} from 'ng-zorro-antd';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {HeapProfiler} from 'inspector';
 
 declare var returnCitySN: any;
 
@@ -63,6 +64,16 @@ export class WzlutilService {
     data.address = returnCitySN["cname"];
     data.id = returnCitySN["cid"];
     return data
+  }
+
+  /**
+   * 相对比当前时间，超出多少时间戳
+   * @param time 时间戳
+   */
+  outTimeOfNow(time:number):number{
+    let nowDate = new Date();
+    let timeNum = nowDate.getTime() - time;
+    return timeNum;
   }
 }
 

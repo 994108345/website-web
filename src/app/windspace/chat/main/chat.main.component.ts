@@ -2,7 +2,16 @@ import {Component, Injector} from '@angular/core';
 import {AbstractComponent} from '../../../common/service/abstract.component';
 import {asllCode, isLocal, pro_ip, routers, urls} from '../../../app.config';
 import {successStatus} from '../../../common/service/base/common.config';
-import {messageType, names, pickName, surnames, webSocketServerMsgCode} from '../chat.config';
+import {
+  heartbeatTime,
+  messageSource,
+  messageType,
+  names,
+  outHeartbeatTime,
+  pickName,
+  surnames,
+  webSocketServerMsgCode
+} from '../chat.config';
 import {Server} from 'ws';
 import {WebSocketService} from '../../../common/service/websocket/websocket.service';
 import {$} from 'protractor';
@@ -22,19 +31,39 @@ export class ChatMainComponent extends AbstractComponent{
   deleteObj:any;
   //数据
   items:any[] = [];
-  //标题
-  data:any[] = [];
+
+  //群聊消息
+  groupChatData:any[] = [];
+  //机器人聊消息
+  robotChatData:any[] = [];
+
   //用户名
   userName:string;
   //是否加载
   load:boolean;
-  //发送信息
-  sendMessage:string ="";
+
+  /**
+   * 心跳计数
+   */
+  webHeartbeatTag:number = 0;
+
+  /**
+   * 心跳计数
+   */
+  serverHeartbeatTag:number = 0;
 
   /**
    * 在线人数
    */
   onlineNum:number = 0;
+
+  /**
+   * 是否重连
+   */
+  reconnect:boolean = false;
+
+  /*定时器*/
+  timer:any;
 
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector,private wsService:WebSocketService){
@@ -43,8 +72,30 @@ export class ChatMainComponent extends AbstractComponent{
 
   ngOnInit(){
     console.log("群聊界面");
-    //生成随机姓名
-    //this.pickName();
+    //随机取一个名字
+    this.pickName();
+    //打开长连接
+    this.openSocket();
+    //打开定时器检查心跳
+    this.timerHeartbeat();
+  }
+
+  ngOnDestroy() {
+    /*删除定时器*/
+    clearInterval(this.timer);
+    //删除长连接
+    this.closeWebsocket();
+  }
+
+  //关闭长连接
+  closeWebsocket(){
+    let url = "";
+    if(isLocal){
+      url = "ws://localhost:6001/websocket/";
+    }else{
+      url ="ws://"+ pro_ip +":6001/websocket/";
+    }
+    this.wsService.closeWebSocket(url);
   }
 
   /**
@@ -55,8 +106,9 @@ export class ChatMainComponent extends AbstractComponent{
       this.wzlNgZorroAntdMessage.error("用户名不能为空");
     }else{
       //获取sessionId,并且开启长连接
-      if(!this.sessionId){
+      if(!this.sessionId  || this.reconnect){
         this.getSessionId();
+        this.reconnect = false;
       }
     }
   }
@@ -66,6 +118,7 @@ export class ChatMainComponent extends AbstractComponent{
    * 打开长连接
    */
   openWebSocket(){
+    console.log("打开长连接....")
     let url = "";
     if(isLocal){
       url = "ws://localhost:6001/websocket/";
@@ -93,15 +146,30 @@ export class ChatMainComponent extends AbstractComponent{
     //判断返回结果
     if(rst.status = successStatus){
       let obj = rst.data;
-      let msgObj = obj.message;
-      if(obj.messageType == messageType.CHAT_MESSAGE){
-        this.receiveChatMessage(msgObj)
-      }else if(obj.messageType == messageType.ON_LINE_NUMER){
-        this.receiveOnlineNum(msgObj)
-      }else if (obj.messageType == messageType.SERVICE_MSG){
-        this.receiveServerMsg(msgObj)
-      }else{
-        this.wzlNgZorroAntdMessage.error("长连接返回信息异常");
+      switch (obj.messageType) {
+        //聊天信息
+        case messageType.CHAT_MESSAGE:
+          let chatMessage = obj.chatMessage;
+          this.receiveChatMessage(chatMessage)
+          break;
+        //在线人数
+        case messageType.ON_LINE_NUMER:
+          let onlineNums = obj.onlineNums;
+          this.receiveOnlineNum(onlineNums)
+          break;
+        //服务信息
+        case messageType.SERVICE_MSG:
+          let serverMsgResult = obj.serverMsgResult;
+          this.receiveServerMsg(serverMsgResult)
+          break;
+        //心跳信息
+        case messageType.HEARTBEAT:
+          let heartbeatResult = obj.heartbeatResult;
+          this.heartbeatHandler(heartbeatResult);
+          break;
+        default:
+          this.wzlNgZorroAntdMessage.error("长连接返回信息异常");
+          break;
       }
     }else{
       this.wzlNgZorroAntdMessage.error("长连接消息接收失败" + rst.message);
@@ -112,7 +180,26 @@ export class ChatMainComponent extends AbstractComponent{
    * 接收聊天信息
    */
   receiveChatMessage(msgObj:any){
-    this.data.push(msgObj)
+    switch (msgObj.messageSource) {
+      case messageSource.ROBOT_CHAT:
+        //机器人聊
+        this.robotChatData.push(msgObj)
+        break;
+      case messageSource.GROUP_CHAT:
+        //群聊
+        this.groupChatData.push(msgObj)
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
+   * 心跳处理
+   */
+  heartbeatHandler(message:any){
+    //设置心跳标签
+    this.serverHeartbeatTag = message.heartbeatTag
   }
 
   /**
@@ -208,26 +295,32 @@ export class ChatMainComponent extends AbstractComponent{
     this.userName = pickName[randomNum];
   }
 
-
-  /**
-   * 键盘回车事件
-   * @param event
-   */
-  pressSendMessage(event){
-    if(event.which == asllCode.enter){
-      this.sendMessageToserver();
-    }
+  /*设置定时器*/
+  timerHeartbeat(){
+    this.timer = setInterval(()=>{
+      /*定时心跳*/
+      this.sendHeartbeat();
+    },heartbeatTime)
   }
 
-  //发送信息
-  sendMessageToserver(){
-    if(this.sendMessage.trim().length < 1){
-      this.wzlNgZorroAntdMessage.error("输入信息不能为空");
-      return;
+  /**
+   * 心跳处理
+   */
+  sendHeartbeat(){
+    console.log("心跳服务" + "webHeartbeatTag:" + this.webHeartbeatTag + ";serverHeartbeatTag;" + this.serverHeartbeatTag);
+    //如果超时时间大于阀值
+    if(this.webHeartbeatTag != this.serverHeartbeatTag){
+      this.reconnect = true;
+      //如果标签不一样，说明已经断开连接，尝试重新连接
+      this.openSocket();
+      this.serverHeartbeatTag++;
+    }else{
+      //web心跳标记自增
+      this.webHeartbeatTag++;
+      //调用心跳
+      let heartbeat = {"heartbeatTag":this.webHeartbeatTag};
+      let item = {"heartbeatResult":heartbeat,"messageType":messageType.HEARTBEAT};
+      this.wsService.sendMessage(item);
     }
-    let item = {"name":this.userName,"message":this.sendMessage,"createDate":new Date()};
-    this.wsService.sendMessage(item);
-    //输入框置空
-    this.sendMessage = "";
   }
 }

@@ -1,11 +1,11 @@
 //网站项目路由
 export const websiteUrl = "/website";
 export const zuulUrl = "/zuul";
-//服务器的ip
-export const pro_ip = "106.15.198.170";
+//服务器的ip  106.15.198.170
+export const pro_ip = "127.0.0.1";
 
 //是否是本地环境
-export const isLocal = false;
+export const isLocal = true;
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
