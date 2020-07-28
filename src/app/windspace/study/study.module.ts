@@ -1,22 +1,19 @@
 import {NgModule} from '@angular/core';
-import { ManageComponent} from './manage.component';
+import { StudyComponent} from './study.component';
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {CommonService} from '../../common/service/base/common.service';
 import {WzlCacheService} from '../../common/service/wzlcache/wzlceche.service';
-import { ManageMainComponent} from './main/manage.main.component';
-import { ManageRouting} from './manage.routing';
+import { StudyRouting} from './study.routing';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module';
 import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
 import {WordModule} from '../../common/basemodel/word/word.module';
 import {QuillModule} from 'ngx-quill';
-import {WordManageComponent} from './word/word.manage.component';
 import {WzlngzorroantdmessageService} from '../../common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service';
-import {FileUploadManageComponent} from './fileupload/file.upload.manage.component';
 import {LoginModule} from '../../common/basemodel/login/login.module';
-import {IplogManageComponent} from './iplog/iplog.manage.component';
-import {TestManageComponent} from './test/test.manage.component';
+import {StudyMainComponent} from './main/study.main.component';
+import {SearchboxMainComponent} from './serchbox/searchbox.main.component';
 
 @NgModule({
   imports: [
@@ -35,16 +32,16 @@ import {TestManageComponent} from './test/test.manage.component';
     QuillModule,
     /*登陆测试模块*/
     LoginModule,
-    ManageRouting,
+    StudyRouting,
   ],
   exports:[
   ],
   declarations: [
-    ManageMainComponent,ManageComponent,WordManageComponent,FileUploadManageComponent,IplogManageComponent,TestManageComponent
+    StudyComponent,StudyMainComponent,SearchboxMainComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,WzlngzorroantdmessageService,{ provide: NZ_I18N, useValue: zh_CN }],
 })
-export class ManageModule {
+export class StudyModule {
 
 }

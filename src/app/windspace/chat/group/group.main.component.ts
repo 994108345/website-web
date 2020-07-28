@@ -24,9 +24,9 @@ export class GroupMainComponent extends AbstractComponent{
    */
   onlineNum:number = 0;
 
-  @Input() private name:string ;
+  @Input()  name:string ;
   //聊天数据
-  @Input() private data:any[] ;
+  @Input()  data:any[] ;
 
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector,private wsService:WebSocketService){

@@ -2,6 +2,7 @@
 export const websiteUrl = "/website";
 export const zuulUrl = "/zuul";
 //服务器的ip  106.15.198.170
+// export const pro_ip = "106.15.198.170";
 export const pro_ip = "127.0.0.1";
 
 //是否是本地环境
@@ -96,6 +97,10 @@ export const urls = {
   upload_pic:websiteUrl + "/uploadfile/upload-pic",
   //上传图片
   query_ip_log_Url:websiteUrl + "/unified/ipLogServiceImpl/queryEarly20IpLog",
+
+  /*-----------------------------------------------学习-------------------------------------------------------*/
+  //模糊查询菜品名
+  fuzzyQueryGoodNameUrl:websiteUrl + "/unified/goodQueryServiceImpl/getSearchBoxWord",
 
   /*----------------------------------------------------登陆------------------------------------------------------*/
   //上传图片

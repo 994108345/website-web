@@ -44,6 +44,8 @@ export class RobotMainComponent extends AbstractComponent{
 
   ngOnInit(){
     console.log("机器人聊天界面");
+    //先塞一句初始问候
+    this.data.push({"name":"三岁小孩","message":"你好，我叫三岁，我可以陪你聊聊哦！","createDate":new Date()});
   }
 
   /**

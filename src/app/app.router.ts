@@ -12,6 +12,10 @@ export const appRoutes: Routes = [
     loadChildren: 'src/app/windspace/manage/manage.module#ManageModule',
   },
   {
+    path: 'study',
+    loadChildren: 'src/app/windspace/study/study.module#StudyModule',
+  },
+  {
     path: '**',
     redirectTo:'/menu',
   },

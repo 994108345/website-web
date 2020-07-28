@@ -1,0 +1,7 @@
+<div class="iplog" style="width: 100%;">
+  <button nz-button nzType="primary" (click)="hystrixTest()">提交</button>
+  <nz-timeline nzMode="alternate" *ngFor="let message of testMessages" >
+    <nz-timeline-item>{{message}}</nz-timeline-item>
+  </nz-timeline>
+</div>
+
