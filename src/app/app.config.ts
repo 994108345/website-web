@@ -112,6 +112,8 @@ export const urls = {
   //上传图片
   loginUrl:zuulUrl + "/login",
   otherHandlerUrl:zuulUrl + "/other",
+  /*----------------------------------------------------配置------------------------------------------------------*/
+  queryConfigUrl:websiteUrl + "/unified/wsConfigServiceImpl/queryConfig",
 };
 
 /*跳转菜单页面路径*/

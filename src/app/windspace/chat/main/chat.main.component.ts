@@ -117,14 +117,8 @@ export class ChatMainComponent extends AbstractComponent{
   /**
    * 打开长连接
    */
-  openWebSocket(){
+  openWebSocket(url:string){
     console.log("打开长连接....")
-    let url = "";
-    if(isLocal){
-      url = "ws://localhost:6001/websocket/";
-    }else{
-      url ="ws://"+ pro_ip +":6001/websocket/";
-    }
     url = url+this.sessionId;
     this.wsService.createObservableSocket(url)
       .subscribe(
@@ -136,6 +130,34 @@ export class ChatMainComponent extends AbstractComponent{
           this.wzlNgZorroAntdMessage.info("长连接已经关闭"),
       )
   }
+
+  /**
+   * 获取配置，然后连接websocket
+   */
+  getConfigInfo(){
+    let condition = {configType:"websocket_server_url"};
+    this.commonService.doHttpPost(urls.queryConfigUrl,condition).then(rst =>{
+      if (rst) {
+        if (rst.status != successStatus) {
+          this.wzlNgZorroAntdMessage.error(rst.message);
+        } else {
+          let data = rst.data;
+          if(data){
+            //读取配置打开长连接
+            this.openWebSocket(data);
+          }
+        }
+      } else {
+        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
+      }
+    }).catch(rtc => {
+      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+    }).finally( () => {
+      this.isFirst = false;
+    });
+  }
+
+
 
   /**
    * 接收消息
@@ -251,7 +273,7 @@ export class ChatMainComponent extends AbstractComponent{
           }else{
             this.sessionId = rst.data;
             //开启长连接
-            this.openWebSocket();
+            this.getConfigInfo();
           }
         }else{
           this.wzlNgZorroAntdMessage.error("返回参数异常，请联系管理员");
