@@ -1,0 +1,77 @@
+<div class="phone">
+  <nz-tabset>
+    <nz-tab nzTitle="拼接sql">
+      <div class="gutter-example">
+        <nz-alert nzType="success" style="white-space: pre-line;"
+                  nzMessage="使用说明！
+                  &#10;1 一个set字段值多个where字段值,即:&#10; update tableName set field1 = value1 where filed2 = values2;&#10; update tableName set field1 = value1 where filed2 = values3;
+                  &#10;2 多个set字段值多个value字段值,即:&#10; update tableName set field1 = value1 where filed2 = values2;&#10; update tableName set field1 = value3 where filed2 = values4;
+                  &#10;3 set字段值和where字段值如果有多个，请用换行符隔开"
+                  ></nz-alert>
+        <br>
+        <div nz-row nzGutter="16">
+
+          <div class="tab" nz-col nzSpan="6">
+            <span class="span-tab"><span style="color: red">*</span>类型:</span>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="选择类型"   style="width: 300px;" [(ngModel)]="this.sqlData.updateType">
+              <nz-option nzLabel="一个set字段值多个where字段值" nzValue="1"></nz-option>
+              <nz-option nzLabel="多个set字段值多个value字段值" nzValue="2"></nz-option>
+            </nz-select>
+          </div>
+          <br><br>
+
+          <div class="tab" nz-col nzSpan="6">
+            <span class="span-tab"><span style="color: red">*</span>表名:</span>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <input nz-input placeholder="输入表名" [(ngModel)]="this.sqlData.tableName"/>
+          </div>
+          <br><br>
+
+          <div class="tab" nz-col nzSpan="6">
+            <span class="span-tab"><span style="color: red">*</span>set字段名:</span>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <input nz-input placeholder="输入set的字段名" [(ngModel)]="this.sqlData.setField"/>
+          </div>
+
+          <div class="tab" nz-col nzSpan="6">
+            <span class="span-tab"><span style="color: red">*</span>set字段值:</span>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <textarea nz-input [(ngModel)]="this.sqlData.setValue" [nzAutosize]="{ minRows: 5, maxRows: 5 }" placeholder="请输入set字段值"></textarea>
+          </div>
+
+          <div class="tab" nz-col nzSpan="6">
+            <span class="span-tab"><span style="color: red">*</span>条件字段名:</span>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <input nz-input placeholder="输入条件字段名" [(ngModel)]="this.sqlData.whereField" />
+          </div>
+
+          <div class="tab" nz-col nzSpan="6">
+            <span class="span-tab"><span style="color: red">*</span>where字段值:</span>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <textarea nz-input [(ngModel)]="this.sqlData.whereValue" [nzAutosize]="{ minRows: 5, maxRows: 5 }" placeholder="请输入where字段值"></textarea>
+          </div>
+
+          <div class="tab" nz-col nzSpan="6">
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <br>
+            <button  nz-button nzType="primary"  (click)="submit()" >提交消息</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </nz-tab>
+  </nz-tabset>
+</div>
+
+
+

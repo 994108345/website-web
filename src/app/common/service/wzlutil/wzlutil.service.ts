@@ -3,6 +3,7 @@ import {NzNotificationService} from 'ng-zorro-antd';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {HeapProfiler} from 'inspector';
+import {strSpecialChar} from '../../../app.config';
 
 declare var returnCitySN: any;
 
@@ -74,6 +75,19 @@ export class WzlutilService {
     let nowDate = new Date();
     let timeNum = nowDate.getTime() - time;
     return timeNum;
+  }
+
+  /**
+   * 打开新页面
+   * @param str 新页面的数据
+   */
+  newTxtPage(str:string){
+    console.log("newTxtPage---util")
+    let winSave = window.open();
+    winSave.document.open("html","utf-8");
+    //替换换行符，换成标签，让数据换行
+    str = str.replace(strSpecialChar.new_line,"<br>");
+    winSave.document.write(str);
   }
 }
 

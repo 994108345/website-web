@@ -14,6 +14,7 @@ import {WzlngzorroantdmessageService} from '../../common/service/wzlngzorroantdm
 import {LoginModule} from '../../common/basemodel/login/login.module';
 import {StudyMainComponent} from './main/study.main.component';
 import {SearchboxMainComponent} from './serchbox/searchbox.main.component';
+import {EverythingMainComponent} from './everything/everything.main.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,7 @@ import {SearchboxMainComponent} from './serchbox/searchbox.main.component';
   exports:[
   ],
   declarations: [
-    StudyComponent,StudyMainComponent,SearchboxMainComponent
+    StudyComponent,StudyMainComponent,SearchboxMainComponent,EverythingMainComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,WzlngzorroantdmessageService,{ provide: NZ_I18N, useValue: zh_CN }],

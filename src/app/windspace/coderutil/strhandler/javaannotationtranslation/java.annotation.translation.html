@@ -1,0 +1,29 @@
+      <div class="gutter-example">
+        <nz-alert nzType="success" style="white-space: pre-line;"
+                  nzMessage="使用说明！
+                  &#10;1 自动将java直接的不需要的*号去掉，并发翻译成中文。"
+                  ></nz-alert>
+        <br>
+        <div nz-row nzGutter="16">
+
+          <div class="tab" nz-col nzSpan="6">
+            <span class="span-tab"><span style="color: red">*</span>文本:</span>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <textarea nz-input [(ngModel)]="this.originStr" [nzAutosize]="{ minRows: 5, maxRows: 10 }" placeholder="请输入set字段值"(keypress)="pressEnter($event)"></textarea>
+          </div>
+
+          <div class="tab" nz-col nzSpan="6">
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <br>
+            <button  nz-button nzType="primary"  (click)="submit()" >提交消息</button>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+

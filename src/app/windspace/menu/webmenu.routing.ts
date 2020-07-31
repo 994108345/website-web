@@ -42,6 +42,10 @@ const menuRoutes: Routes = [
         path: 'pic',
         loadChildren: 'src/app/windspace/pic/pic.module#PicModule',
       },
+      {
+        path: 'coderutil',
+        loadChildren: 'src/app/windspace/coderutil/coderutil.module#CoderutilModule',
+      },
     ]
   },
 ];

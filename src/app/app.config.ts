@@ -101,7 +101,13 @@ export const urls = {
   /*-----------------------------------------------学习-------------------------------------------------------*/
   //模糊查询菜品名
   fuzzyQueryGoodNameUrl:websiteUrl + "/unified/goodQueryServiceImpl/getSearchBoxWord",
-
+  /*-----------------------------------------------程序员工具---------------------------------------------------------*/
+  //获取更新语句
+  getUpdateSqlUrl:websiteUrl + "/unified/coderUtilServiceImpl/getUpdateSql",
+  //将换行符替换成空格
+  lineTransferBlankUrl:websiteUrl + "/unified/coderUtilServiceImpl/lineTransferBlank",
+  //将java注解快速翻译
+  javaAnnotationTransUrl:websiteUrl + "/unified/coderUtilServiceImpl/javaAnnotationHandler",
   /*----------------------------------------------------登陆------------------------------------------------------*/
   //上传图片
   loginUrl:zuulUrl + "/login",
@@ -126,5 +132,12 @@ export const  emitKey ={
  */
 export const asllCode = {
   enter:13,//回车
+}
+
+/**
+ * 字符串的特殊符号
+ */
+export const strSpecialChar = {
+  new_line:"&#10",//换行
 }
 
