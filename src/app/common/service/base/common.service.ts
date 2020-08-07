@@ -5,6 +5,7 @@
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Injectable} from "@angular/core";
 import {httpOptions} from './common.config';
+import {baseConfig} from '../../../app.config';
 @Injectable()
 export class  CommonService {
   /*将httpclient注入到该类中*/
@@ -12,6 +13,8 @@ export class  CommonService {
 
      //发送请求POST
     doHttpPost(url: string, param: any, options?: any): Promise<any> {
+      //设置加载
+      baseConfig.isSpinning = true;
       let defaultOptions = httpOptions;
       let option = options || defaultOptions;
 
@@ -22,7 +25,12 @@ export class  CommonService {
         })
         .catch(
           res => { return this.handleError(res)
-          });
+          }).finally(
+            () => {
+              //设置不加载
+              baseConfig.isSpinning = false;
+            }
+        );
     }
 
   doHttpPostForm(url: string, param: any, options?: any): Promise<any> {

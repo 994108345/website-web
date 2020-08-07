@@ -14,6 +14,10 @@ export class JavaAnnotationTranslationComponent extends AbstractComponent{
    * 要处理的字符串
    */
   originStr:string;
+  /**
+   * 翻译的结果字符串
+   */
+  resultStr:string;
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector){
     super(injector);
@@ -49,8 +53,8 @@ export class JavaAnnotationTranslationComponent extends AbstractComponent{
           let data = rst.data;
           if(data){
             this.wzlNgZorroAntdMessage.info("生成成功");
-            //创建新页面，展示结果数据
-            this.wzlutilService.newTxtPage(data);
+            //设置结果数据
+            this.resultStr = data;
           }
         }
       } else {

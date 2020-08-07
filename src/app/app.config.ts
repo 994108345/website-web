@@ -9,7 +9,9 @@ export const baseConfig = {
   //是否是本地环境
   isLocal:true,
   //websocket的服务器地址
-  websocketServer:""
+  websocketServer:"",
+  //是否加载中
+  isSpinning:false,
 };
 
 /*请求后端路径*/

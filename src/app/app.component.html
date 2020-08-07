@@ -1,2 +1,6 @@
-<router-outlet></router-outlet>
+
+<nz-spin nzTip="Loading..." [nzSpinning]="isSpinning">
+  <router-outlet></router-outlet>
+  <nz-alert nzType="info" nzMessage="Alert message title" nzDescription="请求中"> </nz-alert>
+</nz-spin>
 
