@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Injector, Output} from '@angular/core';
-import {asllCode, cacheKey, isLocal, routers, urls} from '../../../app.config';
+import {asllCode, baseConfig, cacheKey, routers, urls} from '../../../app.config';
 import {AbstractComponent} from '../../../common/service/abstract.component';
 import {successStatus} from '../../../common/service/base/common.config';
 import {UploadFile} from 'ng-zorro-antd';
@@ -48,7 +48,7 @@ export class FileUploadComponent extends AbstractComponent{
     this.fileList.forEach((file: any) => {
       formData.append('file', file);
     });
-    if(isLocal){
+    if(baseConfig.isLocal){
       formData.append('type',"2");
     }
     formData.append("secretKey",this.fileUpload.secretKey);

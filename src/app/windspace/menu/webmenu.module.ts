@@ -15,11 +15,12 @@ import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
     NgZorroAntdModule,
     /*用户建议模块*/
     UseradviceModule,
+    //配置模块
     WebmenuRouting,
   ],
   declarations: [
     WebmenuComponent,
-    WebmenuMainComponent
+    WebmenuMainComponent,
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlngzorroantdmessageService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],

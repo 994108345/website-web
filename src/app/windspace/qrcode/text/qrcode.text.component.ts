@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Injector, Output} from '@angular/core';
-import {asllCode, cacheKey, isLocal, routers, urls} from '../../../app.config';
+import {asllCode, cacheKey,  routers, urls} from '../../../app.config';
 import {AbstractComponent} from '../../../common/service/abstract.component';
 import {successStatus} from '../../../common/service/base/common.config';
 import {UploadFile} from 'ng-zorro-antd';

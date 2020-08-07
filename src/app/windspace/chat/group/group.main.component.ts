@@ -1,6 +1,6 @@
 import {Component, Injector, Input, Output} from '@angular/core';
 import {AbstractComponent} from '../../../common/service/abstract.component';
-import {asllCode, isLocal, pro_ip, routers, urls} from '../../../app.config';
+import {asllCode, routers, urls} from '../../../app.config';
 import {successStatus} from '../../../common/service/base/common.config';
 import {messageSource, messageType, names, pickName, surnames, webSocketServerMsgCode} from '../chat.config';
 import {Server} from 'ws';

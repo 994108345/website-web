@@ -5,10 +5,14 @@ import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app.router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
-import {NgZorroAntdModule, NZ_I18N, en_US} from 'ng-zorro-antd';
+import {NgZorroAntdModule, NZ_I18N, en_US, zh_CN} from 'ng-zorro-antd';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import {CommonService} from './common/service/base/common.service';
+import {WzlCacheService} from './common/service/wzlcache/wzlceche.service';
+import {WzlngzorroantdmessageService} from './common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service';
+import {WzlutilService} from './common/service/wzlutil/wzlutil.service';
 
 registerLocaleData(en);
 
@@ -29,7 +33,7 @@ registerLocaleData(en);
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [CommonService,WzlCacheService,WzlngzorroantdmessageService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

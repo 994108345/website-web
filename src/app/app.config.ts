@@ -1,12 +1,17 @@
 //网站项目路由
 export const websiteUrl = "/website";
 export const zuulUrl = "/zuul";
-//服务器的ip  106.15.198.170
-// export const pro_ip = "106.15.198.170";
-export const pro_ip = "127.0.0.1";
 
-//是否是本地环境
-export const isLocal = true;
+/**
+ * 配置
+ */
+export const baseConfig = {
+  //是否是本地环境
+  isLocal:true,
+  //websocket的服务器地址
+  websocketServer:""
+};
+
 /*请求后端路径*/
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
@@ -113,7 +118,10 @@ export const urls = {
   loginUrl:zuulUrl + "/login",
   otherHandlerUrl:zuulUrl + "/other",
   /*----------------------------------------------------配置------------------------------------------------------*/
+  //查询指定type的配置
   queryConfigUrl:websiteUrl + "/unified/wsConfigServiceImpl/queryConfig",
+  //查询对外配置
+  queryOutConfigUrl:websiteUrl + "/unified/wsConfigServiceImpl/queryOutConfig",
 };
 
 /*跳转菜单页面路径*/

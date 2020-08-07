@@ -1,13 +1,1 @@
-<div class="phone">
-  <nz-tabset>
-    <nz-tab nzTitle="查询邮政编码">
-      <div class="chat-interface">
-        <p>城市名称：</p>
-        <input nz-input placeholder="Basic usage" [(ngModel)]="queryCity" (keypress)="pressQueryPostal($event)"/><br><br>
-        <button  nz-button nzType="primary"  (click)="queryPostal()">查询</button>
-        <p *ngIf="cityMessage" id="cityMessage" style="color: red;font-size: 30px"> {{cityMessage}} </p>
-      </div>
-    </nz-tab>
-  </nz-tabset>
-</div>
 
