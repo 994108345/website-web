@@ -13,6 +13,11 @@ import {PicQueryComponent} from './query/pic.query.component';
 import {PicQueueComponent} from './queue/pic.queue.component';
 import {FlowerpicQueryComponent} from './flowerpic/flowerpic.query.component';
 import {BdpicQueryComponent} from './bdpic/bdpic.query.component';
+import {AddTextComponent} from './addtext/add.text.component';
+import {QueryMainComponent} from '../query/main/query.main.component';
+import {PictureExifMainComponent} from './pictureexif/picture.exif.main.component';
+import {PictureChangeMainComponent} from './picturechange/picture.change.main.component';
+import {JoinPicComponent} from './joinpic/join.pic.component';
 
 @NgModule({
   imports: [
@@ -30,7 +35,7 @@ import {BdpicQueryComponent} from './bdpic/bdpic.query.component';
   exports:[
   ],
   declarations: [
-    PicComponent,PicDownComponent,PicQueryComponent,PicQueueComponent,FlowerpicQueryComponent,BdpicQueryComponent
+    PicComponent,PicDownComponent,PicQueryComponent,PicQueueComponent,FlowerpicQueryComponent,BdpicQueryComponent,AddTextComponent,PictureExifMainComponent,PictureChangeMainComponent,JoinPicComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],

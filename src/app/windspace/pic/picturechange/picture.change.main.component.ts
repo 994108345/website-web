@@ -17,7 +17,7 @@ export class PictureChangeMainComponent extends AbstractComponent{
   //上传文件集合
   uploadedFiles: any[] = [];
   //上传路由
-  uploadUrl:string = urls.uploadFile + '?type=pictureChange';
+  uploadUrl:string = urls.uploadFile + '?type=joinPic';
   //是否启用上传
   isUpload:boolean = false;
   //要上传的文件

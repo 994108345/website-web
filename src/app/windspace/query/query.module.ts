@@ -9,10 +9,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module';
 import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
-import {PictureExifMainComponent} from './pictureexif/picture.exif.main.component';
-import {PictureChangeMainComponent} from './picturechange/picture.change.main.component';
 import {TranslationMainComponent} from './translation/translation.main.component';
-import {PicQueryComponent} from '../pic/query/pic.query.component';
 import {QueryWeatherComponent} from './weather/query.weather.component';
 import {PdfComponent} from './pdf/pdf.component';
 import {LocationComponent} from './location/location.component';
@@ -33,7 +30,7 @@ import {LocationComponent} from './location/location.component';
   exports:[
   ],
   declarations: [
-    QueryComponent,QueryMainComponent,PictureExifMainComponent,PictureChangeMainComponent,TranslationMainComponent,QueryWeatherComponent,PdfComponent,LocationComponent
+    QueryComponent,QueryMainComponent,TranslationMainComponent,QueryWeatherComponent,PdfComponent,LocationComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],
