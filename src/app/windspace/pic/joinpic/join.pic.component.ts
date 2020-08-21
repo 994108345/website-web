@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Injector, Output} from '@angular/core';
-import {asllCode, cacheKey, routers, urls} from '../../../app.config';
+import {asllCode, baseConfig, cacheKey, routers, urls} from '../../../app.config';
 import {AbstractComponent} from '../../../common/service/abstract.component';
 import {successStatus} from '../../../common/service/base/common.config';
 import {UploadFile} from 'ng-zorro-antd';
@@ -36,6 +36,8 @@ export class JoinPicComponent extends AbstractComponent{
 
   ngOnInit(){
     console.log("JoinPicComponent");
+    //设置图片缩放样式的默认值
+    this.joinPic.stretchType = "fixed";
   }
 
   beforeUpload = (file: UploadFile): boolean => {
@@ -54,12 +56,19 @@ export class JoinPicComponent extends AbstractComponent{
       this.wzlNgZorroAntdMessage.warning('文字内容不能为空......');
       return;
     }
+    if(this.wzlutilService.isBlank(this.joinPic.stretchType)){
+      this.wzlNgZorroAntdMessage.warning('图片拉伸类型不能为空......');
+      return;
+    }
     //拼接表单参数
     this.fileList.forEach((file: any) => {
       formData.append('file', file);
     });
     if(this.wzlutilService.isNotBlank(this.joinPic.cols)){
       formData.append("cols",this.joinPic.cols);
+    }
+    if(this.wzlutilService.isNotBlank(this.joinPic.stretchType)){
+      formData.append("stretchType",this.joinPic.stretchType);
     }
     this.commonService.doHttpPostForm(urls.joinPicUrl,formData).then(rst =>{
       if (rst) {

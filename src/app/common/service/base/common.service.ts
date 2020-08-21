@@ -34,11 +34,12 @@ export class  CommonService {
     }
 
   doHttpPostForm(url: string, param: any, options?: any): Promise<any> {
+    //显示加载框
+    baseConfig.isSpinning = true;
     let defaultOptions = new HttpHeaders({
       'Content-Type':  'multipart/form-data',
     });
     let option = options || defaultOptions;
-
     return this.http.post(url, param, option)
       .toPromise()
       .then(res => {
@@ -46,11 +47,16 @@ export class  CommonService {
       })
       .catch(
         res => { return this.handleError(res)
-        });
+        }).finally(() =>{
+        //取消显示加载框
+        baseConfig.isSpinning = false;
+      });
   }
 
     //发送请求GET
     doHttpGet(url: string, options?: any): Promise<any> {
+      //显示加载框
+      baseConfig.isSpinning = true;
       options = options || {};
       return this.http.get(url, options)
         .toPromise()
@@ -59,7 +65,10 @@ export class  CommonService {
         })
         .catch((res) => {
           return this.handleError(res)
-        });
+        }).finally(() =>{
+          //取消显示加载框
+          baseConfig.isSpinning = false;
+        });;
     }
 
     //成功处理

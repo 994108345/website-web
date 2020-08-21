@@ -1,8 +1,19 @@
 <div>
   <nz-alert nzType="success" style="white-space: pre-line;"
-            nzMessage="使用说明：&#10;1 将文字加入到图片中。"></nz-alert>
+            nzMessage="使用说明：&#10;1 填上每行想放置的图片个数，传入不多余50张的图片，就会生成一张合成图"></nz-alert>
   <div class="gutter-example">
     <div nz-row nzGutter="16">
+
+      <div nz-col nzSpan="6">
+        <span class="span-tab"><span style="color: red">*</span>图片拉伸类型:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <nz-select [(ngModel)]="joinPic.stretchType" nzPlaceHolder="选择图片拉伸类型" style="width: 200px;" >
+          <nz-option nzValue="fixed" nzLabel="固定长宽"></nz-option>
+          <nz-option nzValue="scaleDownByHeight" nzLabel="根据高按比例缩放"></nz-option>
+        </nz-select>
+      </div>
+
       <br><br>
       <div nz-col nzSpan="6">
         <span class="span-tab"><span style="color: red">*</span>每行放置个数:</span>
