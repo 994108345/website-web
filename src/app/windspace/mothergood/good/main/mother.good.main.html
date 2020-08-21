@@ -1,0 +1,41 @@
+<div>
+  <button nz-button [nzType]="'primary'" (click)="addMotherGood()" style="margin-top: 16px" >新增</button>
+  <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="listOfData" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+    <thead>
+    <tr>
+      <th
+        [nzSelections]="listOfSelection"
+        [(nzChecked)]="checked"
+        [nzIndeterminate]="indeterminate"
+        (nzCheckedChange)="onAllChecked($event)"
+      ></th>
+      <th>id</th>
+      <th>商品名称</th>
+      <th>商品状态</th>
+      <th>商品销量</th>
+      <th>商品品类</th>
+      <th>原价</th>
+      <th>折扣价</th>
+      <th>创建时间</th>
+      <th>最后修改时间</th>
+      <th>备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of rowSelectionTable.data">
+      <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+      <td>{{ data.goodName }}</td>
+      <td>{{ data.status }}</td>
+      <td>{{ data.saleCount }}</td>
+      <td>{{ data.category }}</td>
+      <td>{{ data.originPrice }}</td>
+      <td>{{ data.discountPrice }}</td>
+      <td>{{ data.createTime }}</td>
+      <td>{{ data.lastModifiedTime }}</td>
+      <td>{{ data.remark }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+
+</div>
+

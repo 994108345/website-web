@@ -8,6 +8,10 @@ export const appRoutes: Routes = [
     loadChildren: 'src/app/windspace/menu/webmenu.module#WebMenuModule',
   },
   {
+    path: 'mothermenu',
+    loadChildren: 'src/app/windspace/mothergood/menu/mother.good.menu.module#MotherGoodMenuModule',
+  },
+  {
     path: 'manage',
     loadChildren: 'src/app/windspace/manage/manage.module#ManageModule',
   },

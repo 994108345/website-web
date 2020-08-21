@@ -1,0 +1,53 @@
+<nz-layout>
+  <!--左边菜单-->
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
+    <div class="logo" style="text-align: center">
+      <a><h1 style="color: darkorange;" (click)="goHome()"><a style="color: #334454;opacity:0;">努</a>码</h1></a>
+    </div>
+    <nz-divider></nz-divider>
+    <ul nz-menu [nzTheme]="'light'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu>
+        <span title><i nz-icon type="tool"></i><span class="nav-text">商品</span></span>
+        <ul>
+          <li nz-menu-item routerLink="/mothermenu/mothergood"><i nz-icon nzType="search" nzTheme="outline"></i>查看商品</li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i nz-icon type="tool"></i><span class="nav-text">订单</span></span>
+        <ul>
+          <li nz-menu-item routerLink="/mothermenu/coderutil/sql"><i nz-icon nzType="search" nzTheme="outline"></i>拼接sql</li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+
+  <!--右边-->
+  <nz-layout class="layout">
+    <!--右边上面-->
+    <nz-header style="background: #fff; padding:0;">
+      <i class="trigger" nz-icon  [type]="isCollapsed ? 'menu-unfold':'menu-fold'" (click)="toggleCollapsed()" title="缩放菜单"></i>
+      <i  class="logout" nz-icon  [type]="'logout'"  (click)="loginOut()" title="退出"></i>
+    </nz-header>
+
+    <nz-content style="margin:0 16px;">
+
+      <nz-breadcrumb  style="margin:16px 0;" [nzAutoGenerate]="true">
+        <nz-breadcrumb-item>
+          <a [routerLink]="['/menu/index']">Home</a>
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+
+      <div style="padding:24px; background: #fff; min-height: 360px;border: 1px solid #E8E8E8;overflow-y: auto;height: 800px">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+
+    <!--底部-->
+    <nz-footer style="text-align: center;">
+      <!--用户建议模块-->
+      <useradvice-root></useradvice-root>
+      <p style="font-size: 10px">nulidexiaoma 1.0</p>
+    </nz-footer>
+
+  </nz-layout>
+</nz-layout>

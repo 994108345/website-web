@@ -127,7 +127,22 @@ export const urls = {
   queryConfigUrl:websiteUrl + "/unified/wsConfigServiceImpl/queryConfig",
   //查询对外配置
   queryOutConfigUrl:websiteUrl + "/unified/wsConfigServiceImpl/queryOutConfig",
+  /*---------------------------------------------------mothergood-------------------------------------------------*/
+  //查询mothergood的列表
+  queryMotherGoodUrl:websiteUrl + "/unified/motherGoodServiceImpl/queryByRequest",
+  //插入mothergood
+  insertMotherGoodUrl:websiteUrl + "/unified/motherGoodServiceImpl/insertOne",
+  //更新mothergood
+  updateMotherGoodUrl:websiteUrl + "/unified/motherGoodServiceImpl/updateByRequest",
+
 };
+
+/**
+ * 条件页面的路由
+ */
+export const appRouters = {
+  motherGoodMainRouter: "mothermenu/mothergood",
+}
 
 /*跳转菜单页面路径*/
 export const routers = {
