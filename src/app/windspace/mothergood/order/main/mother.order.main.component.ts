@@ -4,11 +4,11 @@ import {routers, urls} from '../../../../app.config';
 import {successStatus} from '../../../../common/service/base/common.config';
 
 @Component({
-  selector: 'mother-good-main',
-  templateUrl: './mother.good.main.html',
-  styleUrls: ['./mother.good.main.css']
+  selector: 'mother-order-main',
+  templateUrl: './mother.order.main.html',
+  styleUrls: ['./mother.order.main.css']
 })
-export class MotherGoodMainComponent extends AbstractComponent{
+export class MotherOrderMainComponent extends AbstractComponent{
 
   checked = false;
   indeterminate = false;
@@ -25,7 +25,7 @@ export class MotherGoodMainComponent extends AbstractComponent{
   constructor(public injector:Injector){
     super(injector);
     //设置查询
-    urls.queryUrl = urls.queryMotherGoodUrl;
+    urls.queryUrl = urls.queryMotherOrderUrl;
     //默认查询
     this.queryBySearchParam();
   }
@@ -37,8 +37,8 @@ export class MotherGoodMainComponent extends AbstractComponent{
   /**
    * 跳转到新增页面
    */
-  addMotherGood(){
-    this.router.navigate([routers.motherGoodAddRouter]);
+  routerAdd(){
+    this.router.navigate([routers.motherOrderAddRouter]);
   }
 
   /**
@@ -51,6 +51,6 @@ export class MotherGoodMainComponent extends AbstractComponent{
      */
     this.wzlCache.setCache("motherGoodId",data.id);
     this.wzlCache.setCache("goodPic",data.goodPic);
-    this.router.navigate([routers.motherGoodUpdateRouter]);
+    this.router.navigate([routers.motherOrderUpdateRouter]);
   }
 }

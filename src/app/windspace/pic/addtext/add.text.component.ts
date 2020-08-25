@@ -19,8 +19,7 @@ export class AddTextComponent extends AbstractComponent{
   pictureType:string = 'image/png,image/jpeg';
   //pictureexif-change对象
   picAddText:any = {};
-  //上传文件
-  fileList: UploadFile[] = [];
+
 
   //选择框的默认文字
   nzPlaceHolder:string = '请选择';
@@ -38,8 +37,11 @@ export class AddTextComponent extends AbstractComponent{
     console.log("JoinPicComponent");
   }
 
+  /**
+   * 保持永远只有一个图片
+   * @param file
+   */
   beforeUpload = (file: UploadFile): boolean => {
-    console.log("beforeUpload:" + this.toJsonStr(file));
     this.fileList = this.fileList.concat(file);
     if(this.fileList.length > 1){
       this.fileList[0] = this.fileList[1];

@@ -17,7 +17,18 @@
       </div>
       <div nz-col class="gutter-row" nzSpan="18">
         <nz-select [(ngModel)]="motherGood.category" nzPlaceHolder="选择商品品类" style="width: 200px;" >
-          <nz-option nzValue="1" nzLabel="海鲜"></nz-option>
+          <nz-option nzValue = 1 nzLabel="海鲜"></nz-option>
+        </nz-select>
+      </div>
+
+      <br><br>
+      <div nz-col nzSpan="6" class="tab">
+        <span class="span-tab"><span style="color: red">*</span>商品状态:</span>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="18">
+        <nz-select [(ngModel)]="motherGood.status" nzPlaceHolder="选择商品状态" style="width: 200px;" >
+          <nz-option nzValue= 1 nzLabel="启用"></nz-option>
+          <nz-option nzValue= 0 nzLabel="禁用"></nz-option>
         </nz-select>
       </div>
 
@@ -42,16 +53,17 @@
       </div>
 
       <br><br>
-      <div nz-col nzSpan="6">
+      <div nz-col nzSpan="6" class="tab">
         <span class="span-tab"><span style="color: red">*</span>图片上传:</span>
       </div>
       <div nz-col nzSpan="18">
-        <nz-upload  [nzSize]="pictureSize" nzListType="picture-card" [nzFileType]="pictureType" [nzLimit]="1"
-                    [nzFileList]="fileList" [nzBeforeUpload]="beforeUpload">
-          <button nz-button><i nz-icon nzType="upload"></i>
-            <span>选择图片上传</span>
-          </button>
+        <nz-upload  [nzSize]="pictureSize"  [nzFileType]="pictureType" nzListType="picture-card"  [nzLimit]="1"
+                    [nzFileList]="fileList" [nzBeforeUpload]="beforeUpload" [nzShowUploadList]="showUploadList" [nzPreview]="handlePreview" >
+          <i nz-icon nzType="plus"></i>
+          <div class="ant-upload-text">选择图片上传</div>
         </nz-upload>
+        原图片：
+        <img style="width: 50px;height: 50px;" [src]="motherGood.goodPic">
       </div>
 
 
@@ -70,9 +82,8 @@
       <div nz-col nzSpan="6">
       </div>
       <div nz-col nzSpan="18">
-        <button nz-button [nzType]="'primary'" (click)="insertMotherGood()" style="margin-top: 16px" >提交</button>
+        <button nz-button [nzType]="'primary'" (click)="updateMotherGood()" style="margin-top: 16px" >提交</button>
       </div>
     </div>
   </div>
 </div>
-

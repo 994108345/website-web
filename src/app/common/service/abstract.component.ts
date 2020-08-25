@@ -8,6 +8,7 @@ import {successStatus} from './base/common.config';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {asllCode, routers, urls} from '../../app.config';
 import {WzlutilService} from './wzlutil/wzlutil.service';
+import {UploadFile} from 'ng-zorro-antd';
 
 /**
  * Created by wenzailong on 2017/12/21.
@@ -27,6 +28,16 @@ export class AbstractComponent implements OnDestroy {
   table: any;//查询表格
   selectOrder: any;//选择的表单
   msgsDialog: any;//弹出窗的报错信息
+
+  /*------------------------------图片上传默认配置--------------------------*/
+  //上传文件
+  fileList: UploadFile[] = [];
+  //文件大小
+  pictureSize:number = 1024*20;
+  //文件类型
+  pictureType:string = 'image/png,image/jpeg';
+  //图片上传后的url
+  uploadPicUrl:string = "";
 
   userInfo: any = {};//用户信息
 
@@ -219,10 +230,19 @@ export class AbstractComponent implements OnDestroy {
 
   /*页码改变*/
   indexChange(event) {
-    if (!this.isFirst) {
-      this.nzPageIndex = event;
-      this.queryBySearchParam();
-    }
+    console.info("页面变化进来了吗");
+    this.nzPageIndex = event;
+    this.queryBySearchParam();
+  }
+
+  /**
+   * 每页数据数量变化
+   * @param event
+   */
+  pageSizeChange(event) {
+    console.info("每页数据数量变化进来了吗");
+    this.nzPageSize = event;
+    this.queryBySearchParam();
   }
 
   /*数据改变*/
@@ -241,9 +261,8 @@ export class AbstractComponent implements OnDestroy {
           this.wzlNgZorroAntdMessage.error(rst.message);
         } else {
           this.wzlNgZorroAntdMessage.success('查询成功');
-          this.dataSet = rst.data;
-          this.totalRecords = rst.totalRecords;
-          console.log(rst.totalRecords);
+          this.dataSet = rst.listData;
+          this.totalRecords = rst.total;
         }
       } else {
         this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
@@ -405,4 +424,91 @@ export class AbstractComponent implements OnDestroy {
       method();
     }
   }
+
+  /**
+   * 保持永远只有一个图片
+   * @param file
+   */
+  beforeUpload = (file: UploadFile): boolean => {
+    this.fileList = this.fileList.concat(file);
+    if(this.fileList.length > 1){
+      this.fileList[0] = this.fileList[1];
+      this.fileList.pop();
+    }
+    //上传图片获取url
+    this.getUrlByUploadFile();
+    return false;
+  };
+
+  /**
+   * 上传图片获取图片url
+   */
+  getUrlByUploadFile(){
+    const formData = new FormData();
+    //拼接表单参数
+    this.fileList.forEach((file: any) => {
+      formData.append('file', file);
+    });
+    this.commonService.doHttpPostForm(urls.getUrlByUploadPic,formData).then(rst =>{
+      if (rst) {
+        if (rst.status != successStatus) {
+          this.wzlNgZorroAntdMessage.error(rst.message);
+        } else {
+          this.uploadPicUrl = rst.data;
+        }
+      } else {
+        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
+      }
+    }).catch(rtc => {
+      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+    }).finally( () => {
+    });
+  }
+
+  /**
+   * 上传文件时的状态胖段(暂时没用到)
+   * @param info
+   */
+  uploadHandleChange(info): void {
+    console.log("上传进来了吗");
+    if (info.file.status !== 'uploading') {
+        console.log("上传中");
+    }
+    if (info.file.status === 'done') {
+      console.log("上传成功");
+      //上传文件
+      this.getUrlByUploadFile();
+    } else if (info.file.status === 'error') {
+      console.log("上传报错");
+    }
+  }
+
+  /**
+   * 传进来url，根据url查询
+   * @param url
+   */
+  queryByUrl(url){
+    urls.queryUrl = url;
+    this.queryBySearchParam();
+  }
+  /*------------------------弹窗图片预览 begin-------------------------*/
+  //预览图片的url
+  previewImage: string | undefined = '';
+  //是否预览
+  previewVisible = false;
+  //预览的方法
+  handlePreview = (file: UploadFile) => {
+    this.previewImage = file.url || file.thumbUrl;
+    this.previewVisible = true;
+  };
+  /**
+   * 设置各种参数
+   */
+  showUploadList = {
+    showPreviewIcon: true,
+    showRemoveIcon: true,
+    hidePreviewIconInNonImage: true
+  };
+  /*------------------------弹窗图片预览 end-------------------------*/
+
 }

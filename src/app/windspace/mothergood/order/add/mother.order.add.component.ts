@@ -5,11 +5,11 @@ import {successStatus} from '../../../../common/service/base/common.config';
 import {UploadFile} from 'ng-zorro-antd';
 
 @Component({
-  selector: 'mother-good-add',
-  templateUrl: './mother.good.add.html',
-  styleUrls: ['./mother.good.add.css']
+  selector: 'mother-order-add',
+  templateUrl: './mother.order.add.html',
+  styleUrls: ['./mother.order.add.css']
 })
-export class MotherGoodAddComponent extends AbstractComponent{
+export class MotherOrderAddComponent extends AbstractComponent{
 
   /**
    * 商品对象

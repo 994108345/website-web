@@ -134,19 +134,36 @@ export const urls = {
   insertMotherGoodUrl:websiteUrl + "/unified/motherGoodServiceImpl/insertOne",
   //更新mothergood
   updateMotherGoodUrl:websiteUrl + "/unified/motherGoodServiceImpl/updateByRequest",
+  /*---------------------------------------------------motherorder-------------------------------------------------*/
+  //查询motherorder的列表
+  queryMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/insertOne",
+  //插入motherorder
+  insertMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/updateByRequest",
+  //更新motherorder
+  updateMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/queryByRrequest",
+  /*----------------------------------------------通用接口--------------------------------------------------------------*/
+  getUrlByUploadPic:websiteUrl + "/file/get_url_by_upload_pic",
 
 };
 
-/**
- * 条件页面的路由
- */
-export const appRouters = {
-  motherGoodMainRouter: "mothermenu/mothergood",
-}
-
 /*跳转菜单页面路径*/
 export const routers = {
+  /*网站的主页面*/
   homeRouter:"menu/index",
+  /*-------------------------mother_good--------------------------------------*/
+  /*mothreGood的主页面*/
+  motherGoodMainRouter: "mothermenu/mothergood",
+  /*mothreGood的add页面*/
+  motherGoodAddRouter: "mothermenu/mothergood/add",
+  /*mothreGood的update页面*/
+  motherGoodUpdateRouter: "mothermenu/mothergood/update",
+  /*-------------------------mother_order--------------------------------------*/
+  /*mothreOrder的主页面*/
+  motherOrderMainRouter: "mothermenu/motherorder",
+  /*mothreOrder的add页面*/
+  motherOrderAddRouter: "mothermenu/motherorder/add",
+  /*mothreOrder的update页面*/
+  motherOrderUpdateRouter: "mothermenu/motherorder/update",
 };
 
 //缓存key

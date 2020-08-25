@@ -6,6 +6,7 @@ import {NgModule} from '@angular/core';
 import {MotherGoodComponent} from './mother.good.component';
 import {MotherGoodMainComponent} from './main/mother.good.main.component';
 import {MotherGoodAddComponent} from './add/mother.good.add.component';
+import {MotherGoodUpdateComponent} from './update/mother.good.update.component';
 
 const indexRoutes: Routes = [
   {
@@ -15,6 +16,10 @@ const indexRoutes: Routes = [
       {
         path: 'add',
         component: MotherGoodAddComponent,
+      },
+      {
+        path: 'update',
+        component: MotherGoodUpdateComponent,
       },
       {
         path: '',

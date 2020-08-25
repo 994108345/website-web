@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
-import { MotherGoodComponent} from './mother.good.component';
+import { MotherOrderComponent} from './mother.order.component';
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
-import { MotherGoodRouting} from './mother.good.routing';
+import { MotherOrderRouting} from './mother.order.routing';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {QuillModule} from 'ngx-quill';
@@ -12,9 +12,10 @@ import {CommonService} from '../../../common/service/base/common.service';
 import {WzlCacheService} from '../../../common/service/wzlcache/wzlceche.service';
 import {WzlutilService} from '../../../common/service/wzlutil/wzlutil.service';
 import {WzlngzorroantdmessageService} from '../../../common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service';
-import {MotherGoodMainComponent} from './main/mother.good.main.component';
-import {MotherGoodAddComponent} from './add/mother.good.add.component';
-import {MotherGoodUpdateComponent} from './update/mother.good.update.component';
+import {MotherOrderMainComponent} from './main/mother.order.main.component';
+import {MotherOrderAddComponent} from './add/mother.order.add.component';
+import {MotherGoodModule} from '../good/mother.good.module';
+import {MotherGoodMainComponent} from '../good/main/mother.good.main.component';
 
 @NgModule({
   imports: [
@@ -33,16 +34,17 @@ import {MotherGoodUpdateComponent} from './update/mother.good.update.component';
     QuillModule,
     /*登陆测试模块*/
     LoginModule,
-    MotherGoodRouting,
+    MotherGoodModule,
+    MotherOrderRouting,
   ],
   exports:[
   ],
   declarations: [
-    MotherGoodComponent,MotherGoodMainComponent,MotherGoodAddComponent,MotherGoodUpdateComponent
+    MotherOrderComponent,MotherOrderMainComponent,MotherOrderAddComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,WzlngzorroantdmessageService,{ provide: NZ_I18N, useValue: zh_CN }],
 })
-export class MotherGoodModule {
+export class MotherOrderModule {
 
 }

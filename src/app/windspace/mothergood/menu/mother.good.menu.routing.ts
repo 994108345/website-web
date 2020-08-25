@@ -14,6 +14,10 @@ const menuRoutes: Routes = [
         path: 'mothergood',
         loadChildren: 'src/app/windspace/mothergood/good/mother.good.module#MotherGoodModule',
       },
+      {
+        path: 'motherorder',
+        loadChildren: 'src/app/windspace/mothergood/order/mother.order.module#MotherOrderModule',
+      },
     ]
   },
 ];
