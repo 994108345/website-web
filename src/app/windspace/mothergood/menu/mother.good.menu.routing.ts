@@ -11,12 +11,12 @@ const menuRoutes: Routes = [
     component: MotherGoodMenuMainComponent,
     children: [
       {
-        path: 'mothergood',
-        loadChildren: 'src/app/windspace/mothergood/good/mother.good.module#MotherGoodModule',
-      },
-      {
         path: 'motherorder',
         loadChildren: 'src/app/windspace/mothergood/order/mother.order.module#MotherOrderModule',
+      },
+      {
+        path: 'mothergood',
+        loadChildren: 'src/app/windspace/mothergood/good/mother.good.module#MotherGoodModule',
       },
     ]
   },

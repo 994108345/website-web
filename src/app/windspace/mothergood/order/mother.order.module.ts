@@ -34,7 +34,6 @@ import {MotherGoodMainComponent} from '../good/main/mother.good.main.component';
     QuillModule,
     /*登陆测试模块*/
     LoginModule,
-    MotherGoodModule,
     MotherOrderRouting,
   ],
   exports:[

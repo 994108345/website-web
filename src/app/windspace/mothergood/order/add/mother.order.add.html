@@ -1,77 +1,86 @@
 <div>
-  <div class="gutter-example">
-    <div nz-row nzGutter="16">
-      <br><br>
-      <div nz-col nzSpan="6" class="tab">
-        <span class="span-tab"><span style="color: red">*</span>选择商品:</span>
-      </div>
-      <div nz-col class="gutter-row" nzSpan="18">
-        <div class="gutter-box">
-        </div>
-      </div>
+  <nz-tabset>
+    <nz-tab nzTitle="选择商品">
+      <nz-table #rowSelectionTable [nzData]="dataSet"  [nzScroll]="{ y: '600px' }" [nzShowPagination] = false>
+        <thead>
+          <tr>
+            <th  nzWidth="80px">操作</th>
+            <th nzWidth="80px">id</th>
+            <th nzWidth="80px">商品名称</th>
+            <th nzWidth="80px">商品图片</th>
+            <th nzWidth="80px">商品状态</th>
+            <th nzWidth="80px">商品销量</th>
+            <th nzWidth="80px">商品品类</th>
+            <th nzWidth="80px">原价</th>
+            <th nzWidth="80px">折扣价</th>
+            <th nzWidth="180px">创建时间</th>
+            <th nzWidth="180px">最后修改时间</th>
+            <th nzWidth="180px">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of rowSelectionTable.data">
+            <td nzWidth="80px"><a (click)="addGoodToOrder(data)">添加商品</a></td>
+            <td nzWidth="80px">{{ data.id }}</td>
+            <td nzWidth="80px">{{ data.goodName }}</td>
+            <td nzWidth="80px"><img style="width: 50px;height: 50px;" src="{{data.goodPic }}"></td>
+            <td nzWidth="80px">{{ data.status }}</td>
+            <td nzWidth="80px">{{ data.saleCount }}</td>
+            <td nzWidth="80px">{{ data.category }}</td>
+            <td nzWidth="80px">{{ data.originPrice }}</td>
+            <td nzWidth="80px">{{ data.discountPrice }}</td>
+            <td nzWidth="180px">{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td nzWidth="180px">{{ data.lastModifiedTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td nzWidth="180px">{{ data.remark }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <nz-pagination [nzPageIndex]="totalRecords/nzPageSize" [nzTotal]="totalRecords" nzShowSizeChanger [nzPageSize]="nzPageSize"
+                     (nzPageIndexChange)="indexChange($event)" (nzPageSizeChange)="pageSizeChange($event)"
+      ></nz-pagination>
+      <button nz-button [nzType]="'primary'" (click)="queryBySearchParam()" style="margin-top: 16px" >查询</button>
+    </nz-tab>
 
-      <br><br>
-      <div nz-col nzSpan="6" class="tab">
-        <span class="span-tab"><span style="color: red">*</span>商品品类:</span>
+    <nz-tab nzTitle="订单信息"  (nzClick)="showData()">
+      <div [hidden] = isHidder>
+        <nz-table #editTable [nzData]="goodsList"  [nzScroll]="{ y: '600px' }" [nzShowPagination] = false>
+          <thead>
+          <tr>
+            <th  nzWidth="80px">操作</th>
+            <th nzWidth="80px">id</th>
+            <th nzWidth="80px">商品名称</th>
+            <th nzWidth="80px">商品图片</th>
+            <th nzWidth="80px">商品状态</th>
+            <th nzWidth="80px">商品销量</th>
+            <th nzWidth="80px">商品品类</th>
+            <th nzWidth="80px">原价</th>
+            <th nzWidth="80px">折扣价</th>
+            <th nzWidth="180px">创建时间</th>
+            <th nzWidth="180px">最后修改时间</th>
+            <th nzWidth="180px">备注</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of editTable.data">
+            <td nzWidth="80px"><a (click)="addGoodToOrder(data)">添加商品</a></td>
+            <td nzWidth="80px">{{ data.id }}</td>
+            <td nzWidth="80px">{{ data.goodName }}</td>
+            <td nzWidth="80px"><img style="width: 50px;height: 50px;" src="{{data.goodPic }}"></td>
+            <td nzWidth="80px">{{ data.status }}</td>
+            <td nzWidth="80px">{{ data.saleCount }}</td>
+            <td nzWidth="80px">{{ data.category }}</td>
+            <td nzWidth="80px">{{ data.originPrice }}</td>
+            <td nzWidth="80px">{{ data.discountPrice }}</td>
+            <td nzWidth="180px">{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td nzWidth="180px">{{ data.lastModifiedTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td nzWidth="180px">{{ data.remark }}</td>
+          </tr>
+          </tbody>
+        </nz-table>
       </div>
-      <div nz-col class="gutter-row" nzSpan="18">
-        <nz-select [(ngModel)]="motherGood.category" nzPlaceHolder="选择商品品类" style="width: 200px;" >
-          <nz-option nzValue="1" nzLabel="海鲜"></nz-option>
-        </nz-select>
-      </div>
+      <button nz-button [nzType]="'primary'" (click)="freshGoodsList()" style="margin-top: 16px" >查询</button>
+    </nz-tab>
 
-      <br><br>
-      <div nz-col nzSpan="6" class="tab">
-        <span class="span-tab"><span style="color: red">*</span>原价:</span>
-      </div>
-      <div nz-col class="gutter-row" nzSpan="18">
-        <div class="gutter-box">
-          <nz-input-number [(ngModel)]="motherGood.originPrice" [nzMin]="0" [nzMax]="10000" [nzStep]="0.01"></nz-input-number>
-        </div>
-      </div>
-
-      <br><br>
-      <div nz-col nzSpan="6" class="tab">
-        <span class="span-tab"><span style="color: red">*</span>折扣价:</span>
-      </div>
-      <div nz-col class="gutter-row" nzSpan="18">
-        <div class="gutter-box">
-          <nz-input-number [(ngModel)]="motherGood.discountPrice" [nzMin]="0" [nzMax]="10000" [nzStep]="0.01"></nz-input-number>
-        </div>
-      </div>
-
-      <br><br>
-      <div nz-col nzSpan="6">
-        <span class="span-tab"><span style="color: red">*</span>图片上传:</span>
-      </div>
-      <div nz-col nzSpan="18">
-        <nz-upload  [nzSize]="pictureSize" nzListType="picture-card" [nzFileType]="pictureType" [nzLimit]="1"
-                    [nzFileList]="fileList" [nzBeforeUpload]="beforeUpload">
-          <button nz-button><i nz-icon nzType="upload"></i>
-            <span>选择图片上传</span>
-          </button>
-        </nz-upload>
-      </div>
-
-
-
-      <br><br>
-      <div nz-col nzSpan="6" class="tab">
-        <span class="span-tab"><span style="color: red"></span>备注:</span>
-      </div>
-      <div nz-col class="gutter-row" nzSpan="18">
-        <div class="gutter-box">
-          <textarea nz-input [(ngModel)]="motherGood.remark" [nzAutosize]="{ minRows: 5, maxRows: 5 }" placeholder="请输入备注"></textarea>
-        </div>
-      </div>
-
-      <br><br>
-      <div nz-col nzSpan="6">
-      </div>
-      <div nz-col nzSpan="18">
-        <button nz-button [nzType]="'primary'" (click)="insertMotherGood()" style="margin-top: 16px" >提交</button>
-      </div>
-    </div>
-  </div>
+  </nz-tabset>
 </div>
 

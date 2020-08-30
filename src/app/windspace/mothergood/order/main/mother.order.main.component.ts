@@ -24,20 +24,21 @@ export class MotherOrderMainComponent extends AbstractComponent{
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector){
     super(injector);
-    //设置查询
-    urls.queryUrl = urls.queryMotherOrderUrl;
-    //默认查询
-    this.queryBySearchParam();
   }
 
   ngOnInit(){
-    console.log("MotherGoodMainComponent");
+    //设置查询
+    urls.queryUrl = urls.queryMotherOrderUrl;
+    //默认查询
+    //this.queryBySearchParam();
+    console.log("MotherOrderMainComponent");
   }
 
   /**
    * 跳转到新增页面
    */
   routerAdd(){
+    console.log("跳转：" + routers.motherOrderAddRouter);
     this.router.navigate([routers.motherOrderAddRouter]);
   }
 

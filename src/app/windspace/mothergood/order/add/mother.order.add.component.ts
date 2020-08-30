@@ -9,71 +9,100 @@ import {UploadFile} from 'ng-zorro-antd';
   templateUrl: './mother.order.add.html',
   styleUrls: ['./mother.order.add.css']
 })
-export class MotherOrderAddComponent extends AbstractComponent{
+export class MotherOrderAddComponent extends AbstractComponent {
 
   /**
-   * 商品对象
+   * 订单信息，里面装着商品的信息
+   * @type {Array}
    */
-  motherGood:any = {};
+  goodsList = [];
+  editCache: { [key: string]: { edit: boolean; data: any } } = {};
 
-  //上传文件
-  fileList: UploadFile[] = [];
+  /**
+   * 是否展示
+   * @type {boolean}
+   */
+  isHidder = true;
 
   /*初始化必须加，初始化基类的数据*/
-  constructor(public injector:Injector){
+  constructor(public injector: Injector) {
     super(injector);
   }
 
-  ngOnInit(){
-    console.log("MotherGoodMainComponent");
-    //初始化默认值
-    //品类默认选中海鲜
-    this.motherGood.category = "1";
-    this.motherGood.discountPrice = 0;
+  ngOnInit() {
+    console.log("MotherOrderAddComponent");
+    //设置查询
+    urls.queryUrl = urls.queryMotherGoodUrl;
+    //默认查询
+    this.queryBySearchParam();
+
+    const data = [];
+    for (let i = 0; i < 2; i++) {
+      data.push({
+        id: `${i}`,
+        goodName: `Edrward ${i}`,
+        status: 1,
+      });
+    }
+    this.goodsList = data;
   }
 
   /**
-   * 插入商品信息
+   * 跳转到新增页面
    */
-  insertMotherGood(){
-    if(this.wzlutilService.isBlank(this.motherGood.goodName)){
-        this.wzlNgZorroAntdMessage.warning("商品名称不能为空");
-        return;
-    }
-    if(this.wzlutilService.isBlank(this.motherGood.category)){
-      this.wzlNgZorroAntdMessage.warning("商品品类不能为空");
-      return;
-    }
-    if(!this.motherGood.originPrice){
-      this.wzlNgZorroAntdMessage.warning("原价不能为空");
-      return;
-    }
-    if(!this.motherGood.discountPrice){
-      this.wzlNgZorroAntdMessage.warning("折扣价不能为空");
-      return;
-    }
-    if(this.wzlutilService.isBlank(this.uploadPicUrl)){
-      this.wzlNgZorroAntdMessage.warning("上传图片url不能为空");
-      return;
-    }else{
-      this.motherGood.goodPic = this.uploadPicUrl;
-    }
+  routerAdd() {
+    console.log("跳转：" + routers.motherOrderAddRouter);
+    this.router.navigate([routers.motherOrderAddRouter]);
+  }
 
-    let condition = this.motherGood;
-    this.commonService.doHttpPost(urls.insertMotherGoodUrl,condition).then(rst =>{
-      if (rst) {
-        if (rst.status != successStatus) {
-          this.wzlNgZorroAntdMessage.error(rst.message);
-        } else {
-          this.wzlNgZorroAntdMessage.success("新增成功");
-          this.router.navigate([routers.motherGoodMainRouter]);
-        }
-      } else {
-        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
-      }
-    }).catch(rtc => {
-      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
-    }).finally( () => {
+  /**
+   * 跳到更新页面
+   * @param id
+   */
+  addGoodToOrder(data) {
+    let copyData = this.goodsList;
+    copyData.push(data);
+    this.goodsList = copyData;
+   //将list数据防止到editCache
+   //this.updateEditCache();
+   console.log(this.goodsList);
+  }
+
+  startEdit(id: string): void {
+    this.editCache[id].edit = true;
+  }
+
+  cancelEdit(id: string): void {
+    const index = this.goodsList.findIndex(item => item.id === id);
+    this.editCache[id] = {
+      data: { ...this.goodsList[index] },
+      edit: false
+    };
+  }
+
+  saveEdit(id: string): void {
+    const index = this.goodsList.findIndex(item => item.id === id);
+    Object.assign(this.goodsList[index], this.editCache[id].data);
+    this.editCache[id].edit = false;
+  }
+
+  updateEditCache(): void {
+    this.goodsList.forEach(item => {
+      this.editCache[item.id] = {
+        edit: false,
+        data: { ...item }
+      };
     });
+  }
+
+  freshGoodsList(){
+    this.goodsList.push({
+      id:11,goodName:"测试"
+    });
+    console.log(this.goodsList);
+  }
+
+  showData(){
+    this.isHidder = false;
   }
 }

@@ -136,11 +136,11 @@ export const urls = {
   updateMotherGoodUrl:websiteUrl + "/unified/motherGoodServiceImpl/updateByRequest",
   /*---------------------------------------------------motherorder-------------------------------------------------*/
   //查询motherorder的列表
-  queryMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/insertOne",
+  queryMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/queryByRrequest",
   //插入motherorder
-  insertMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/updateByRequest",
+  insertMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/insertOne",
   //更新motherorder
-  updateMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/queryByRrequest",
+  updateMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/updateByRequest",
   /*----------------------------------------------通用接口--------------------------------------------------------------*/
   getUrlByUploadPic:websiteUrl + "/file/get_url_by_upload_pic",
 
