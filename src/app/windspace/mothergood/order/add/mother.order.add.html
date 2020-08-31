@@ -41,46 +41,65 @@
       <button nz-button [nzType]="'primary'" (click)="queryBySearchParam()" style="margin-top: 16px" >查询</button>
     </nz-tab>
 
-    <nz-tab nzTitle="订单信息"  (nzClick)="showData()">
-      <div [hidden] = isHidder>
-        <nz-table #editTable [nzData]="goodsList"  [nzScroll]="{ y: '600px' }" [nzShowPagination] = false>
-          <thead>
-          <tr>
-            <th  nzWidth="80px">操作</th>
-            <th nzWidth="80px">id</th>
-            <th nzWidth="80px">商品名称</th>
-            <th nzWidth="80px">商品图片</th>
-            <th nzWidth="80px">商品状态</th>
-            <th nzWidth="80px">商品销量</th>
-            <th nzWidth="80px">商品品类</th>
-            <th nzWidth="80px">原价</th>
-            <th nzWidth="80px">折扣价</th>
-            <th nzWidth="180px">创建时间</th>
-            <th nzWidth="180px">最后修改时间</th>
-            <th nzWidth="180px">备注</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let data of editTable.data">
-            <td nzWidth="80px"><a (click)="addGoodToOrder(data)">添加商品</a></td>
-            <td nzWidth="80px">{{ data.id }}</td>
-            <td nzWidth="80px">{{ data.goodName }}</td>
-            <td nzWidth="80px"><img style="width: 50px;height: 50px;" src="{{data.goodPic }}"></td>
-            <td nzWidth="80px">{{ data.status }}</td>
-            <td nzWidth="80px">{{ data.saleCount }}</td>
-            <td nzWidth="80px">{{ data.category }}</td>
-            <td nzWidth="80px">{{ data.originPrice }}</td>
-            <td nzWidth="80px">{{ data.discountPrice }}</td>
-            <td nzWidth="180px">{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
-            <td nzWidth="180px">{{ data.lastModifiedTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
-            <td nzWidth="180px">{{ data.remark }}</td>
-          </tr>
-          </tbody>
-        </nz-table>
+    <nz-tab nzTitle="订单信息">
+      <nz-table #editRowTable nzBordered [nzData]="goodsList">
+        <thead>
+        <tr>
+          <th  nzWidth="80px">操作</th>
+          <th nzWidth="80px">id</th>
+          <th nzWidth="80px">商品名称</th>
+          <th nzWidth="80px">商品图片</th>
+          <th nzWidth="80px">商品数量</th>
+          <th nzWidth="80px">商品品类</th>
+          <th nzWidth="80px">原价</th>
+          <th nzWidth="80px">折扣价</th>
+          <th nzWidth="80px">商品总价</th>
+          <th nzWidth="180px">备注</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of editRowTable.data" class="editable-row">
+          <td nzWidth="120px"><a (click)="subOne(data)">删除</a> &nbsp;<a (click)="addGoodToOrder(data)">添加</a></td>
+          <td nzWidth="80px">{{ data.id }}</td>
+          <td nzWidth="80px">{{ data.goodName }}</td>
+          <td nzWidth="80px"><img style="width: 50px;height: 50px;" src="{{data.goodPic }}"></td>
+          <td nzWidth="80px">{{ data.goodCount }}</td>
+          <td nzWidth="80px">{{ data.category }}</td>
+          <td nzWidth="80px">{{ data.originPrice }}</td>
+          <td nzWidth="80px">{{ data.discountPrice }}</td>
+          <th nzWidth="80px">{{ data.goodCount * data.originPrice }}</th>
+          <td nzWidth="180px">{{ data.remark }}</td>
+        </tr>
+        </tbody>
+      </nz-table>
+      <h2>总价：{{allPrice}}</h2>
+      <div class="gutter-example">
+        <div nz-row nzGutter="16">
+
+          <div class="tab" nz-col nzSpan="6">
+            <span class="span-tab"><span style="color: red">*</span>收货人姓名:</span>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <input nz-input placeholder="填写收货人姓名" [(ngModel)]="motherOrder.userName"/>
+          </div>
+          <br><br><br>
+
+          <div class="tab" nz-col nzSpan="6">
+            <span class="span-tab"><span style="color: red">*</span>收货地址:</span>
+          </div>
+          <div nz-col class="gutter-row" nzSpan="18">
+            <input nz-input placeholder="填写收货地址:" [(ngModel)]="motherOrder.address"/>
+          </div>
+          <br><br><br>
+        </div>
       </div>
-      <button nz-button [nzType]="'primary'" (click)="freshGoodsList()" style="margin-top: 16px" >查询</button>
+      <button nz-button [nzType]="'primary'" (click)="submitOrder()" style="margin-top: 16px" >提交</button>
     </nz-tab>
 
   </nz-tabset>
 </div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="dialogCancel()" (nzOnOk)="dialogOk()">
+  <h2>确定提交订单吗？</h2>
+</nz-modal>
 

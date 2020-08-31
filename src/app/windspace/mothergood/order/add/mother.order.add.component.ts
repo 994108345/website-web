@@ -12,17 +12,22 @@ import {UploadFile} from 'ng-zorro-antd';
 export class MotherOrderAddComponent extends AbstractComponent {
 
   /**
+   * 订单对象
+   * @type {{}}
+   */
+  motherOrder:any = {};
+
+  /**
    * 订单信息，里面装着商品的信息
    * @type {Array}
    */
-  goodsList = [];
-  editCache: { [key: string]: { edit: boolean; data: any } } = {};
+  goodsList:any = [];
 
   /**
-   * 是否展示
-   * @type {boolean}
+   * 总价
+   * @type {number}
    */
-  isHidder = true;
+  allPrice:number = 0 ;
 
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector: Injector) {
@@ -35,16 +40,6 @@ export class MotherOrderAddComponent extends AbstractComponent {
     urls.queryUrl = urls.queryMotherGoodUrl;
     //默认查询
     this.queryBySearchParam();
-
-    const data = [];
-    for (let i = 0; i < 2; i++) {
-      data.push({
-        id: `${i}`,
-        goodName: `Edrward ${i}`,
-        status: 1,
-      });
-    }
-    this.goodsList = data;
   }
 
   /**
@@ -56,53 +51,113 @@ export class MotherOrderAddComponent extends AbstractComponent {
   }
 
   /**
-   * 跳到更新页面
+   * 添加数据
    * @param id
    */
   addGoodToOrder(data) {
-    let copyData = this.goodsList;
-    copyData.push(data);
-    this.goodsList = copyData;
-   //将list数据防止到editCache
-   //this.updateEditCache();
-   console.log(this.goodsList);
+    //循环数据，已存在则数量加1，不存在就直接添加到数据源中
+    for (let obj of this.goodsList) {
+      if(data.id === obj.id){
+        obj.goodCount = obj.goodCount + 1;
+        this.wzlNgZorroAntdMessage.info("添加商品:" + data.goodName + "成功");
+        this.caculateAllPrice();
+        return;
+      }
+    }
+    data.goodCount = 1;
+    this.goodsList = [ ...this.goodsList,data];
+    this.wzlNgZorroAntdMessage.info("添加商品:" + data.goodName + "成功");
+    this.caculateAllPrice();
   }
 
-  startEdit(id: string): void {
-    this.editCache[id].edit = true;
+  /**
+   * 计算总价
+   */
+  caculateAllPrice(){
+    let price = 0;
+    for (let obj of this.goodsList) {
+        price = price + obj.goodCount * obj.originPrice
+    }
+    this.allPrice = price;
   }
 
-  cancelEdit(id: string): void {
-    const index = this.goodsList.findIndex(item => item.id === id);
-    this.editCache[id] = {
-      data: { ...this.goodsList[index] },
-      edit: false
-    };
+  /**
+   * 数量减1
+   * @param data
+   */
+  subOne(data){
+    for(let obj of this.goodsList){
+      if(data.id === obj.id){
+        obj.goodCount = obj.goodCount - 1;
+        if(obj.goodCount === 0){
+          //如果数量已经删除到0则删除对应记录
+          this.removeGoodOrder(obj.id);
+        }
+        this.wzlNgZorroAntdMessage.info("删除商品:" + data.goodName + "成功");
+        this.caculateAllPrice();
+        return;
+      }
+
+    }
   }
 
-  saveEdit(id: string): void {
-    const index = this.goodsList.findIndex(item => item.id === id);
-    Object.assign(this.goodsList[index], this.editCache[id].data);
-    this.editCache[id].edit = false;
+  /**
+   * 删除数据
+   * @param data
+   */
+  removeGoodOrder(i) {
+    this.goodsList = this.goodsList.filter(d => d.id !== i);
   }
 
-  updateEditCache(): void {
-    this.goodsList.forEach(item => {
-      this.editCache[item.id] = {
-        edit: false,
-        data: { ...item }
-      };
+  /**
+   * 提交数据
+   */
+  submitOrder(){
+    if(this.wzlutilService.arrayIsNull(this.goodsList)){
+      this.wzlNgZorroAntdMessage.warning("商品不能为空");
+      return ;
+    }
+    if(this.wzlutilService.isBlank(this.motherOrder.userName)){
+      this.wzlNgZorroAntdMessage.warning("用户名不能为空");
+      return ;
+    }
+    if(this.wzlutilService.isBlank(this.motherOrder.address)){
+      this.wzlNgZorroAntdMessage.warning("收获地址不能为空");
+      return ;
+    }
+    this.showDialog();
+  }
+
+
+  addOrder(){
+    //订单总价
+    this.motherOrder.allPrice = this.allPrice;
+    let condition = {motherOrderGoodRes:this.goodsList,order:this.motherOrder};
+    this.commonService.doHttpPost(urls.insertMotherOrderUrl,condition).then(rst =>{
+      if (rst) {
+        if (rst.status != successStatus) {
+          this.wzlNgZorroAntdMessage.error(rst.message);
+        } else {
+          this.wzlNgZorroAntdMessage.success("新增成功");
+          this.router.navigate([routers.motherOrderMainRouter]);
+        }
+      } else {
+        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
+      }
+    }).catch(rtc => {
+      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+    }).finally( () => {
     });
   }
 
-  freshGoodsList(){
-    this.goodsList.push({
-      id:11,goodName:"测试"
-    });
-    console.log(this.goodsList);
+  /**
+   * 重写弹框的确定放啊发
+   * @param addOrder
+   */
+  dialogOk(){
+    super.dialogOk();
+    this.addOrder();
   }
 
-  showData(){
-    this.isHidder = false;
-  }
+
 }

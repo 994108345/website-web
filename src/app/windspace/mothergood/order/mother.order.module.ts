@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {Component, NgModule} from '@angular/core';
 import { MotherOrderComponent} from './mother.order.component';
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import { MotherOrderRouting} from './mother.order.routing';
@@ -16,6 +16,7 @@ import {MotherOrderMainComponent} from './main/mother.order.main.component';
 import {MotherOrderAddComponent} from './add/mother.order.add.component';
 import {MotherGoodModule} from '../good/mother.good.module';
 import {MotherGoodMainComponent} from '../good/main/mother.good.main.component';
+import {NzListModule} from "ng-zorro-antd/list";
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import {MotherGoodMainComponent} from '../good/main/mother.good.main.component';
     QuillModule,
     /*登陆测试模块*/
     LoginModule,
+    NzListModule,
     MotherOrderRouting,
   ],
   exports:[

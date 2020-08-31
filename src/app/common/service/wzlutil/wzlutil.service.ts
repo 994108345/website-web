@@ -107,5 +107,34 @@ export class WzlutilService {
     str = str.replace(strSpecialChar.new_line,"<br>");
     winSave.document.write(str);
   }
+
+  /*------------------------------------集合操作----------------------------------------*/
+  /**
+   *  数组是否为空
+   * @param data
+   * @returns {boolean}
+   */
+  arrayIsNull(data){
+    let result = false;
+    if(data === undefined){
+      return true;
+    }
+    if(data == null){
+      return true;
+    }
+    if(data.length == 0){
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * 数据是否不为空
+   * @param data
+   * @returns {boolean}
+   */
+  arrayIsNotNull(data){
+    return !this.arrayIsNull(data);
+  }
 }
 

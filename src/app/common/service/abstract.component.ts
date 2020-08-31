@@ -66,6 +66,10 @@ export class AbstractComponent implements OnDestroy {
   inputValue = '';
   inputElement: ElementRef;
 
+  /*-----------------------对话框-------------------------------*/
+  //对话框是否显示
+  isVisible = false;
+
   /**
    * 结果图片的url
    */
@@ -511,4 +515,27 @@ export class AbstractComponent implements OnDestroy {
   };
   /*------------------------弹窗图片预览 end-------------------------*/
 
+
+  /*----------------------------对话框------------------------------------*/
+
+  /**
+   * 展示对话框
+   */
+  showDialog(){
+    this.isVisible = true;
+  }
+  /**
+   * 对话框点确定
+   * @param mothod
+   */
+  dialogOk(){
+    this.isVisible = false;
+  }
+
+  /**
+   * 对话框点取消
+   */
+  dialogCancel(){
+    this.isVisible = false;
+  }
 }
