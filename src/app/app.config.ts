@@ -141,6 +141,9 @@ export const urls = {
   insertMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/insertOne",
   //更新motherorder
   updateMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/updateByRequest",
+  //查询订单的详情信息
+  queryMotherOrderInfoUrl:websiteUrl + "/unified/motherOrderServiceImpl/queryOrderInfoByRequest",
+
   /*----------------------------------------------通用接口--------------------------------------------------------------*/
   getUrlByUploadPic:websiteUrl + "/file/get_url_by_upload_pic",
 

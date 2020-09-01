@@ -2,6 +2,7 @@ import {Component, EventEmitter, Injector, Output} from '@angular/core';
 import {AbstractComponent} from '../../../../common/service/abstract.component';
 import {routers, urls} from '../../../../app.config';
 import {successStatus} from '../../../../common/service/base/common.config';
+import {mother_order_settlement_status_conf, mother_order_status_conf, mother_order_sub_status_conf} from '../mother.order.config';
 
 @Component({
   selector: 'mother-order-main',
@@ -21,6 +22,19 @@ export class MotherOrderMainComponent extends AbstractComponent{
    */
   goodQueryRequest:any = {};
 
+  /**
+   * 订单主状态
+   */
+  motherOrderStatus = mother_order_status_conf;
+  /**
+   * 订单子状态
+   */
+  motherOrderSubStatus = mother_order_sub_status_conf;
+  /**
+   * 订单结算状态
+   */
+  motherOrderSettlementStatus = mother_order_settlement_status_conf;
+
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector){
     super(injector);
@@ -30,7 +44,7 @@ export class MotherOrderMainComponent extends AbstractComponent{
     //设置查询
     urls.queryUrl = urls.queryMotherOrderUrl;
     //默认查询
-    //this.queryBySearchParam();
+    this.queryBySearchParam();
     console.log("MotherOrderMainComponent");
   }
 
@@ -47,11 +61,8 @@ export class MotherOrderMainComponent extends AbstractComponent{
    * @param id
    */
   routerUpdate(data){
-    /**
-     * 设置缓存值
-     */
-    this.wzlCache.setCache("motherGoodId",data.id);
-    this.wzlCache.setCache("goodPic",data.goodPic);
+    //设置缓存值
+    this.wzlCache.setCache("motherOrderId",data.orderId);
     this.router.navigate([routers.motherOrderUpdateRouter]);
   }
 }

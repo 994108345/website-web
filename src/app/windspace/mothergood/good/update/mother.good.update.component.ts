@@ -8,7 +8,7 @@ import {UploadFile, UploadFileStatus} from 'ng-zorro-antd';
 @Component({
   selector: 'mother-good-update',
   templateUrl: './mother.good.update.html',
-  styleUrls: ['./mother.good.addupdate.css']
+  styleUrls: ['./mother.good.update.css']
 })
 export class MotherGoodUpdateComponent extends AbstractComponent{
 

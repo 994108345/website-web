@@ -76,7 +76,8 @@ export class MotherOrderAddComponent extends AbstractComponent {
   caculateAllPrice(){
     let price = 0;
     for (let obj of this.goodsList) {
-        price = price + obj.goodCount * obj.originPrice
+      let goodAllPrice = this.wzlutilService.accMul(obj.goodCount , obj.originPrice);
+      price = this.wzlutilService.accAdd(price, goodAllPrice);
     }
     this.allPrice = price;
   }
@@ -132,6 +133,14 @@ export class MotherOrderAddComponent extends AbstractComponent {
   addOrder(){
     //订单总价
     this.motherOrder.allPrice = this.allPrice;
+    //整理后端需要的数据
+    for(let obj of this.goodsList){
+      obj.goodOriginPrice = obj.originPrice;
+      obj.goodDiscountPrice = obj.originPrice;
+      obj.goodId = obj.id;
+      obj.goodSettlementPrice = obj.originPrice;
+      obj.allPrice = this.wzlutilService.accMul(obj.originPrice,obj.goodCount);
+    }
     let condition = {motherOrderGoodRes:this.goodsList,order:this.motherOrder};
     this.commonService.doHttpPost(urls.insertMotherOrderUrl,condition).then(rst =>{
       if (rst) {

@@ -6,6 +6,7 @@ import {NgModule} from '@angular/core';
 import {MotherOrderComponent} from './mother.order.component';
 import {MotherOrderMainComponent} from './main/mother.order.main.component';
 import {MotherOrderAddComponent} from './add/mother.order.add.component';
+import {MotherOrderUpdateComponent} from './update/mother.order.update.component';
 
 const indexRoutes: Routes = [
   {
@@ -15,6 +16,10 @@ const indexRoutes: Routes = [
       {
         path: 'add',
         component: MotherOrderAddComponent,
+      },
+      {
+        path: 'update',
+        component: MotherOrderUpdateComponent,
       },
       {
         path: '',

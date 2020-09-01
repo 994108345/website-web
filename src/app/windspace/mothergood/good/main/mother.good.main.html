@@ -1,5 +1,9 @@
 <div>
   <button nz-button [nzType]="'primary'" (click)="addMotherGood()" style="margin-top: 16px" >新增</button>
+  <div style="float:right;">
+    <button nz-button [nzType]="'primary'" (click)="queryBySearchParam()" style="margin-top: 16px;margin-right: 5px;" >查询</button>
+    <input nz-input placeholder="填写商品名称。" [(ngModel)]="nzSearchParams.goodName" style="width: 200px" [maxLength]="20" nzsize="50"/>
+  </div >
   <nz-table #rowSelectionTable [nzData]="dataSet"  [nzScroll]="{ y: '600px' }" [nzShowPagination] = false>
     <thead>
       <tr>

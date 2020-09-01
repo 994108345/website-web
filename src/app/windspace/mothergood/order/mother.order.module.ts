@@ -17,6 +17,7 @@ import {MotherOrderAddComponent} from './add/mother.order.add.component';
 import {MotherGoodModule} from '../good/mother.good.module';
 import {MotherGoodMainComponent} from '../good/main/mother.good.main.component';
 import {NzListModule} from "ng-zorro-antd/list";
+import {MotherOrderUpdateComponent} from './update/mother.order.update.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,7 @@ import {NzListModule} from "ng-zorro-antd/list";
   exports:[
   ],
   declarations: [
-    MotherOrderComponent,MotherOrderMainComponent,MotherOrderAddComponent
+    MotherOrderComponent,MotherOrderMainComponent,MotherOrderAddComponent,MotherOrderUpdateComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlutilService,WzlngzorroantdmessageService,{ provide: NZ_I18N, useValue: zh_CN }],
