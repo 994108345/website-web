@@ -69,7 +69,9 @@ export class AbstractComponent implements OnDestroy {
   /*-----------------------对话框-------------------------------*/
   //对话框是否显示
   isVisible = false;
-
+  /*-------------------------抽屉--------------------------------*/
+  //抽屉是否显示
+  drawerIsVisible = false;
   /**
    * 结果图片的url
    */
@@ -217,7 +219,6 @@ export class AbstractComponent implements OnDestroy {
    * 设置分页参数
    */
   ngZorroSearParam() {
-    this.nzSearchParams = this.order;
     this.nzSearchParams.curPage = this.nzPageIndex;
     this.nzSearchParams.pageSize = this.nzPageSize;
     this.nzSearchParams.isPaging = true;
@@ -267,6 +268,8 @@ export class AbstractComponent implements OnDestroy {
           this.wzlNgZorroAntdMessage.success('查询成功');
           this.dataSet = rst.listData;
           this.totalRecords = rst.total;
+          //调用查询方法钩子
+          this.queryMethodParam();
         }
       } else {
         this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
@@ -278,6 +281,106 @@ export class AbstractComponent implements OnDestroy {
     });
   }
 
+  /**
+   * 插入方法钩子
+   */
+  queryMethodParam(){
+
+  }
+
+  /**
+   * 通用插入方法
+   */
+  insertBySearchParam() {
+    let condition = this.ngZorroSearParam();
+    this.commonService.doHttpPost(urls.insertUrl, condition).then(rst => {
+      if (rst) {
+        if (rst.status != successStatus) {
+          this.wzlNgZorroAntdMessage.error(rst.message);
+        } else {
+          this.wzlNgZorroAntdMessage.success('插入成功');
+          //调用插入方法钩子
+          this.insertMethodParam();
+        }
+      } else {
+        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
+      }
+    }).catch(rtc => {
+      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+    }).finally( () => {
+      this.isFirst = false;
+    });
+  }
+
+  /**
+   * 插入方法钩子
+   */
+  insertMethodParam(){
+
+  }
+
+  /**
+   * 通用更新方法
+   */
+  updateBySearchParam() {
+    let condition = this.ngZorroSearParam();
+    this.commonService.doHttpPost(urls.updateUrl, condition).then(rst => {
+      if (rst) {
+        if (rst.status != successStatus) {
+          this.wzlNgZorroAntdMessage.error(rst.message);
+        } else {
+          this.wzlNgZorroAntdMessage.success('更新成功');
+          //更新方法的钩子
+          this.updateMethodParam();
+        }
+      } else {
+        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
+      }
+    }).catch(rtc => {
+      console.log("请求出现异常：" + rtc);
+      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+    }).finally( () => {
+      this.isFirst = false;
+    });
+  }
+
+  /**
+   * 更新方法钩子
+   */
+  updateMethodParam(){
+
+  }
+
+  /**
+   * 通用删除方法
+   */
+  deleteBySearchParam() {
+    let condition = this.ngZorroSearParam();
+    this.commonService.doHttpPost(urls.deleteUrl, condition).then(rst => {
+      if (rst) {
+        if (rst.status != successStatus) {
+          this.wzlNgZorroAntdMessage.error(rst.message);
+        } else {
+          this.wzlNgZorroAntdMessage.success('删除成功');
+          //删除方法钩子
+          this.deleteMethodParam();
+        }
+      } else {
+        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
+      }
+    }).catch(rtc => {
+      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+    }).finally( () => {
+      this.isFirst = false;
+    });
+  }
+
+  /**
+   * 删除方法钩子
+   */
+  deleteMethodParam(){
+
+  }
   /*单选框*/
   currentPageDataChange($event: Array<{ id: number, name: string; age: number; address: string; disabled: boolean }>): void {
     this.selectData = $event;
@@ -537,5 +640,17 @@ export class AbstractComponent implements OnDestroy {
    */
   dialogCancel(){
     this.isVisible = false;
+  }
+/*--------------------------------抽屉-------------------------------*/
+  //开启抽屉
+  openDrawer(): void {
+    this.drawerIsVisible = true;
+  }
+
+  /**
+   * 关闭抽屉
+   */
+  closeDrawer(): void {
+    this.drawerIsVisible = false;
   }
 }

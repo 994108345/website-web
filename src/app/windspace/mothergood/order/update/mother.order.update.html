@@ -1,5 +1,25 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a routerLink="/mothermenu">主页</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    <a routerLink="/mothermenu/motherorder">订单主页</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    <a>更新订单</a>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
 <div>
   <nz-card style="width:100%;" nzTitle="订单信息">
+    <div style="width: 100%">
+      <button nz-button [nzType]="'primary'" (click)="orderStatusChange(0)" style="margin-top: 16px;margin-right: 5px;" >创建商品</button>
+      <button nz-button [nzType]="'primary'" (click)="orderStatusChange(10)" style="margin-top: 16px;margin-right: 5px;" >发送商家</button>
+      <button nz-button [nzType]="'primary'" (click)="orderStatusChange(20)" style="margin-top: 16px;margin-right: 5px;" >商家发货</button>
+      <button nz-button [nzType]="'primary'" (click)="orderStatusChange(30)" style="margin-top: 16px;margin-right: 5px;" >用户收到</button>
+      <button nz-button [nzType]="'primary'" (click)="orderStatusChange(40)" style="margin-top: 16px;margin-right: 5px;" >订单异常</button>
+
+      <button nz-button [nzType]="'primary'" (click)="openDrawer()" style="margin-top: 16px;margin-right: 5px;float: right" >订单信息导出</button>
+    </div>
     <div class="gutter-example">
       <div nz-row nzGutter="16">
         <div nz-col nzSpan="6" class="tab">
@@ -122,33 +142,84 @@
     </div>
   </nz-card>
   <nz-card style="width:100%;" nzTitle="商品信息">
+    <button nz-button [nzType]="'primary'" (click)="showDialog()" style="margin-top: 16px;margin-right: 5px;" >添加商品</button>
     <nz-table #rowSelectionTable nzBordered [nzData]="motherOrderGoods"   [nzShowPagination] = false [nzScroll]="{ x:'1000px'}">
       <thead>
       <tr>
         <th nzWidth="80px">操作</th>
-        <th nzWidth="80px">商品id</th>
         <th nzWidth="150px">商品名称</th>
+        <th nzWidth="120px">商品数量</th>
         <th nzWidth="120px">商品图片</th>
         <th nzWidth="120px">商品原价</th>
         <th nzWidth="120px">优惠价</th>
         <th nzWidth="120px">结算价格</th>
         <th nzWidth="120px">使用价格类型</th>
-        <th nzWidth="120px">商品数量</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let data of rowSelectionTable.data">
-        <td nzWidth="80px" ><a (click)="routerUpdate(data)">删除</a>#nbsp;<a (click)="">添加</a></td>
-        <td nzWidth="80px" >{{ data.id }}</td>
+        <td nzWidth="80px" ><a (click)="subOne(data)">删除</a>&nbsp;<a (click)="addGoodToOrder(data)">添加</a></td>
         <td nzWidth="150px">{{ data.goodName }}</td>
+        <td nzWidth="120px">{{ data.goodCount }}</td>
         <td nzWidth="120px"><img style="width: 50px;height: 50px;" src="{{data.goodPic }}"></td>
         <td nzWidth="120px">{{ data.originPrice }}</td>
         <td nzWidth="120px">{{ data.discountPrice }}</td>
         <td nzWidth="120px">{{ data.goodSettlementPrice }}</td>
         <td nzWidth="120px">{{ statusChange(data.goodUsePriceType,goodUsePriceType)}}</td>
-        <td nzWidth="120px">{{ data.goodCount }}</td>
       </tr>
       </tbody>
     </nz-table>
   </nz-card>
 </div>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="添加商品" (nzOnCancel)="dialogCancel()" (nzOnOk)="dialogOk()" nzWidth="100%">
+  <button nz-button [nzType]="'primary'" (click)="queryBySearchParam()" style="margin-top: 16px;margin-right: 5px;" >添加商品</button>
+  <input nz-input placeholder="商品名称" [(ngModel)]="nzSearchParams.goodName" style="width: 200px" [maxLength]="20" nzsize="50"/>
+  <nz-table #goodsTable [nzData]="dataSet"  [nzScroll]="{ y: '600px' }" [nzShowPagination] = false>
+    <thead>
+    <tr>
+      <th  nzWidth="80px">操作</th>
+      <th nzWidth="80px">id</th>
+      <th nzWidth="80px">商品名称</th>
+      <th nzWidth="80px">商品图片</th>
+      <th nzWidth="80px">商品状态</th>
+      <th nzWidth="80px">商品销量</th>
+      <th nzWidth="80px">商品品类</th>
+      <th nzWidth="80px">原价</th>
+      <th nzWidth="80px">折扣价</th>
+      <th nzWidth="180px">创建时间</th>
+      <th nzWidth="180px">最后修改时间</th>
+      <th nzWidth="180px">备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of goodsTable.data">
+      <td nzWidth="80px"><a (click)="addGoodToOrder(data)">添加商品</a></td>
+      <td nzWidth="80px">{{ data.id }}</td>
+      <td nzWidth="80px">{{ data.goodName }}</td>
+      <td nzWidth="80px"><img style="width: 50px;height: 50px;" src="{{data.goodPic }}"></td>
+      <td nzWidth="80px">{{ data.status }}</td>
+      <td nzWidth="80px">{{ data.saleCount }}</td>
+      <td nzWidth="80px">{{ data.category }}</td>
+      <td nzWidth="80px">{{ data.originPrice }}</td>
+      <td nzWidth="80px">{{ data.discountPrice }}</td>
+      <td nzWidth="180px">{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td nzWidth="180px">{{ data.lastModifiedTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td nzWidth="180px">{{ data.remark }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+  <nz-pagination [nzPageIndex]="totalRecords/nzPageSize" [nzTotal]="totalRecords" nzShowSizeChanger [nzPageSize]="nzPageSize"
+                 (nzPageIndexChange)="indexChange($event)" (nzPageSizeChange)="pageSizeChange($event)"
+  ></nz-pagination>
+</nz-modal>
+<button nz-button [nzType]="'primary'" (click)="saveOrderInfo()" style="margin-top: 16px;margin-right: 5px;" >保存</button>
+<button nz-button [nzType]="'primary'" (click)="cancelOrderInfo()" style="margin-top: 16px;margin-right: 5px;" >取消</button>
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="drawerIsVisible"
+  nzPlacement="right"
+  nzTitle="导出的文案"
+  (nzOnClose)="closeDrawer()"
+>
+  <P class="content">{{exportText}}</P>
+</nz-drawer>

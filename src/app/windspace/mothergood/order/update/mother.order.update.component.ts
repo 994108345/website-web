@@ -2,7 +2,6 @@ import {Component, EventEmitter, Injector, Output} from '@angular/core';
 import {AbstractComponent} from '../../../../common/service/abstract.component';
 import { routers, urls} from '../../../../app.config';
 import {successStatus} from '../../../../common/service/base/common.config';
-import {UploadFile, UploadFileStatus} from 'ng-zorro-antd';
 import {
   good_use_price_type_conf,
   mother_order_settlement_status_conf,
@@ -49,6 +48,11 @@ export class MotherOrderUpdateComponent extends AbstractComponent{
    */
   goodUsePriceType = good_use_price_type_conf;
 
+  /**
+   * 导出文本
+   */
+  exportText:string = "";
+
   /*初始化必须加，初始化基类的数据*/
   constructor(public injector:Injector){
     super(injector);
@@ -56,9 +60,7 @@ export class MotherOrderUpdateComponent extends AbstractComponent{
 
   ngOnInit(){
     console.log("MotherOrderUpdateComponent");
-    /**
-     * 获取缓存值
-     */
+    //获取缓存值
     let orderId = this.wzlCache.getCache("motherOrderId");
     //设置查询参数
     this.queryOrderInfoById(orderId);
@@ -110,6 +112,7 @@ export class MotherOrderUpdateComponent extends AbstractComponent{
       }
     }).catch(rtc => {
       this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+      console.log("请求出现异常：" + rtc);
     }).finally( () => {
       this.isFirst = false;
     });
@@ -121,7 +124,7 @@ export class MotherOrderUpdateComponent extends AbstractComponent{
    */
   addGoodToOrder(data) {
     //循环数据，已存在则数量加1，不存在就直接添加到数据源中
-    for (let obj of this.goodsList) {
+    for (let obj of this.motherOrderGoods) {
       if(data.id === obj.id){
         obj.goodCount = obj.goodCount + 1;
         this.wzlNgZorroAntdMessage.info("添加商品:" + data.goodName + "成功");
@@ -130,7 +133,9 @@ export class MotherOrderUpdateComponent extends AbstractComponent{
       }
     }
     data.goodCount = 1;
-    this.goodsList = [ ...this.goodsList,data];
+    data.goodSettlementPrice = data.originPrice;
+    data.goodUsePriceType = 1;
+    this.motherOrderGoods = [ ...this.motherOrderGoods,data];
     this.wzlNgZorroAntdMessage.info("添加商品:" + data.goodName + "成功");
     this.caculateAllPrice();
   }
@@ -140,11 +145,13 @@ export class MotherOrderUpdateComponent extends AbstractComponent{
    */
   caculateAllPrice(){
     let price = 0;
-    for (let obj of this.goodsList) {
+    for (let obj of this.motherOrderGoods) {
       let goodAllPrice = this.wzlutilService.accMul(obj.goodCount , obj.originPrice);
       price = this.wzlutilService.accAdd(price, goodAllPrice);
     }
-    this.allPrice = price;
+    price = this.wzlutilService.accSub(price,this.motherOrder.couponAllPrice);
+    this.motherOrder.allPrice = price;
+    this.motherOrder.settlementPrice = price;
   }
 
   /**
@@ -152,7 +159,7 @@ export class MotherOrderUpdateComponent extends AbstractComponent{
    * @param data
    */
   subOne(data){
-    for(let obj of this.goodsList){
+    for(let obj of this.motherOrderGoods){
       if(data.id === obj.id){
         obj.goodCount = obj.goodCount - 1;
         if(obj.goodCount === 0){
@@ -173,6 +180,91 @@ export class MotherOrderUpdateComponent extends AbstractComponent{
    */
   removeGoodOrder(i) {
     this.motherOrderGoods = this.motherOrderGoods.filter(d => d.id !== i);
+  }
+
+  /**
+   * 展示弹窗并且查询
+   */
+  showDialog() {
+    super.showDialog();
+    urls.queryUrl = urls.queryMotherGoodUrl;
+    //默认查询
+    this.queryBySearchParam();
+  }
+
+  /**
+   * 保存订单
+   */
+  saveOrderInfo(){
+    if(this.motherOrderInfo.order == null){
+      this.wzlNgZorroAntdMessage.warning("订单信息不能为空");
+    }
+    if(this.wzlutilService.arrayIsNull(this.motherOrderInfo.goodList)){
+      this.wzlNgZorroAntdMessage.warning("商品信息列表不能为空");
+    }
+    urls.updateUrl = urls.updateMotherOrderUrl;
+    this.nzSearchParams = {order:this.motherOrder,goodList:this.motherOrderGoods};
+    this.updateBySearchParam();
+    //跳转到主页
+    this.router.navigate([routers.motherOrderMainRouter]);
+  }
+
+  /**
+   * 取消订单
+   */
+  cancelOrderInfo(){
+    this.router.navigate([routers.motherOrderMainRouter]);
+  }
+
+  /**
+   * 更新指定的订单状态
+   * @param status
+   */
+  orderStatusChange(status){
+    urls.updateUrl = urls.updateMotherOrderByOrderIdUrl;
+    this.nzSearchParams = {status:status,orderId:this.motherOrder.orderId};
+    let orderId = this.motherOrder.orderId;
+    this.updateBySearchParam();
+  }
+
+  /**
+   * 重写更新方法钩子
+   */
+  updateMethodParam() {
+    super.updateMethodParam();
+    //重新查询界面
+    this.queryOrderInfoById(this.motherOrder.orderId);
+  }
+
+  /**
+   * 打开抽屉
+   */
+  openDrawer(){
+    super.openDrawer();
+    this.exportOrderText();
+  }
+  /**
+   * 导出订单信息
+   * @param id
+   */
+  exportOrderText() {
+    let condition = {orderIds:[this.motherOrder.orderId]};
+    this.commonService.doHttpPost(urls.exportOrderTextUrl,condition).then(rst => {
+      if (rst) {
+        if (rst.status != successStatus) {
+          this.wzlNgZorroAntdMessage.error(rst.message);
+        } else {
+          this.exportText = rst.data;
+        }
+      } else {
+        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
+      }
+    }).catch(rtc => {
+      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+      console.log("请求出现异常：" + rtc);
+    }).finally( () => {
+      this.isFirst = false;
+    });
   }
 
 }

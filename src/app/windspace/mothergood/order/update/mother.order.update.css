@@ -1,12 +1,6 @@
 .tab{
   text-align: right;
 }
-
-/*i[nz-icon] {
-  font-size: 32px;
-  color: #999;
+.content {
+  white-space: pre-line;
 }
-.ant-upload-text {
-  margin-top: 8px;
-  color: #666;
-}*/

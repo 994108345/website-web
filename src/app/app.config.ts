@@ -18,9 +18,9 @@ export const baseConfig = {
 export const urls = {
   /*-----------------------------------基础路径-------------------------------*/
   // 新增url
-  addUrl:"",
+  insertUrl:"",
   // 修改url
-  editUrl:"",
+  updateUrl:"",
   // 删除url
   deleteUrl:"",
   // 查询url
@@ -137,12 +137,16 @@ export const urls = {
   /*---------------------------------------------------motherorder-------------------------------------------------*/
   //查询motherorder的列表
   queryMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/queryByRrequest",
+  //查询订单的详情信息
+  queryMotherOrderInfoUrl:websiteUrl + "/unified/motherOrderServiceImpl/queryOrderInfoByRequest",
   //插入motherorder
   insertMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/insertOne",
   //更新motherorder
   updateMotherOrderUrl:websiteUrl + "/unified/motherOrderServiceImpl/updateByRequest",
-  //查询订单的详情信息
-  queryMotherOrderInfoUrl:websiteUrl + "/unified/motherOrderServiceImpl/queryOrderInfoByRequest",
+  //根据订单号更新motherorder
+  updateMotherOrderByOrderIdUrl:websiteUrl + "/unified/motherOrderServiceImpl/updateByOrderId ",
+  //导出订单信息文案
+  exportOrderTextUrl:websiteUrl + "/unified/motherOrderExportServiceImpl/exportText ",
 
   /*----------------------------------------------通用接口--------------------------------------------------------------*/
   getUrlByUploadPic:websiteUrl + "/file/get_url_by_upload_pic",
