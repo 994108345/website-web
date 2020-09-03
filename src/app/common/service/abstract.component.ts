@@ -41,7 +41,7 @@ export class AbstractComponent implements OnDestroy {
 
   userInfo: any = {};//用户信息
 
-  /*ng-zorro*/
+  /*ng-zorro------------------------------------b表单--*/
   nzPageIndex: number = 1;//当前页码
   nzSearchParams: any = {};//请求参数
   nzPageSize: number = 10;//一页多少条数据
@@ -55,10 +55,11 @@ export class AbstractComponent implements OnDestroy {
 
   /*-----------------单选框--------------------------*/
   isAllDisplayDataChecked = false;
-  isOperating = false;
   isIndeterminate = false;
-  listOfAllData = [];
-  mapOfCheckedId = {};
+  listOfDisplayData: any[] = [];
+  listOfAllData: any[] = [];
+  mapOfCheckedId: { [key: string]: boolean } = {};
+  isOperating = false;
   numberOfChecked = 0;
   /*===================tag================================*/
   tags = [  ];
@@ -270,6 +271,8 @@ export class AbstractComponent implements OnDestroy {
           this.totalRecords = rst.total;
           //调用查询方法钩子
           this.queryMethodParam();
+          //将数据复制给选择器使用的数据
+          this.listOfDisplayData = this.dataSet;
         }
       } else {
         this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
@@ -382,21 +385,44 @@ export class AbstractComponent implements OnDestroy {
 
   }
   /*单选框*/
-  currentPageDataChange($event: Array<{ id: number, name: string; age: number; address: string; disabled: boolean }>): void {
-    this.selectData = $event;
+  currentPageDataChange($event: Array<{ id: number; name: string; age: number; address: string }>): void {
+    this.listOfDisplayData = $event;
     this.refreshStatus();
   }
 
   refreshStatus(): void {
-    this.isAllDisplayDataChecked = this.selectData.filter(item => !item.disabled).every(item => this.mapOfCheckedId[ item.id ]);
-    this.isIndeterminate = this.selectData.filter(item => !item.disabled).some(item => this.mapOfCheckedId[ item.id ]) && !this.isAllDisplayDataChecked;
-    this.numberOfChecked = this.listOfAllData.filter(item => this.mapOfCheckedId[ item.id ]).length;
+    this.isAllDisplayDataChecked = this.listOfDisplayData.every(item => this.mapOfCheckedId[item.id]);
+    this.isIndeterminate =
+      this.listOfDisplayData.some(item => this.mapOfCheckedId[item.id]) && !this.isAllDisplayDataChecked;
   }
 
   checkAll(value: boolean): void {
-    this.selectData.filter(item => !item.disabled).forEach(item => this.mapOfCheckedId[ item.id ] = value);
+    this.listOfDisplayData.forEach(item => (this.mapOfCheckedId[item.id] = value));
     this.refreshStatus();
   }
+
+  listOfSelection = [
+    {
+      text: 'Select All Row',
+      onSelect: () => {
+        this.checkAll(true);
+      }
+    },
+    {
+      text: 'Select Odd Row',
+      onSelect: () => {
+        this.selectData.forEach((data, index) => (this.mapOfCheckedId[data.id] = index % 2 !== 0));
+        this.refreshStatus();
+      }
+    },
+    {
+      text: 'Select Even Row',
+      onSelect: () => {
+        this.selectData.forEach((data, index) => (this.mapOfCheckedId[data.id] = index % 2 === 0));
+        this.refreshStatus();
+      }
+    }
+  ];
 
   operateData(): void {
     this.isOperating = true;
@@ -654,3 +680,5 @@ export class AbstractComponent implements OnDestroy {
     this.drawerIsVisible = false;
   }
 }
+
+

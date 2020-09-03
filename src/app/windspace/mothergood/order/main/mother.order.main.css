@@ -1,3 +1,11 @@
 .tab{
   text-align: right;
 }
+
+.content {
+  white-space: pre-line;
+}
+
+button{
+  margin:5px;
+}

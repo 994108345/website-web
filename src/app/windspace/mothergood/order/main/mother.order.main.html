@@ -9,6 +9,7 @@
 <div>
   <div>
     <button nz-button [nzType]="'primary'" (click)="routerAdd()" style="margin-top: 16px" >新增</button>
+    <button nz-button [nzType]="'primary'" (click)="openDrawer()" style="margin-top: 16px" >导出文本</button>
     <div style="float:right;">
       <button nz-button [nzType]="'primary'" (click)="queryBySearchParam()" style="margin-top: 16px;margin-right: 5px;" >查询</button>
       <input nz-input placeholder="填写订单号。" [(ngModel)]="nzSearchParams.orderId" style="width: 200px" [maxLength]="20" nzsize="50"/>
@@ -17,6 +18,13 @@
   <nz-table #rowSelectionTable nzBordered [nzData]="dataSet"   [nzShowPagination] = false [nzScroll]="{ x:'1000px'}">
     <thead>
       <tr>
+        <th nzShowCheckbox
+            nzShowRowSelection
+            [nzSelections]="listOfSelection"
+            [(nzChecked)]="isAllDisplayDataChecked"
+            [nzIndeterminate]="isIndeterminate"
+            (nzCheckedChange)="checkAll($event)"
+        ></th>
         <th nzWidth="80px">操作</th>
         <th nzWidth="80px">id</th>
         <th nzWidth="150px">订单id</th>
@@ -35,6 +43,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of rowSelectionTable.data">
+        <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)="refreshStatus()"></td>
         <td nzWidth="80px" ><a (click)="routerUpdate(data)">更新</a></td>
         <td nzWidth="80px" >{{ data.id }}</td>
         <td nzWidth="150px">{{ data.orderId }}</td>
@@ -57,5 +66,13 @@
   ></nz-pagination>
   <button nz-button [nzType]="'primary'" (click)="queryBySearchParam()" style="margin-top: 16px" >查询</button>
 </div>
-
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="drawerIsVisible"
+  nzPlacement="right"
+  nzTitle="导出的文案"
+  (nzOnClose)="closeDrawer()"
+>
+  <P class="content">{{exportText}}</P>
+</nz-drawer>
 

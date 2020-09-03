@@ -212,5 +212,19 @@ export class WzlutilService {
     } catch (g) { }
     return c = Number(a.toString().replace(".", "")), d = Number(b.toString().replace(".", "")), this.accMul(c / d, Math.pow(10, f - e));
   }
+  /*-----------------number判断----------------------*/
+  /**
+   * 数字是否为空
+   * @param a
+   */
+  numberIsBlank(a){
+    if(a === undefined){
+      return true;
+    }
+    if(a == null){
+      return true;
+    }
+    return false;
+  }
 }
 

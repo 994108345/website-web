@@ -48,7 +48,7 @@ export class MotherGoodAddComponent extends AbstractComponent{
       this.wzlNgZorroAntdMessage.warning("原价不能为空");
       return;
     }
-    if(!this.motherGood.discountPrice){
+    if(this.wzlutilService.numberIsBlank(this.motherGood.discountPrice)){
       this.wzlNgZorroAntdMessage.warning("折扣价不能为空");
       return;
     }
@@ -75,5 +75,25 @@ export class MotherGoodAddComponent extends AbstractComponent{
       this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
     }).finally( () => {
     });
+  }
+
+  handleChange(info: { file: UploadFile }): void {
+    console.log(info);
+    switch (info.file.status) {
+      case 'uploading':
+        break;
+      case 'done':
+        // Get this url from response in real world.
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+        });
+        break;
+      case 'error':
+        break;
+    }
+  }
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
   }
 }
