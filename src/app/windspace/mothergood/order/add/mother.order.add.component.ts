@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Injector, Output} from '@angular/core';
 import {AbstractComponent} from '../../../../common/service/abstract.component';
-import {routers, urls} from '../../../../app.config';
+import {asllCode, routers, urls} from '../../../../app.config';
 import {successStatus} from '../../../../common/service/base/common.config';
 import {UploadFile} from 'ng-zorro-antd';
 
@@ -119,7 +119,11 @@ export class MotherOrderAddComponent extends AbstractComponent {
       return ;
     }
     if(this.wzlutilService.isBlank(this.motherOrder.userName)){
-      this.wzlNgZorroAntdMessage.warning("用户名不能为空");
+      this.wzlNgZorroAntdMessage.warning("收货人姓名不能为空");
+      return ;
+    }
+    if(this.wzlutilService.isBlank(this.motherOrder.userPhone)){
+      this.wzlNgZorroAntdMessage.warning("收货人手机号不能为空");
       return ;
     }
     if(this.wzlutilService.isBlank(this.motherOrder.address)){
@@ -168,5 +172,14 @@ export class MotherOrderAddComponent extends AbstractComponent {
     this.addOrder();
   }
 
+  /**
+   * 回车查询
+   */
+  pressEnter(event){
+    if(event.which == asllCode.enter){
+      //调用指定方法
+      this.queryBySearchParam();
+    }
+  }
 
 }

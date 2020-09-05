@@ -54,6 +54,14 @@
         <br><br><br>
 
         <div class="tab" nz-col nzSpan="6">
+          <span class="span-tab"><span style="color: red">*</span>收货人手机号:</span>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="18">
+          <input nz-input placeholder="填写收货人手机号" [(ngModel)]="motherOrder.userPhone"/>
+        </div>
+        <br><br><br>
+
+        <div class="tab" nz-col nzSpan="6">
           <span class="span-tab"><span style="color: red">*</span>收货地址:</span>
         </div>
         <div nz-col class="gutter-row" nzSpan="18">
@@ -65,6 +73,8 @@
     <button nz-button [nzType]="'primary'" (click)="submitOrder()" style="margin-top: 16px" >提交</button>
   </nz-card>
   <nz-card style="width:100%;" nzTitle="选择商品">
+    <button nz-button [nzType]="'primary'" (click)="queryBySearchParam()" style="margin-top: 16px;margin-right: 5px;" >查询商品</button>
+    <input nz-input placeholder="商品名称" [(ngModel)]="nzSearchParams.goodName" style="width: 200px" [maxLength]="20" nzsize="50" (keypress)="pressEnter($event)"/>
     <nz-table #rowSelectionTable [nzData]="dataSet"  [nzScroll]="{ y: '600px' }" [nzShowPagination] = false>
       <thead>
       <tr>
@@ -102,7 +112,6 @@
     <nz-pagination [nzPageIndex]="totalRecords/nzPageSize" [nzTotal]="totalRecords" nzShowSizeChanger [nzPageSize]="nzPageSize"
                    (nzPageIndexChange)="indexChange($event)" (nzPageSizeChange)="pageSizeChange($event)"
     ></nz-pagination>
-    <button nz-button [nzType]="'primary'" (click)="queryBySearchParam()" style="margin-top: 16px" >查询</button>
   </nz-card>
 </div>
 

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Injector, Output} from '@angular/core';
 import {AbstractComponent} from '../../../../common/service/abstract.component';
-import {routers, urls} from '../../../../app.config';
+import {asllCode, routers, urls} from '../../../../app.config';
 import {successStatus} from '../../../../common/service/base/common.config';
 import {mother_order_settlement_status_conf, mother_order_status_conf, mother_order_sub_status_conf} from '../mother.order.config';
 
@@ -78,6 +78,15 @@ export class MotherOrderMainComponent extends AbstractComponent{
   }
 
   /**
+   * 单个数据显示文本
+   * @param data
+   */
+  addDataToList(data){
+    super.openDrawer();
+    this.exportOneOrderText(data);
+  }
+
+  /**
    * 导出订单信息
    * @param id
    */
@@ -106,5 +115,38 @@ export class MotherOrderMainComponent extends AbstractComponent{
     }).finally( () => {
       this.isFirst = false;
     });
+  }
+
+  /**
+   * 导出订单信息
+   * @param id
+   */
+  exportOneOrderText(data) {
+    let condition = {orderIds:[data.orderId]};
+    this.commonService.doHttpPost(urls.exportOrderTextUrl,condition).then(rst => {
+      if (rst) {
+        if (rst.status != successStatus) {
+          this.wzlNgZorroAntdMessage.error(rst.message);
+        } else {
+          this.exportText = rst.data;
+        }
+      } else {
+        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
+      }
+    }).catch(rtc => {
+      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+      console.log("请求出现异常：" + rtc);
+    }).finally( () => {
+      this.isFirst = false;
+    });
+  }
+  /**
+   * 回车查询
+   */
+  pressEnter(event){
+    if(event.which == asllCode.enter){
+      //调用指定方法
+      this.queryBySearchParam();
+    }
   }
 }

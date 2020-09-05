@@ -679,6 +679,23 @@ export class AbstractComponent implements OnDestroy {
   closeDrawer(): void {
     this.drawerIsVisible = false;
   }
+
+  /*--------------------------------备注处理------------------------------------*/
+  /**
+   * 备注处理
+   * @param remark
+   * @param index
+   */
+  remarkHandler(remark:string,index:number){
+    let result = "";
+    let length = remark.length;
+    if(length > index){
+      result = remark.substring(0,index) + "...";
+    }else{
+      result = remark;
+    }
+   return result;
+  }
 }
 
 

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Injector, Output} from '@angular/core';
 import {AbstractComponent} from '../../../../common/service/abstract.component';
-import { routers, urls} from '../../../../app.config';
+import {asllCode, routers, urls} from '../../../../app.config';
 import {successStatus} from '../../../../common/service/base/common.config';
 import {
   good_use_price_type_conf,
@@ -60,6 +60,13 @@ export class MotherOrderUpdateComponent extends AbstractComponent{
 
   ngOnInit(){
     console.log("MotherOrderUpdateComponent");
+    this.init();
+  }
+
+  /**
+   * 初始化数据
+   */
+  init(){
     //获取缓存值
     let orderId = this.wzlCache.getCache("motherOrderId");
     //设置查询参数
@@ -265,6 +272,16 @@ export class MotherOrderUpdateComponent extends AbstractComponent{
     }).finally( () => {
       this.isFirst = false;
     });
+  }
+
+  /**
+   * 回车查询
+   */
+  pressEnter(event){
+    if(event.which == asllCode.enter){
+      //调用指定方法
+      this.queryBySearchParam()
+    }
   }
 
 }

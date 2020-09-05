@@ -12,10 +12,10 @@
     <button nz-button [nzType]="'primary'" (click)="openDrawer()" style="margin-top: 16px" >导出文本</button>
     <div style="float:right;">
       <button nz-button [nzType]="'primary'" (click)="queryBySearchParam()" style="margin-top: 16px;margin-right: 5px;" >查询</button>
-      <input nz-input placeholder="填写订单号。" [(ngModel)]="nzSearchParams.orderId" style="width: 200px" [maxLength]="20" nzsize="50"/>
+      <input nz-input placeholder="填写订单号。" [(ngModel)]="nzSearchParams.orderId" style="width: 200px" [maxLength]="20" nzsize="50" (keypress)="pressEnter($event)"/>
     </div >
   </div>
-  <nz-table #rowSelectionTable nzBordered [nzData]="dataSet"   [nzShowPagination] = false [nzScroll]="{ x:'1000px'}">
+  <nz-table #rowSelectionTable nzBordered [nzData]="dataSet"   [nzShowPagination] = false [nzScroll]="{ x: '1100px'}">
     <thead>
       <tr>
         <th nzShowCheckbox
@@ -25,16 +25,17 @@
             [nzIndeterminate]="isIndeterminate"
             (nzCheckedChange)="checkAll($event)"
         ></th>
-        <th nzWidth="80px">操作</th>
+        <th nzWidth="200px">操作</th>
         <th nzWidth="80px">id</th>
         <th nzWidth="150px">订单id</th>
         <th nzWidth="120px">订单状态</th>
-        <th nzWidth="120px">订单子状态</th>
+        <th nzWidth="150px">订单子状态</th>
         <th nzWidth="120px">订单总价</th>
         <th nzWidth="120px">优惠总金额</th>
         <th nzWidth="120px">结算金额</th>
         <th nzWidth="120px">结算状态</th>
-        <th nzWidth="120px">用户姓名</th>
+        <th nzWidth="150px">收货人姓名</th>
+        <th nzWidth="120px">收货人手机号</th>
         <th nzWidth="200px">收货地址</th>
         <th nzWidth="180px">创建时间</th>
         <th nzWidth="180px">修改时间</th>
@@ -44,20 +45,22 @@
     <tbody>
       <tr *ngFor="let data of rowSelectionTable.data">
         <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)="refreshStatus()"></td>
-        <td nzWidth="80px" ><a (click)="routerUpdate(data)">更新</a></td>
-        <td nzWidth="80px" >{{ data.id }}</td>
-        <td nzWidth="150px">{{ data.orderId }}</td>
-        <td nzWidth="120px">{{ statusChange(data.status,motherOrderStatus) }}</td>
-        <td nzWidth="120px">{{ statusChange(data.subStatus,motherOrderSubStatus) }}</td>
-        <td nzWidth="120px">{{ data.allPrice }}</td>
-        <td nzWidth="120px">{{ data.couponAllPrice }}</td>
-        <td nzWidth="120px">{{ data.settlementPrice }}</td>
-        <td nzWidth="120px">{{ statusChange(data.settlementStatus,motherOrderSettlementStatus) }}</td>
-        <td nzWidth="120px">{{ data.userName }}</td>
-        <td nzWidth="200px">{{ data.address }}</td>
-        <td nzWidth="180px">{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
-        <td nzWidth="180px">{{ data.lastModifiedTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
-        <td ><span nz-tooltip nzTitle="{{ data.remark }}">{{data.remark.substring(0,5) + "......"}}</span></td>
+        <td nzWidth="200px" ><a (click)="routerUpdate(data)">更新</a> &nbsp; <a (click)="addDataToList(data)">订单信息</a>
+        </td>
+        <td>{{ data.id }}</td>
+        <td>{{ data.orderId }}</td>
+        <td>{{ statusChange(data.status,motherOrderStatus) }}</td>
+        <td>{{ statusChange(data.subStatus,motherOrderSubStatus) }}</td>
+        <td>{{ data.allPrice }}</td>
+        <td>{{ data.couponAllPrice }}</td>
+        <td>{{ data.settlementPrice }}</td>
+        <td>{{ statusChange(data.settlementStatus,motherOrderSettlementStatus) }}</td>
+        <td>{{ data.userName }}</td>
+        <td>{{ data.userPhone }}</td>
+        <td>{{ data.address }}</td>
+        <td>{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+        <td>{{ data.lastModifiedTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+        <td ><span nz-tooltip nzTitle="{{ data.remark }}">{{remarkHandler(data.remark,5)}}</span></td>
       </tr>
     </tbody>
   </nz-table>
