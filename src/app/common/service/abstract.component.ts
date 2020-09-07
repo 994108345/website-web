@@ -696,6 +696,14 @@ export class AbstractComponent implements OnDestroy {
     }
    return result;
   }
+  /*-------------------------------折叠面板--------------------------------*/
+  panels = [
+    {
+      active: false,
+      name: '用户建议',
+      disabled: false,
+    }
+  ];
 }
 
 
