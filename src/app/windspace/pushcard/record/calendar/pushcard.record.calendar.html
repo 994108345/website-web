@@ -25,7 +25,7 @@
   <ul *nzDateCell="let date" class="events">
     <ng-container [ngSwitch]="date.getDate()">
       <li *ngFor="let item of listDataMap">
-        <ng-container *ngSwitchCase="item.num">
+        <ng-container *ngIf="item.num == date.getDate() && item.month == date.getMonth()" >
           <nz-tag [nzColor]="'orange'">上班:{{item.beginTime | date:'yyyy-MM-dd HH:mm:ss'}}</nz-tag>
           <nz-tag [nzColor]="'blue'">下班:{{item.endTime | date:'yyyy-MM-dd HH:mm:ss'}}</nz-tag>
           <nz-tag *ngIf="item.enough" [nzColor]="'green'">工时:{{item.workTime}}</nz-tag>
