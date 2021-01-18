@@ -1,0 +1,39 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a routerLink="/authmenu">主页</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    <a>打卡历史</a>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+<div>
+  <button nz-button [nzType]="'primary'" (click)="routerHistoryAdd()" style="margin-top: 16px" >新增</button>
+  <div style="float:right;">
+    <button nz-button [nzType]="'primary'" (click)="queryRequest()" style="margin-top: 16px;margin-right: 5px;" >查询</button>
+    <nz-range-picker [(ngModel)]="dateRange" nzShowTime (ngModelChange)="queryRequest()"></nz-range-picker>
+  </div >
+  <nz-table #rowSelectionTable [nzData]="dataSet"  [nzScroll]="{ y: '600px' }" [nzShowPagination] = false>
+    <thead>
+    <tr>
+      <th  nzWidth="80px">操作</th>
+      <th nzWidth="80px">时间</th>
+      <th nzWidth="80px">打卡时间</th>
+      <th nzWidth="80px">更新时间</th>
+      <th nzWidth="180px">备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of rowSelectionTable.data">
+      <td nzWidth="80px"><a (click)="routerUpdate(data)">更新</a></td>
+      <td nzWidth="80px">{{ data.statisticTime | date:'yyyy-MM-dd'}}</td>
+      <td nzWidth="80px">{{ data.clockTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td nzWidth="180px">{{ data.updateTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td nzWidth="180px">{{ data.remark }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+  <nz-pagination [nzPageIndex]="totalRecords/nzPageSize" [nzTotal]="totalRecords" nzShowSizeChanger [nzPageSize]="nzPageSize"
+                 (nzPageIndexChange)="indexChange($event)" (nzPageSizeChange)="pageSizeChange($event)"
+  ></nz-pagination>
+</div>
+

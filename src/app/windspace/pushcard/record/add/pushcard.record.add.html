@@ -1,0 +1,41 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>记录时间</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <nz-date-picker formControlName="staticDate"></nz-date-picker>
+      <nz-form-explain *ngIf="validateForm.get('statisticTime')?.dirty && validateForm.get('statisticTime')?.errors">记录时间必填！</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>上班卡时间</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <nz-date-picker nzShowTime formControlName="push"></nz-date-picker>
+      <nz-form-explain *ngIf="validateForm.get('clockTime')?.dirty && validateForm.get('clockTime')?.errors">打卡时间必填！</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>下班卡时间</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <nz-date-picker nzShowTime formControlName="clockTime"></nz-date-picker>
+      <nz-form-explain *ngIf="validateForm.get('clockTime')?.dirty && validateForm.get('clockTime')?.errors">打卡时间必填！</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>工时时间</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <nz-date-picker nzShowTime formControlName="clockTime"></nz-date-picker>
+      <nz-form-explain *ngIf="validateForm.get('clockTime')?.dirty && validateForm.get('clockTime')?.errors">打卡时间必填！</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="8" nzRequired nzFor="note">备注</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <input id="note" type="text" nz-input formControlName="remark" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 16, offset: 8 }">
+      <button nz-button nzType="primary">新增</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

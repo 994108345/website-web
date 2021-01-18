@@ -12,6 +12,10 @@ export const appRoutes: Routes = [
     loadChildren: 'src/app/windspace/mothergood/menu/mother.good.menu.module#MotherGoodMenuModule',
   },
   {
+    path: 'authmenu',
+    loadChildren: 'src/app/windspace/authmenu/auth.menu.module#AuthMenuModule',
+  },
+  {
     path: 'manage',
     loadChildren: 'src/app/windspace/manage/manage.module#ManageModule',
   },
@@ -20,9 +24,13 @@ export const appRoutes: Routes = [
     loadChildren: 'src/app/windspace/study/study.module#StudyModule',
   },
   {
+    path: 'login',
+    loadChildren: 'src/app/windspace/login/login.module#LoginModule',
+  },
+/*  {
     path: '**',
     redirectTo:'/menu',
-  },
+  },*/
 ];
 
 @NgModule({

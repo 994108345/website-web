@@ -11,7 +11,6 @@ import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
 import {WordModule} from '../../common/basemodel/word/word.module';
 import {QuillModule} from 'ngx-quill';
 import {WzlngzorroantdmessageService} from '../../common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service';
-import {LoginModule} from '../../common/basemodel/login/login.module';
 import {StudyMainComponent} from './main/study.main.component';
 import {SearchboxMainComponent} from './serchbox/searchbox.main.component';
 import {EverythingMainComponent} from './everything/everything.main.component';
@@ -31,8 +30,6 @@ import {EverythingMainComponent} from './everything/everything.main.component';
     WordModule,
     /*导入quil富文本编辑器模块*/
     QuillModule,
-    /*登陆测试模块*/
-    LoginModule,
     StudyRouting,
   ],
   exports:[

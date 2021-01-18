@@ -3,6 +3,8 @@ import {AbstractComponent} from './common/service/abstract.component';
 import {baseConfig, urls} from './app.config';
 import {successStatus} from './common/service/base/common.config';
 import {heartbeatTime} from './windspace/chat/chat.config';
+import zh from "@angular/common/locales/zh";
+import {registerLocaleData} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -30,6 +32,8 @@ export class AppComponent extends AbstractComponent{
     this.isSpinning = baseConfig.isSpinning;
     //开启定时器
     this.timerHeartbeat();
+    //加入时间标准化
+    registerLocaleData(zh);
   }
 
   /*定时器*/

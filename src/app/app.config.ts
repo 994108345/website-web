@@ -118,10 +118,6 @@ export const urls = {
   lineTransferBlankUrl:websiteUrl + "/unified/coderUtilServiceImpl/lineTransferBlank",
   //将java注解快速翻译
   javaAnnotationTransUrl:websiteUrl + "/unified/coderUtilServiceImpl/javaAnnotationHandler",
-  /*----------------------------------------------------登陆------------------------------------------------------*/
-  //上传图片
-  loginUrl:zuulUrl + "/login",
-  otherHandlerUrl:zuulUrl + "/other",
   /*----------------------------------------------------配置------------------------------------------------------*/
   //查询指定type的配置
   queryConfigUrl:websiteUrl + "/unified/wsConfigServiceImpl/queryConfig",
@@ -148,6 +144,18 @@ export const urls = {
   //导出订单信息文案
   exportOrderTextUrl:websiteUrl + "/unified/motherOrderExportServiceImpl/exportText ",
 
+  /*---------------------------------------------------登录模块--------------------------------------------------------------*/
+  loginUrl:websiteUrl +  "/login/login",
+  /*------------------------打卡--------------------*/
+  /*---打卡历史记录--*/
+  pushCardHistoryQueryUrl:websiteUrl +"/auth/pushCard/history/handler/queryPushCardHistory",
+  pushCardHistoryAddUrl:websiteUrl +"/auth/pushCard/history/handler/insertPushCardHisotry",
+  pushCardHistoryUpdateUrl:websiteUrl +"/auth/pushCard/history/handler/updatePushCardHisotry",
+  /*--打卡每天整理记录--*/
+  pushCardRecordQueryUrl:websiteUrl +"/auth/pushCard/record/handler/queryRecordByUserId",
+  pushCardRecordCaculateUrl:websiteUrl +"/auth/pushCard/record/handler/reCaculateRecord",
+  pushCardRecordInSelectTimeUrl:websiteUrl +"/auth/pushCard/record/handler/getMonthDataByTime",
+  pushCardRecordGetStatisticDataUrl:websiteUrl +"/auth/pushCard/record/handler/getStatisticDate",
   /*----------------------------------------------通用接口--------------------------------------------------------------*/
   getUrlByUploadPic:websiteUrl + "/file/get_url_by_upload_pic",
 
@@ -171,6 +179,15 @@ export const routers = {
   motherOrderAddRouter: "mothermenu/motherorder/add",
   /*mothreOrder的update页面*/
   motherOrderUpdateRouter: "mothermenu/motherorder/update",
+  /*--------------------------push_card-------------------------------------*/
+  /*--hisotry*/
+  pushCardHistoryRouter:"authmenu/pushcard/history",
+  pushCardHistoryAddRouter:"authmenu/pushcard/history-add",
+  pushCardHistoryUpdateRouter:"authmenu/pushcard/history-update",
+  /*--record*/
+  pushCardRecordRouter:"authmenu/pushcard/record",
+  pushCardRecordAddRouter:"authmenu/pushcard/record-add",
+  pushCardRecordUpdateRouter:"authmenu/pushcard/record-update",
 };
 
 //缓存key

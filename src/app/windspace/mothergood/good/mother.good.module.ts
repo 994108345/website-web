@@ -6,7 +6,6 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {QuillModule} from 'ngx-quill';
 import {UseradviceModule} from '../../../common/basemodel/advice/useradvice.module';
-import {LoginModule} from '../../../common/basemodel/login/login.module';
 import {WordModule} from '../../../common/basemodel/word/word.module';
 import {CommonService} from '../../../common/service/base/common.service';
 import {WzlCacheService} from '../../../common/service/wzlcache/wzlceche.service';
@@ -31,8 +30,6 @@ import {MotherGoodUpdateComponent} from './update/mother.good.update.component';
     WordModule,
     /*导入quil富文本编辑器模块*/
     QuillModule,
-    /*登陆测试模块*/
-    LoginModule,
     MotherGoodRouting,
   ],
   exports:[

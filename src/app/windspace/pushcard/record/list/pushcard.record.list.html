@@ -1,0 +1,36 @@
+<div>
+  <div style="float:right;">
+    <button nz-button [nzType]="'primary'" (click)="queryRequest()" style="margin-top: 16px;margin-right: 5px;" >查询</button>
+    <nz-range-picker [(ngModel)]="dateRange" nzShowTime (ngModelChange)="queryRequest()"></nz-range-picker>
+  </div>
+  <br><br><!--不换行上面的按钮好像会被遮住，然后点不了-->
+  <nz-table #rowSelectionTable [nzData]="dataSet"  [nzScroll]="{ y: '600px' }" [nzShowPagination] = false>
+    <thead>
+    <tr>
+      <th  nzWidth="80px">操作</th>
+      <th nzWidth="80px">统计时间</th>
+      <th nzWidth="120px">上班打卡时间</th>
+      <th nzWidth="120px">下班打卡时间</th>
+      <th nzWidth="80px">工作时长</th>
+      <th nzWidth="120px">创建时间</th>
+      <th nzWidth="120px">更新时间</th>
+      <th nzWidth="120px">备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of rowSelectionTable.data">
+      <td nzWidth="80px"><!--<a (click)="routerUpdate(data)">更新</a>--></td>
+      <td nzWidth="80px">{{ data.staticDate | date:'yyyy-MM-dd'}}</td>
+      <td nzWidth="120px">{{ data.pushBeginTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td nzWidth="120px">{{ data.pushEndTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td nzWidth="80px">{{ data.workTime }}</td>
+      <td nzWidth="120px">{{ data.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td nzWidth="120px">{{ data.updateTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td nzWidth="120px">{{ data.remark }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+  <nz-pagination [nzPageIndex]="totalRecords/nzPageSize" [nzTotal]="totalRecords" nzShowSizeChanger [nzPageSize]="nzPageSize"
+                 (nzPageIndexChange)="indexChange($event)" (nzPageSizeChange)="pageSizeChange($event)"
+  ></nz-pagination>
+</div>

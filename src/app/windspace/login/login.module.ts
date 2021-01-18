@@ -1,21 +1,16 @@
 import {NgModule} from '@angular/core';
-import { ManageComponent} from './manage.component';
+import { LoginComponent} from './login.component';
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import {CommonService} from '../../common/service/base/common.service';
 import {WzlCacheService} from '../../common/service/wzlcache/wzlceche.service';
-import { ManageMainComponent} from './main/manage.main.component';
-import { ManageRouting} from './manage.routing';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UseradviceModule} from '../../common/basemodel/advice/useradvice.module';
 import {WzlutilService} from '../../common/service/wzlutil/wzlutil.service';
 import {WordModule} from '../../common/basemodel/word/word.module';
 import {QuillModule} from 'ngx-quill';
-import {WordManageComponent} from './word/word.manage.component';
-import {WzlngzorroantdmessageService} from '../../common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service';
-import {FileUploadManageComponent} from './fileupload/file.upload.manage.component';
-import {IplogManageComponent} from './iplog/iplog.manage.component';
-import {TestManageComponent} from './test/test.manage.component';
+import {LoginRouting} from "./login.routing";
+import {LoginMainComponent} from "./main/login.main.component";
 
 @NgModule({
   imports: [
@@ -32,16 +27,16 @@ import {TestManageComponent} from './test/test.manage.component';
     WordModule,
     /*导入quil富文本编辑器模块*/
     QuillModule,
-    ManageRouting,
+    LoginRouting,
   ],
   exports:[
   ],
   declarations: [
-    ManageMainComponent,ManageComponent,WordManageComponent,FileUploadManageComponent,IplogManageComponent,TestManageComponent
+    LoginMainComponent,LoginComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
-  providers: [CommonService,WzlCacheService,WzlutilService,WzlngzorroantdmessageService,{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [CommonService,WzlCacheService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],
 })
-export class ManageModule {
+export class LoginModule {
 
 }

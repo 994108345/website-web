@@ -1,0 +1,43 @@
+<nz-row [nzGutter]="24">
+  <nz-col [nzSpan]="8">
+    <nz-statistic [nzValue]="statisticData.monthAllWorkTime == null? 0:statisticData.monthAllWorkTime" [nzTitle]="'月总工时'"></nz-statistic>
+  </nz-col>
+  <nz-col [nzSpan]="8">
+    <nz-statistic [nzValue]="statisticData.monthAvgWorkTime == null? 0:statisticData.monthAvgWorkTime" [nzTitle]="'月平均工时'"></nz-statistic>
+  </nz-col>
+  <nz-col [nzSpan]="8">
+    <nz-statistic [nzValue]="statisticData.monthWorkDayNum == null? 0:statisticData.monthWorkDayNum" [nzTitle]="'月上班天数'"></nz-statistic>
+  </nz-col>
+</nz-row>
+<nz-row [nzGutter]="24">
+  <nz-col [nzSpan]="8">
+    <nz-statistic [nzValue]="statisticData.weekAllWorkTime == null? 0:statisticData.weekAllWorkTime" [nzTitle]="'周总工时'"></nz-statistic>
+  </nz-col>
+  <nz-col [nzSpan]="8">
+    <nz-statistic [nzValue]="statisticData.weekAvgWorkTime == null? 0:statisticData.weekAvgWorkTime" [nzTitle]="'周平均工时'"></nz-statistic>
+  </nz-col>
+  <nz-col [nzSpan]="8">
+    <nz-statistic [nzValue]="statisticData.weekWorkDayNum == null? 0:statisticData.weekWorkDayNum" [nzTitle]="'周上班天数'"></nz-statistic>
+  </nz-col>
+</nz-row>
+
+<nz-calendar [(ngModel)]="selectDate" (ngModelChange)="monthChange()">
+  <ul *nzDateCell="let date" class="events">
+    <ng-container [ngSwitch]="date.getDate()">
+      <li *ngFor="let item of listDataMap">
+        <ng-container *ngSwitchCase="item.num">
+          <nz-tag [nzColor]="'orange'">上班:{{item.beginTime | date:'yyyy-MM-dd HH:mm:ss'}}</nz-tag>
+          <nz-tag [nzColor]="'blue'">下班:{{item.endTime | date:'yyyy-MM-dd HH:mm:ss'}}</nz-tag>
+          <nz-tag *ngIf="item.enough" [nzColor]="'green'">工时:{{item.workTime}}</nz-tag>
+          <nz-tag *ngIf="!item.enough" [nzColor]="'red'">工时:{{item.workTime}}</nz-tag>
+        </ng-container>
+      </li>
+    </ng-container>
+  </ul>
+  <ng-container *nzMonthCell="let month">
+    <div *ngIf="getMonthData(month) as monthData" class="notes-month">
+      <section>{{ monthData }}</section>
+      <span>Backlog number</span>
+    </div>
+  </ng-container>
+</nz-calendar>
