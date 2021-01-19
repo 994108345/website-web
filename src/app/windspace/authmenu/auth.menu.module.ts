@@ -9,6 +9,7 @@ import {WzlutilService} from "../../common/service/wzlutil/wzlutil.service";
 import {WzlngzorroantdmessageService} from "../../common/service/wzlngzorroantdmessage/wzlngzorroantdmessage.service";
 import {WzlCacheService} from "../../common/service/wzlcache/wzlceche.service";
 import {AuthMenuMainComponent} from "./main/auth.menu.main.component";
+import {AuthMenuIndexComponent} from "./index/auth.menu.index.component";
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import {AuthMenuMainComponent} from "./main/auth.menu.main.component";
     AuthMenuRouting,
   ],
   declarations: [
-    AuthMenuComponent,AuthMenuMainComponent
+    AuthMenuComponent,AuthMenuMainComponent,AuthMenuIndexComponent
   ],
   /** 配置 ng-zorro-antd 国际化 **/
   providers: [CommonService,WzlCacheService,WzlngzorroantdmessageService,WzlutilService,{ provide: NZ_I18N, useValue: zh_CN }],

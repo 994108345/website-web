@@ -44,7 +44,7 @@ export class PushcardHistoryUpdateComponent extends AbstractComponent{
    * @param data
    */
   updatePushCard(data){
-    let condition = data;
+    const condition = data;
     condition.id = this.id;
     this.commonService.doHttpPost(urls.pushCardHistoryUpdateUrl,condition).then(rst =>{
       if (rst) {

@@ -151,6 +151,7 @@ export const urls = {
   pushCardHistoryQueryUrl:websiteUrl +"/auth/pushCard/history/handler/queryPushCardHistory",
   pushCardHistoryAddUrl:websiteUrl +"/auth/pushCard/history/handler/insertPushCardHisotry",
   pushCardHistoryUpdateUrl:websiteUrl +"/auth/pushCard/history/handler/updatePushCardHisotry",
+  pushCardUrl:websiteUrl +"/auth/pushCard/history/handler/pushCard",
   /*--打卡每天整理记录--*/
   pushCardRecordQueryUrl:websiteUrl +"/auth/pushCard/record/handler/queryRecordByUserId",
   pushCardRecordCaculateUrl:websiteUrl +"/auth/pushCard/record/handler/reCaculateRecord",

@@ -61,7 +61,7 @@ export class  CommonService {
       return this.http.get(url, options)
         .toPromise()
         .then((res) => {
-          //return this.extractData(res)
+          return this.extractData(res)
         })
         .catch((res) => {
           return this.handleError(res)

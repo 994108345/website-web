@@ -19,8 +19,6 @@ export class LoginInterceptor  implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('拦截器进来了吗-1');
-    console.log(req);
     return next.handle(req).pipe(
       // 处理返回值对象
       tap(event => {
@@ -34,28 +32,23 @@ export class LoginInterceptor  implements HttpInterceptor {
 
   /**
    * 处理未登录状态的跳转
-   * @param event
    */
   private handleData(
     event: HttpResponse<any>
   ): Observable<any> {
-    console.log('拦截器进来了吗-2');
-    console.log(event);
+    console.log("拦截器");
     // 业务处理：一些通用操作
     switch (event.body.status) {
-      case 20000: // 未登录
-        console.log('not login') ;
+      case 30: // 未登录
         this.router.navigate(['/login']);
         break ;
       default:
-        console.log('什么都没有匹配到');
         return of(event) ;
     }
   }
 
   /**
    * 异常处理
-   * @param event
    */
   private handleDataError(
     event: HttpErrorResponse,

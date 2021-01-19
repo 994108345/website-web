@@ -61,4 +61,29 @@ export class PushcardHistoryMainComponent extends AbstractComponent{
     this.wzlCache.setCache("pushCardId",data.id);
     this.router.navigate([routers.pushCardHistoryUpdateRouter]);
   }
+
+  /**
+   * 更新信息
+   * @param data
+   */
+  pushCard(){
+    this.commonService.doHttpGet(urls.pushCardUrl).then(rst =>{
+      if (rst) {
+        if (rst.status != successStatus) {
+          this.wzlNgZorroAntdMessage.error(rst.message);
+        }else{
+          this.wzlNgZorroAntdMessage.success("打卡成功");
+          //刷新一下
+          this.queryBySearchParam();
+        }
+      } else {
+        this.wzlNgZorroAntdMessage.error('返回参数异常，请联系管理员');
+      }
+    }).catch(rtc => {
+      this.wzlNgZorroAntdMessage.error('http请求出现异常，请联系管理员');
+    }).finally( () => {
+      this.isFirst = false;
+    });
+  }
+
 }
